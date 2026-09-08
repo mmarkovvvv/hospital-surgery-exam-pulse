@@ -298,8 +298,24 @@ function renderTickets() {
   return `<div class="mode-header"><div><h1>Билеты</h1><p>Нажми на билет. Внутри — темы и порядок устного ответа.</p></div></div><section class="ticket-grid">${tickets.map(ticket => `<article class="ticket-card" role="button" tabindex="0" data-action="open-ticket" data-ticket="${ticket.number}"><span class="ticket-number">БИЛЕТ ${ticket.number}</span><h3>${ticket.title}</h3><p>${ticket.topics.join(" · ")}</p><div class="card-footer"><span class="tag">${ticket.tag}</span></div></article>`).join("")}</section><div class="disclaimer"><strong>Как читать банк.</strong> Билеты 01–20 покрывают основной тематический каркас; 21–40 — расширенная самопроверка; 41–57 — темы, найденные при сверке дополнительных учебных банков. Это не опубликованный кафедральный список.</div>`;
 }
 
+const ticketAnswerStopWords = new Set(["заболевания", "заболевание", "клиника", "диагностика", "лечение", "лечения", "принципы", "оценка", "ситуация", "методы", "метод", "показания", "система", "системы", "пациент", "пациента", "хирургическая", "хирургическое", "тактика", "осложнения", "состояния", "операция", "операции"]);
+
+function getTicketAnswerCards(ticket) {
+  const ticketText = `${ticket.title} ${ticket.tag} ${ticket.topics.join(" ")}`.toLowerCase();
+  const terms = [...new Set(ticketText.match(/[а-яё]{6,}/giu) || [])].filter(term => !ticketAnswerStopWords.has(term));
+  return cards.map(card => {
+    const cardText = `${card.module} ${card.question} ${card.answer}`.toLowerCase();
+    const score = terms.reduce((total, term) => total + (cardText.includes(term.slice(0, 6)) ? 1 : 0), 0);
+    return { card, score };
+  }).filter(entry => entry.score > 0).sort((left, right) => right.score - left.score || left.card.id - right.card.id).slice(0, 5).map(entry => entry.card);
+}
+
 function renderTicketDetail(ticket) {
-  appView.innerHTML = `<div class="mode-header"><div><h1>${ticket.title}</h1><p>Ответ строй последовательно: определение и классификация → клиника → диагностика → дифференциальный диагноз → лечебная тактика.</p></div><button class="button secondary" data-view="tickets">← Все билеты</button></div><article class="case-detail"><div class="scenario">Экзаменационная задача: раскрой тему ${ticket.title} и обоснуй действия врача в первые часы.</div><h2>Что нужно закрыть</h2><ol class="step-list">${ticket.topics.map((topic, index) => `<li><span>${index + 1}</span><div>${topic}</div></li>`).join("")}</ol><div class="disclaimer"><strong>Чек-лист устного ответа.</strong> Назови критерии тяжести, показания к госпитализации, красные флаги и момент, когда консервативная тактика перестаёт быть безопасной.</div><div class="card-footer"><button class="button dark" data-view="cases">Перейти к задаче →</button><button class="button secondary" data-action="random-ticket">Другой билет</button></div></article>`;
+  const answerCards = getTicketAnswerCards(ticket);
+  const answerMarkup = answerCards.length
+    ? `<ol class="step-list">${answerCards.map((card, index) => `<li><span>${index + 1}</span><div><strong>${card.question}</strong><p>${card.answer}</p></div></li>`).join("")}</ol>`
+    : `<div class="disclaimer"><strong>Эталон пока не добавлен.</strong> Используй темы ниже как структуру ответа и сверяй формулировки с актуальной кафедральной методичкой.</div>`;
+  appView.innerHTML = `<div class="mode-header"><div><h1>${ticket.title}</h1><p>Сначала сформулируй ответ сам, затем сравни его с эталонными формулировками.</p></div><button class="button secondary" data-view="tickets">← Все билеты</button></div><article class="case-detail"><div class="scenario">Экзаменационный билет: ${ticket.title}</div><h2>Эталон ответа</h2>${answerMarkup}<h2>Что обязательно упомянуть</h2><ol class="step-list">${ticket.topics.map((topic, index) => `<li><span>${index + 1}</span><div>${topic}</div></li>`).join("")}</ol><div class="disclaimer"><strong>Важно.</strong> Это учебный конспект для самопроверки, а не официальный кафедральный текст билета. Клинические решения сверяй с актуальными клиническими рекомендациями.</div><div class="card-footer"><button class="button secondary" data-action="random-ticket">Другой билет</button></div></article>`;
   bindActions();
 }
 

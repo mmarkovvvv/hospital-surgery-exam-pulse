@@ -308,3 +308,5 @@ img { max-width: 100%; height: auto; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+.step-list li strong { display: block; color: var(--ink); font-size: 12px; }
+.step-list li p { margin: 5px 0 0; color: var(--ink-soft); font-size: 12px; line-height: 1.6; }
