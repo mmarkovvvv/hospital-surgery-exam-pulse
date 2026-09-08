@@ -298,8 +298,58 @@ function renderTickets() {
   return `<div class="mode-header"><div><h1>Билеты</h1><p>Нажми на билет. Внутри — темы и порядок устного ответа.</p></div></div><section class="ticket-grid">${tickets.map(ticket => `<article class="ticket-card" role="button" tabindex="0" data-action="open-ticket" data-ticket="${ticket.number}"><span class="ticket-number">БИЛЕТ ${ticket.number}</span><h3>${ticket.title}</h3><p>${ticket.topics.join(" · ")}</p><div class="card-footer"><span class="tag">${ticket.tag}</span></div></article>`).join("")}</section><div class="disclaimer"><strong>Как читать банк.</strong> Билеты 01–20 покрывают основной тематический каркас; 21–40 — расширенная самопроверка; 41–57 — темы, найденные при сверке дополнительных учебных банков. Это не опубликованный кафедральный список.</div>`;
 }
 
+const ticketAnswerStopWords = new Set(["заболевания", "заболевание", "клиника", "диагностика", "лечение", "лечения", "принципы", "оценка", "ситуация", "методы", "метод", "показания", "система", "системы", "пациент", "пациента", "хирургическая", "хирургическое", "тактика", "осложнения", "состояния", "операция", "операции", "железа", "железы", "острый", "острая", "острое", "хронический", "хроническая", "хроническое"]);
+
+function getTicketTerms(value) {
+  return [...new Set((value || "").toLowerCase().match(/[а-яё]{6,}/giu) || [])].filter(term => !ticketAnswerStopWords.has(term));
+}
+
+function getTicketEvidenceScore(ticket, text) {
+  const normalizedText = text.toLowerCase();
+  const titleScore = getTicketTerms(ticket.title).reduce((total, term) => total + (normalizedText.includes(term.slice(0, 6)) ? 3 : 0), 0);
+  const tagScore = getTicketTerms(ticket.tag).reduce((total, term) => total + (normalizedText.includes(term.slice(0, 6)) ? 2 : 0), 0);
+  const topicScore = getTicketTerms(ticket.topics.join(" ")).reduce((total, term) => total + (normalizedText.includes(term.slice(0, 6)) ? 1 : 0), 0);
+  return titleScore + tagScore + topicScore;
+}
+
+function getTicketAnswerCards(ticket) {
+  return cards.map(card => ({ card, score: getTicketEvidenceScore(ticket, `${card.module} ${card.question} ${card.answer}`) }))
+    .filter(entry => entry.score > 0)
+    .sort((left, right) => right.score - left.score || left.card.id - right.card.id)
+    .slice(0, 4)
+    .map(entry => entry.card);
+}
+
+function getTicketAnswerTests(ticket) {
+  return testQuestions.map(item => ({ item, score: getTicketEvidenceScore(ticket, `${item.question} ${item.options.map(option => option.text).join(" ")} ${item.explanation}`) }))
+    .filter(entry => entry.score > 0)
+    .sort((left, right) => right.score - left.score)
+    .slice(0, 3)
+    .map(entry => entry.item);
+}
+
+function renderTicketAnswerPlan(ticket) {
+  const plan = [
+    ["Диагноз и классификация", `Начни с формулировки: ${ticket.topics[0]}. Назови основную форму заболевания, распространённость и степень тяжести, если они определяют тактику.`],
+    ["Клиника и опасность", `Раскрой ситуацию: ${ticket.topics[2]}. Отдельно назови признаки угрозы жизни, органной недостаточности, ишемии, инфекции или кровотечения — в зависимости от случая.`],
+    ["Обследование", `Объясни, что нужно подтвердить: ${ticket.topics[1]}. Назови первичные лабораторные и инструментальные методы и укажи, какое решение они помогают принять.`],
+    ["Лечебная тактика", "Заверши ответ последовательностью: первичная стабилизация, лечение причины и контроль источника осложнения; затем обозначь показания к эндоскопическому, интервенционному или открытому вмешательству и необходимость наблюдения в динамике."]
+  ];
+  return `<section class="ticket-answer-section"><h3>Порядок устного ответа</h3><ol class="ticket-plan">${plan.map(([title, text], index) => `<li><span>${index + 1}</span><div><strong>${title}</strong><p>${text}</p></div></li>`).join("")}</ol></section>`;
+}
+
+function renderTicketCardEvidence(answerCards) {
+  return answerCards.length ? `<section class="ticket-answer-section"><h3>Готовые формулировки</h3><div class="ticket-evidence-list">${answerCards.map(card => `<article class="ticket-evidence"><strong>${card.question}</strong><p>${card.answer}</p></article>`).join("")}</div></section>` : "";
+}
+
+function renderTicketTestEvidence(answerTests) {
+  return answerTests.length ? `<section class="ticket-answer-section"><h3>Что проверить перед экзаменом</h3><div class="ticket-evidence-list">${answerTests.map(item => { const correctAnswers = item.options.filter(option => option.correct).map(option => option.text).join("; "); return `<article class="ticket-evidence"><strong>${item.question}</strong><p><b>Правильное содержание:</b> ${correctAnswers}</p><p>${item.explanation}</p></article>`; }).join("")}</div></section>` : "";
+}
+
 function renderTicketDetail(ticket) {
-  appView.innerHTML = `<div class="mode-header"><div><h1>${ticket.title}</h1><p>Ответ строй последовательно: определение и классификация → клиника → диагностика → дифференциальный диагноз → лечебная тактика.</p></div><button class="button secondary" data-view="tickets">← Все билеты</button></div><article class="case-detail"><div class="scenario">Экзаменационная задача: раскрой тему ${ticket.title} и обоснуй действия врача в первые часы.</div><h2>Что нужно закрыть</h2><ol class="step-list">${ticket.topics.map((topic, index) => `<li><span>${index + 1}</span><div>${topic}</div></li>`).join("")}</ol><div class="disclaimer"><strong>Чек-лист устного ответа.</strong> Назови критерии тяжести, показания к госпитализации, красные флаги и момент, когда консервативная тактика перестаёт быть безопасной.</div><div class="card-footer"><button class="button dark" data-view="cases">Перейти к задаче →</button><button class="button secondary" data-action="random-ticket">Другой билет</button></div></article>`;
+  const answerCards = getTicketAnswerCards(ticket);
+  const answerTests = getTicketAnswerTests(ticket);
+  appView.innerHTML = `<div class="mode-header"><div><h1>${ticket.title}</h1><p>Сначала сформулируй ответ сам, затем сверяйся с готовыми формулировками и планом устного ответа.</p></div><button class="button secondary" data-view="tickets">← Все билеты</button></div><article class="case-detail"><div class="scenario">Экзаменационный билет: ${ticket.title}</div><h2>Эталон ответа</h2>${renderTicketAnswerPlan(ticket)}${renderTicketCardEvidence(answerCards)}${renderTicketTestEvidence(answerTests)}<section class="ticket-answer-section"><h3>Минимум, который должен прозвучать</h3><ul class="ticket-checklist">${ticket.topics.map(topic => `<li>${topic}</li>`).join("")}</ul></section><div class="disclaimer"><strong>Важно.</strong> Это учебный конспект для самопроверки, а не официальный кафедральный текст билета. Клинические решения сверяй с актуальными клиническими рекомендациями.</div><div class="card-footer"><button class="button secondary" data-action="random-ticket">Другой билет</button></div></article>`;
   bindActions();
 }
 
