@@ -230,7 +230,7 @@ body { color: var(--ink); background: var(--paper); letter-spacing: -0.01em; }
 .hero-orbit::before, .hero-orbit::after { border-color: rgba(109, 224, 208, .28); }
 .orbit-core { border-color: var(--aqua); background: linear-gradient(145deg, #0d9b9b, #0d2b3a 68%); box-shadow: 0 0 0 16px rgba(109, 224, 208, .08); }
 .orbit-core span { color: var(--aqua); }
-.button.primary, .button.dark { background: var(--night); box-shadow: 0 8px 18px rgba(11, 29, 42, .14); }
+.button.primary, .button.dark { color: #fff; background: var(--night); box-shadow: 0 8px 18px rgba(11, 29, 42, .14); }
 .button.primary:hover, .button.dark:hover { background: #183c51; }
 .button.secondary { color: var(--aqua-deep); background: rgba(255, 255, 255, .7); border-color: rgba(8, 127, 136, .24); }
 .button.secondary:hover { background: #fff; border-color: var(--aqua-deep); }
