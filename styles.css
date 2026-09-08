@@ -145,6 +145,7 @@ body.dark { --paper: #0f181d; --paper-2: #18252b; --ink: #edf4ef; --ink-soft: #a
 .test-feedback.is-wrong { border-color: rgba(239,138,101,.45); background: rgba(239,138,101,.1); }
 .test-feedback p { margin: 6px 0 0; }
 .test-actions { display: flex; justify-content: flex-end; margin-top: 24px; }
+.test-next-button { min-width: 190px; }
 .test-result { max-width: 700px; padding: clamp(24px, 5vw, 52px); border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--paper-2); }
 .test-result-score { margin: 12px 0; color: var(--aqua-deep); font: clamp(58px, 10vw, 100px)/1 var(--display); }
 .test-result h2 { margin: 0 0 10px; font: 30px var(--display); }
