@@ -342,15 +342,22 @@ function render() {
   bindActions();
 }
 
+function bindOnce(element, key, eventName, handler) {
+  element.pulseBindings = element.pulseBindings || new Set();
+  if (element.pulseBindings.has(key)) return;
+  element.pulseBindings.add(key);
+  element.addEventListener(eventName, handler);
+}
+
 function bindActions() {
   applyRussianTypography(appView);
-  document.querySelectorAll("[data-view]").forEach(element => element.addEventListener("click", () => setView(element.dataset.view)));
-  document.querySelectorAll("[data-view], [data-action]").forEach(element => element.addEventListener("keydown", event => {
+  document.querySelectorAll("[data-view]").forEach(element => bindOnce(element, "view-click", "click", () => setView(element.dataset.view)));
+  document.querySelectorAll("[data-view], [data-action]").forEach(element => bindOnce(element, "keyboard", "keydown", event => {
     if (element.tagName === "BUTTON" || (event.key !== "Enter" && event.key !== " ")) return;
     event.preventDefault();
     element.click();
   }));
-  document.querySelectorAll("[data-action]").forEach(element => element.addEventListener("click", () => {
+  document.querySelectorAll("[data-action]").forEach(element => bindOnce(element, "action-click", "click", () => {
     const action = element.dataset.action;
     const cardPool = cards;
     if (action === "next-card") { state.studied += 1; state.cardIndex = (state.cardIndex + 1) % cardPool.length; persist(); render(); showToast("Следующая карточка"); }
@@ -392,14 +399,14 @@ function bindActions() {
     }
   }));
   const reveal = document.querySelector("#reveal-answer");
-  if (reveal) reveal.addEventListener("click", () => { document.querySelector("#flash-answer").hidden = false; reveal.hidden = true; });
+  if (reveal) bindOnce(reveal, "reveal-answer", "click", () => { document.querySelector("#flash-answer").hidden = false; reveal.hidden = true; });
   const revealCase = document.querySelector("#reveal-case");
-  if (revealCase) revealCase.addEventListener("click", () => { document.querySelector("#case-answer").hidden = false; revealCase.hidden = true; });
+  if (revealCase) bindOnce(revealCase, "reveal-case", "click", () => { document.querySelector("#case-answer").hidden = false; revealCase.hidden = true; });
   const revealImageCase = document.querySelector("#reveal-image-case");
-  if (revealImageCase) revealImageCase.addEventListener("click", () => { document.querySelector("#image-case-answer").hidden = false; revealImageCase.hidden = true; });
-  document.querySelectorAll("[data-case-score]").forEach(button => button.addEventListener("click", () => { state.caseScores[button.dataset.caseScore] = button.dataset.score; persist(); showToast(`Оценка ${button.dataset.score}/3 сохранена`); button.parentElement.querySelectorAll("button").forEach(item => item.classList.remove("active")); button.classList.add("active"); }));
-  document.querySelectorAll("[data-image-score]").forEach(button => button.addEventListener("click", () => { state.imageCaseScores[button.dataset.imageScore] = button.dataset.score; persist(); showToast(`Оценка ${button.dataset.score}/3 сохранена`); button.parentElement.querySelectorAll("button").forEach(item => item.classList.remove("active")); button.classList.add("active"); }));
-  document.querySelectorAll("[data-test-option]").forEach(input => input.addEventListener("change", () => {
+  if (revealImageCase) bindOnce(revealImageCase, "reveal-image-case", "click", () => { document.querySelector("#image-case-answer").hidden = false; revealImageCase.hidden = true; });
+  document.querySelectorAll("[data-case-score]").forEach(button => bindOnce(button, "case-score", "click", () => { state.caseScores[button.dataset.caseScore] = button.dataset.score; persist(); showToast(`Оценка ${button.dataset.score}/3 сохранена`); button.parentElement.querySelectorAll("button").forEach(item => item.classList.remove("active")); button.classList.add("active"); }));
+  document.querySelectorAll("[data-image-score]").forEach(button => bindOnce(button, "image-score", "click", () => { state.imageCaseScores[button.dataset.imageScore] = button.dataset.score; persist(); showToast(`Оценка ${button.dataset.score}/3 сохранена`); button.parentElement.querySelectorAll("button").forEach(item => item.classList.remove("active")); button.classList.add("active"); }));
+  document.querySelectorAll("[data-test-option]").forEach(input => bindOnce(input, "test-option", "change", () => {
     const questionIndex = Number(input.dataset.testIndex);
     state.testAnswers[questionIndex] = [...document.querySelectorAll(`input[data-test-option][data-test-index="${questionIndex}"]:checked`)].map(option => option.value);
     persist();
