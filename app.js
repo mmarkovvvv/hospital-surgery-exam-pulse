@@ -258,7 +258,12 @@ function applyRussianTypography(root) {
 }
 
 function renderDashboard() {
-  return `<div class="home-heading"><h1>Госпитальная хирургия</h1><p>Выбери формат подготовки.</p></div>
+  return `<div class="home-heading"><p class="eyebrow">Предметы</p><h1>Что будем изучать?</h1><p>Выбери предмет, чтобы открыть форматы подготовки.</p></div>
+  <section class="subject-grid" aria-label="Список предметов"><article class="subject-card featured" role="button" tabindex="0" data-action="open-subject" data-subject="surgery"><div><span class="format-number">01 · АКТИВНЫЙ КУРС</span><h3>Госпитальная хирургия</h3><p>Карточки, тесты, билеты и клинические задачи.</p></div><span class="subject-open">Открыть предмет <span aria-hidden="true">→</span></span></article><article class="subject-card" role="button" tabindex="0" data-action="open-subject" data-subject="placeholder"><div><span class="format-number">02 · СКОРО</span><h3>Lorem ipsum</h3><p>Здесь появится следующий предмет для подготовки.</p></div><span class="subject-open">Пока недоступно</span></article><article class="subject-card" role="button" tabindex="0" data-action="open-subject" data-subject="placeholder"><div><span class="format-number">03 · СКОРО</span><h3>Dolor sit amet</h3><p>Отдельный набор материалов и форматов обучения.</p></div><span class="subject-open">Пока недоступно</span></article><article class="subject-card" role="button" tabindex="0" data-action="open-subject" data-subject="placeholder"><div><span class="format-number">04 · СКОРО</span><h3>Adipiscing elit</h3><p>Предмет можно будет добавить позже.</p></div><span class="subject-open">Пока недоступно</span></article></section>`;
+}
+
+function renderCourseDashboard() {
+  return `<div class="mode-header"><div><p class="eyebrow">Предмет</p><h1>Госпитальная хирургия</h1><p>Выбери формат подготовки.</p></div><button class="button secondary" data-view="dashboard">← Все предметы</button></div>
   <section class="section-heading"><h2>Форматы подготовки</h2></section>
   <section class="format-grid"><article class="format-card" role="button" tabindex="0" data-view="cards"><span class="format-number">01</span><h3>Карточки</h3><p>Вопрос → самостоятельный ответ → эталон.</p></article><article class="format-card" role="button" tabindex="0" data-view="test"><span class="format-number">02</span><h3>Тест</h3><p>Один или несколько правильных вариантов с результатом.</p></article><article class="format-card" role="button" tabindex="0" data-view="tickets"><span class="format-number">03</span><h3>Билеты</h3><p>Теоретические вопросы и структура устного ответа.</p></article><article class="format-card" role="button" tabindex="0" data-view="cases"><span class="format-number">04</span><h3>Клинические задачи</h3><p>Диагноз → опасность → тактика.</p></article><article class="format-card" role="button" tabindex="0" data-view="image-cases"><span class="format-number">05</span><h3>Изображения</h3><p>Интерпретация реального клинического изображения.</p></article><article class="format-card" role="button" tabindex="0" data-view="sources"><span class="format-number">06</span><h3>Источники</h3><p>Клинические рекомендации и материалы к задачам.</p></article></section>`;
 }
@@ -379,10 +384,12 @@ function renderSources() {
 
 function render() {
   document.body.classList.toggle("dark", state.dark);
-  document.querySelectorAll(".nav-item").forEach(item => item.classList.toggle("active", item.dataset.view === state.view));
-  const active = document.querySelector(`.nav-item[data-view="${state.view}"]`);
-  document.querySelector("#current-section").textContent = active ? active.dataset.label : "Обзор";
+  const navigationView = state.view === "course-dashboard" ? "dashboard" : state.view;
+  document.querySelectorAll(".nav-item").forEach(item => item.classList.toggle("active", item.dataset.view === navigationView));
+  const active = document.querySelector(`.nav-item[data-view="${navigationView}"]`);
+  document.querySelector("#current-section").textContent = state.view === "course-dashboard" ? "Госпитальная хирургия" : (active ? active.dataset.label : "Обзор");
   if (state.view === "dashboard") appView.innerHTML = renderDashboard();
+  if (state.view === "course-dashboard") appView.innerHTML = renderCourseDashboard();
   if (state.view === "cards") appView.innerHTML = renderCards();
   if (state.view === "test") appView.innerHTML = renderTest();
   if (state.view === "tickets") appView.innerHTML = renderTickets();
@@ -410,6 +417,10 @@ function bindActions() {
   document.querySelectorAll("[data-action]").forEach(element => bindOnce(element, "action-click", "click", () => {
     const action = element.dataset.action;
     const cardPool = cards;
+    if (action === "open-subject") {
+      if (element.dataset.subject === "surgery") setView("course-dashboard");
+      else showToast("Этот предмет пока не добавлен");
+    }
     if (action === "next-card") { state.studied += 1; state.cardIndex = (state.cardIndex + 1) % cardPool.length; persist(); render(); showToast("Следующая карточка"); }
     if (action === "know") { const card = cardPool[state.cardIndex % cardPool.length]; if (!state.known.includes(card.id)) state.known.push(card.id); state.studied += 1; state.cardIndex = (state.cardIndex + 1) % cardPool.length; persist(); render(); showToast("Карточка отмечена как освоенная"); }
     if (action === "random-ticket") { const ticket = tickets[Math.floor(Math.random() * tickets.length)]; showToast(`Сегодня: билет ${ticket.number} · ${ticket.title}`); }
