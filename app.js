@@ -242,7 +242,44 @@ const appView = document.querySelector("#app-view");
 function persist() { localStorage.setItem("pulse-state", JSON.stringify(state)); }
 function showToast(message) { const toast = document.querySelector("#toast"); toast.textContent = message; toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 2200); }
 function progressPercent() { return Math.min(100, Math.round((state.known.length / cards.length) * 100)); }
-function setView(view) { state.view = view; persist(); render(); window.scrollTo({ top: 0, behavior: "smooth" }); }
+function closeMobileMenu() {
+  const sidebar = document.querySelector("#sidebar");
+  const toggle = document.querySelector("#menu-toggle");
+  const backdrop = document.querySelector("#sidebar-backdrop");
+  sidebar?.classList.remove("is-open");
+  document.body.classList.remove("menu-open");
+  if (toggle) toggle.setAttribute("aria-expanded", "false");
+  if (backdrop) backdrop.hidden = true;
+}
+function setView(view) { state.view = view; persist(); closeMobileMenu(); render(); window.scrollTo({ top: 0, behavior: "smooth" }); }
+const viewLabels = { "course-dashboard": "Обзор курса", cards: "Карточки", test: "Тест", tickets: "Билеты", cases: "Клинические задачи", "image-cases": "Задачи с изображением", sources: "Источники" };
+function updateNavigation() {
+  const sidebar = document.querySelector("#sidebar");
+  const isCourse = state.view !== "dashboard";
+  const globalNav = document.querySelector('[data-nav="global"]');
+  const courseNav = document.querySelector('[data-nav="course"]');
+  const sidebarTitle = document.querySelector("#sidebar-title");
+  sidebar?.classList.toggle("has-course", isCourse);
+  if (globalNav) globalNav.hidden = isCourse;
+  if (courseNav) courseNav.hidden = !isCourse;
+  if (sidebarTitle) sidebarTitle.textContent = isCourse ? "Разделы курса" : "Предметы";
+  const navigationView = state.view === "course-dashboard" ? "course-dashboard" : state.view;
+  document.querySelectorAll(".nav-item").forEach(item => item.classList.toggle("active", item.dataset.view === navigationView));
+}
+function updateBreadcrumbs(detailLabel = "") {
+  const breadcrumb = document.querySelector("#breadcrumb");
+  if (!breadcrumb) return;
+  if (state.view === "dashboard") {
+    breadcrumb.innerHTML = `<strong>ПУЛЬС</strong><i>/</i><span>ПРЕДМЕТЫ</span>`;
+    return;
+  }
+  if (state.view === "course-dashboard") {
+    breadcrumb.innerHTML = `<button class="breadcrumb-link" type="button" data-view="dashboard">ПУЛЬС</button><i>/</i><strong>ГОСПИТАЛЬНАЯ ХИРУРГИЯ</strong>`;
+    return;
+  }
+  const label = detailLabel || viewLabels[state.view] || "Раздел";
+  breadcrumb.innerHTML = `<button class="breadcrumb-link" type="button" data-view="dashboard">ПУЛЬС</button><i>/</i><button class="breadcrumb-link" type="button" data-view="course-dashboard">ГОСПИТАЛЬНАЯ ХИРУРГИЯ</button><i>/</i><strong>${label}</strong>`;
+}
 const russianShortWords = /(^|\s)(а|в|во|и|к|ко|на|не|ни|о|об|от|по|с|со|у|за|из|до|для|как|но|что|же|ли|или|либо)\s+/giu;
 const russianPhraseGroups = /\b(острая|острый|острое|острого|хроническая|хронический|хроническое|критическая|критический|механическая|механический|гнойная|гнойный|перфоративная|перфоративный|артериальная|артериальные|венозные|желчные|верхний|нижний|тонкой|толстой|послеоперационная|послеоперационный|диафрагмальная|пупочная|паховая|бедренная|травматическая|травматический)\s+(ишемия|ишемии|ишемию|осложнения|кровотечение|кровотечения|язва|язвенная|непроходимость|холангит|холецистит|перитонит|артерий|вены|пути|грыжа|грыжи|повреждения|ожоги|стриктуры)\b/giu;
 function applyRussianTypography(root) {
@@ -355,6 +392,7 @@ function renderTicketDetail(ticket) {
   const answerCards = getTicketAnswerCards(ticket);
   const answerTests = getTicketAnswerTests(ticket);
   appView.innerHTML = `<div class="mode-header"><div><h1>${ticket.title}</h1><p>Сначала сформулируй ответ сам, затем сверяйся с готовыми формулировками и планом устного ответа.</p></div><button class="button secondary" data-view="tickets">← Все билеты</button></div><article class="case-detail"><div class="scenario">Экзаменационный билет: ${ticket.title}</div><h2>Эталон ответа</h2>${renderTicketAnswerPlan(ticket)}${renderTicketCardEvidence(answerCards)}${renderTicketTestEvidence(answerTests)}<section class="ticket-answer-section"><h3>Минимум, который должен прозвучать</h3><ul class="ticket-checklist">${ticket.topics.map(topic => `<li>${topic}</li>`).join("")}</ul></section><div class="disclaimer"><strong>Важно.</strong> Это учебный конспект для самопроверки, а не официальный кафедральный текст билета. Клинические решения сверяй с актуальными клиническими рекомендациями.</div><div class="card-footer"><button class="button secondary" data-action="random-ticket">Другой билет</button></div></article>`;
+  updateBreadcrumbs(ticket.title);
   bindActions();
 }
 
@@ -369,12 +407,14 @@ function renderImageCases() {
 function renderCaseDetail(index) {
   const item = cases[index];
   appView.innerHTML = `<div class="mode-header"><div><h1>${item.title}</h1><p>${item.summary}</p></div><button class="button secondary" data-view="cases">← Все задачи</button></div><article class="case-detail"><div class="scenario">${item.scenario}</div><h2>Твоя клиническая гипотеза</h2><p style="color:var(--ink-soft);font-size:12px;line-height:1.6">Сформулируй диагноз, назови минимум два опасных признака и укажи первое исследование. Когда будешь готов — открой разбор.</p><button class="button dark" id="reveal-case">Показать разбор</button><div id="case-answer" hidden><h2>Ожидаемая логика</h2><p style="color:var(--aqua-deep);font-weight:800;font-size:13px">${item.diagnosis}</p><ol class="step-list">${item.steps.map((step, stepIndex) => `<li><span>${stepIndex + 1}</span><div>${step}</div></li>`).join("")}</ol><div class="card-footer" style="margin-top:28px"><strong style="font-size:12px">Насколько уверенно?</strong><div style="display:flex;gap:6px"><button class="filter-chip" data-score="1" data-case-score="${item.number}">1</button><button class="filter-chip" data-score="2" data-case-score="${item.number}">2</button><button class="filter-chip" data-score="3" data-case-score="${item.number}">3</button></div></div></div></article>`;
+  updateBreadcrumbs(item.title);
   bindActions();
 }
 
 function renderImageCaseDetail(index) {
   const item = imageCases[index];
   appView.innerHTML = `<div class="mode-header"><div><h1>${item.title}</h1><p>${item.summary}</p></div><button class="button secondary" data-view="image-cases">← Все изображения</button></div><article class="case-detail image-case-detail"><button class="image-preview-button" data-action="zoom-image" aria-label="Увеличить изображение"><img src="${item.image}" alt="${item.imageAlt}" /></button><p class="image-caption">Реальное клиническое изображение · нажми, чтобы увеличить</p><div class="image-source image-source-top">Источник: <a href="${item.sourceUrl}" target="_blank" rel="noreferrer">${item.sourceTitle}</a> · ${item.license} · ${item.changes}.</div><div class="scenario">${item.scenario}</div><h2>Твоя интерпретация</h2><p class="study-prompt">Назови наиболее вероятную проблему, два опасных признака и первое действие врача. После этого открой разбор.</p><button class="button dark" id="reveal-image-case">Показать разбор</button><div id="image-case-answer" hidden><h2>Ожидаемая логика</h2><p class="answer-highlight">${item.diagnosis}</p><ol class="step-list">${item.steps.map((step, stepIndex) => `<li><span>${stepIndex + 1}</span><div>${step}</div></li>`).join("")}</ol><div class="image-source">Источник изображения: <a href="${item.sourceUrl}" target="_blank" rel="noreferrer">${item.sourceTitle}</a>. Для экзамена клиническое изображение всё равно нужно сопоставлять с клиникой и актуальными рекомендациями.</div><div class="card-footer" style="margin-top:28px"><strong>Насколько уверенно?</strong><div class="score-actions"><button class="filter-chip" data-score="1" data-image-score="${item.number}">1</button><button class="filter-chip" data-score="2" data-image-score="${item.number}">2</button><button class="filter-chip" data-score="3" data-image-score="${item.number}">3</button></div></div></div></article>`;
+  updateBreadcrumbs(item.title);
   bindActions();
 }
 
@@ -384,10 +424,8 @@ function renderSources() {
 
 function render() {
   document.body.classList.toggle("dark", state.dark);
-  const navigationView = state.view === "course-dashboard" ? "dashboard" : state.view;
-  document.querySelectorAll(".nav-item").forEach(item => item.classList.toggle("active", item.dataset.view === navigationView));
-  const active = document.querySelector(`.nav-item[data-view="${navigationView}"]`);
-  document.querySelector("#current-section").textContent = state.view === "course-dashboard" ? "Госпитальная хирургия" : (active ? active.dataset.label : "Обзор");
+  updateNavigation();
+  updateBreadcrumbs();
   if (state.view === "dashboard") appView.innerHTML = renderDashboard();
   if (state.view === "course-dashboard") appView.innerHTML = renderCourseDashboard();
   if (state.view === "cards") appView.innerHTML = renderCards();
@@ -472,6 +510,20 @@ function bindActions() {
     state.testAnswers[questionIndex] = [...document.querySelectorAll(`input[data-test-option][data-test-index="${questionIndex}"]:checked`)].map(option => option.value);
     persist();
   }));
+  const menuToggle = document.querySelector("#menu-toggle");
+  if (menuToggle) bindOnce(menuToggle, "menu-toggle", "click", () => {
+    const sidebar = document.querySelector("#sidebar");
+    const backdrop = document.querySelector("#sidebar-backdrop");
+    const isOpen = sidebar.classList.toggle("is-open");
+    document.body.classList.toggle("menu-open", isOpen);
+    menuToggle.setAttribute("aria-expanded", String(isOpen));
+    backdrop.hidden = !isOpen;
+  });
+  const backdrop = document.querySelector("#sidebar-backdrop");
+  if (backdrop) bindOnce(backdrop, "menu-backdrop", "click", closeMobileMenu);
+  const sidebarClose = document.querySelector("#sidebar-close");
+  if (sidebarClose) bindOnce(sidebarClose, "menu-close", "click", closeMobileMenu);
+  bindOnce(document, "menu-escape", "keydown", event => { if (event.key === "Escape") closeMobileMenu(); });
 }
 
 render();
