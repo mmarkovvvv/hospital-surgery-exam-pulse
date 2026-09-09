@@ -310,3 +310,16 @@ img { max-width: 100%; height: auto; }
 }
 .step-list li strong { display: block; color: var(--ink); font-size: 12px; }
 .step-list li p { margin: 5px 0 0; color: var(--ink-soft); font-size: 12px; line-height: 1.6; }
+.ticket-answer-section { margin-top: 24px; }
+.ticket-answer-section h3 { margin: 0 0 12px; color: var(--ink); font-size: 16px; letter-spacing: -.025em; }
+.ticket-plan { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; counter-reset: ticket-step; }
+.ticket-plan li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: start; padding: 13px 14px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: rgba(123, 216, 194, .07); }
+.ticket-plan li > span { width: 24px; height: 24px; display: grid; place-items: center; color: var(--night); background: var(--aqua); border-radius: 8px; font-size: 10px; font-weight: 800; }
+.ticket-plan strong { display: block; color: var(--ink); font-size: 13px; }
+.ticket-plan p { margin: 5px 0 0; color: var(--ink-soft); font-size: 12px; line-height: 1.6; }
+.ticket-evidence-list { display: grid; gap: 10px; }
+.ticket-evidence { padding: 14px 15px; border-left: 3px solid var(--aqua-deep); background: rgba(123, 216, 194, .08); }
+.ticket-evidence strong { display: block; color: var(--ink); font-size: 13px; line-height: 1.45; }
+.ticket-evidence p { margin: 7px 0 0; color: var(--ink-soft); font-size: 12px; line-height: 1.6; }
+.ticket-checklist { display: grid; gap: 8px; margin: 0; padding-left: 20px; color: var(--ink-soft); font-size: 12px; line-height: 1.6; }
+.ticket-checklist li::marker { color: var(--aqua-deep); font-weight: 800; }

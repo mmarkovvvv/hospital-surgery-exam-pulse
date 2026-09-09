@@ -172,7 +172,7 @@ const imageCases = [
 const references = [
   { icon: "М", title: "Рубрикатор клинических рекомендаций", text: "Точка проверки актуальных версий клинических рекомендаций Минздрава России.", label: "Минздрав РФ", url: "https://minzdrav.gov.ru/smartphone_apps_rubrikator_kr" },
   { icon: "К", title: "Острый аппендицит у взрослых", text: "Рекомендации Минздрава: диагностика, тактика, алгоритмы и критерии качества.", label: "КР · 2023", url: "https://www.consultant.ru/document/cons_doc_LAW_463029/" },
-  { icon: "К", title: "Острый холецистит", text: "Диагностика, тяжесть, хирургическая тактика и алгоритмы ведения.", label: "КР · 2021", url: "https://apicr.minzdrav.gov.ru/api.ashx?id=819_1&op=GetClinrecPdf" },
+  { icon: "К", title: "Острый холецистит", text: "Диагностика, тяжесть, хирургическая тактика и алгоритмы ведения.", label: "КР · 2024", url: "https://apicr.minzdrav.gov.ru/api.ashx?id=819_1&op=GetClinrecPdf" },
   { icon: "К", title: "Острый панкреатит", text: "Клинические рекомендации, утверждённые в 2024 году; проверять обновление перед экзаменом.", label: "КР · 2024", url: "https://apicr.minzdrav.gov.ru/api.ashx?id=903_1&op=GetClinrecPdf" },
   { icon: "И", title: "Рентгенограмма при непроходимости", text: "Реальный обзорный снимок с уровнями жидкости; Wikimedia Commons, лицензия CC BY-SA 3.0.", label: "Изображение", url: "https://commons.wikimedia.org/wiki/File:Upright_X-ray_demonstrating_small_bowel_obstruction.jpg" },
   { icon: "И", title: "Рентгенограммы при пневмотораксе", text: "Серия клинических рентгенограмм из открытого case report; лицензия CC BY 4.0.", label: "Изображение", url: "https://commons.wikimedia.org/wiki/File:Chest_X-ray_of_pneumothorax.png" },
@@ -298,24 +298,58 @@ function renderTickets() {
   return `<div class="mode-header"><div><h1>Билеты</h1><p>Нажми на билет. Внутри — темы и порядок устного ответа.</p></div></div><section class="ticket-grid">${tickets.map(ticket => `<article class="ticket-card" role="button" tabindex="0" data-action="open-ticket" data-ticket="${ticket.number}"><span class="ticket-number">БИЛЕТ ${ticket.number}</span><h3>${ticket.title}</h3><p>${ticket.topics.join(" · ")}</p><div class="card-footer"><span class="tag">${ticket.tag}</span></div></article>`).join("")}</section><div class="disclaimer"><strong>Как читать банк.</strong> Билеты 01–20 покрывают основной тематический каркас; 21–40 — расширенная самопроверка; 41–57 — темы, найденные при сверке дополнительных учебных банков. Это не опубликованный кафедральный список.</div>`;
 }
 
-const ticketAnswerStopWords = new Set(["заболевания", "заболевание", "клиника", "диагностика", "лечение", "лечения", "принципы", "оценка", "ситуация", "методы", "метод", "показания", "система", "системы", "пациент", "пациента", "хирургическая", "хирургическое", "тактика", "осложнения", "состояния", "операция", "операции"]);
+const ticketAnswerStopWords = new Set(["заболевания", "заболевание", "клиника", "диагностика", "лечение", "лечения", "принципы", "оценка", "ситуация", "методы", "метод", "показания", "система", "системы", "пациент", "пациента", "хирургическая", "хирургическое", "тактика", "осложнения", "состояния", "операция", "операции", "железа", "железы", "острый", "острая", "острое", "хронический", "хроническая", "хроническое"]);
+
+function getTicketTerms(value) {
+  return [...new Set((value || "").toLowerCase().match(/[а-яё]{6,}/giu) || [])].filter(term => !ticketAnswerStopWords.has(term));
+}
+
+function getTicketEvidenceScore(ticket, text) {
+  const normalizedText = text.toLowerCase();
+  const titleScore = getTicketTerms(ticket.title).reduce((total, term) => total + (normalizedText.includes(term.slice(0, 6)) ? 3 : 0), 0);
+  const tagScore = getTicketTerms(ticket.tag).reduce((total, term) => total + (normalizedText.includes(term.slice(0, 6)) ? 2 : 0), 0);
+  const topicScore = getTicketTerms(ticket.topics.join(" ")).reduce((total, term) => total + (normalizedText.includes(term.slice(0, 6)) ? 1 : 0), 0);
+  return titleScore + tagScore + topicScore;
+}
 
 function getTicketAnswerCards(ticket) {
-  const ticketText = `${ticket.title} ${ticket.tag} ${ticket.topics.join(" ")}`.toLowerCase();
-  const terms = [...new Set(ticketText.match(/[а-яё]{6,}/giu) || [])].filter(term => !ticketAnswerStopWords.has(term));
-  return cards.map(card => {
-    const cardText = `${card.module} ${card.question} ${card.answer}`.toLowerCase();
-    const score = terms.reduce((total, term) => total + (cardText.includes(term.slice(0, 6)) ? 1 : 0), 0);
-    return { card, score };
-  }).filter(entry => entry.score > 0).sort((left, right) => right.score - left.score || left.card.id - right.card.id).slice(0, 5).map(entry => entry.card);
+  return cards.map(card => ({ card, score: getTicketEvidenceScore(ticket, `${card.module} ${card.question} ${card.answer}`) }))
+    .filter(entry => entry.score > 0)
+    .sort((left, right) => right.score - left.score || left.card.id - right.card.id)
+    .slice(0, 4)
+    .map(entry => entry.card);
+}
+
+function getTicketAnswerTests(ticket) {
+  return testQuestions.map(item => ({ item, score: getTicketEvidenceScore(ticket, `${item.question} ${item.options.map(option => option.text).join(" ")} ${item.explanation}`) }))
+    .filter(entry => entry.score > 0)
+    .sort((left, right) => right.score - left.score)
+    .slice(0, 3)
+    .map(entry => entry.item);
+}
+
+function renderTicketAnswerPlan(ticket) {
+  const plan = [
+    ["Диагноз и классификация", `Начни с формулировки: ${ticket.topics[0]}. Назови основную форму заболевания, распространённость и степень тяжести, если они определяют тактику.`],
+    ["Клиника и опасность", `Раскрой ситуацию: ${ticket.topics[2]}. Отдельно назови признаки угрозы жизни, органной недостаточности, ишемии, инфекции или кровотечения — в зависимости от случая.`],
+    ["Обследование", `Объясни, что нужно подтвердить: ${ticket.topics[1]}. Назови первичные лабораторные и инструментальные методы и укажи, какое решение они помогают принять.`],
+    ["Лечебная тактика", "Заверши ответ последовательностью: первичная стабилизация, лечение причины и контроль источника осложнения; затем обозначь показания к эндоскопическому, интервенционному или открытому вмешательству и необходимость наблюдения в динамике."]
+  ];
+  return `<section class="ticket-answer-section"><h3>Порядок устного ответа</h3><ol class="ticket-plan">${plan.map(([title, text], index) => `<li><span>${index + 1}</span><div><strong>${title}</strong><p>${text}</p></div></li>`).join("")}</ol></section>`;
+}
+
+function renderTicketCardEvidence(answerCards) {
+  return answerCards.length ? `<section class="ticket-answer-section"><h3>Готовые формулировки</h3><div class="ticket-evidence-list">${answerCards.map(card => `<article class="ticket-evidence"><strong>${card.question}</strong><p>${card.answer}</p></article>`).join("")}</div></section>` : "";
+}
+
+function renderTicketTestEvidence(answerTests) {
+  return answerTests.length ? `<section class="ticket-answer-section"><h3>Что проверить перед экзаменом</h3><div class="ticket-evidence-list">${answerTests.map(item => { const correctAnswers = item.options.filter(option => option.correct).map(option => option.text).join("; "); return `<article class="ticket-evidence"><strong>${item.question}</strong><p><b>Правильное содержание:</b> ${correctAnswers}</p><p>${item.explanation}</p></article>`; }).join("")}</div></section>` : "";
 }
 
 function renderTicketDetail(ticket) {
   const answerCards = getTicketAnswerCards(ticket);
-  const answerMarkup = answerCards.length
-    ? `<ol class="step-list">${answerCards.map((card, index) => `<li><span>${index + 1}</span><div><strong>${card.question}</strong><p>${card.answer}</p></div></li>`).join("")}</ol>`
-    : `<div class="disclaimer"><strong>Эталон пока не добавлен.</strong> Используй темы ниже как структуру ответа и сверяй формулировки с актуальной кафедральной методичкой.</div>`;
-  appView.innerHTML = `<div class="mode-header"><div><h1>${ticket.title}</h1><p>Сначала сформулируй ответ сам, затем сравни его с эталонными формулировками.</p></div><button class="button secondary" data-view="tickets">← Все билеты</button></div><article class="case-detail"><div class="scenario">Экзаменационный билет: ${ticket.title}</div><h2>Эталон ответа</h2>${answerMarkup}<h2>Что обязательно упомянуть</h2><ol class="step-list">${ticket.topics.map((topic, index) => `<li><span>${index + 1}</span><div>${topic}</div></li>`).join("")}</ol><div class="disclaimer"><strong>Важно.</strong> Это учебный конспект для самопроверки, а не официальный кафедральный текст билета. Клинические решения сверяй с актуальными клиническими рекомендациями.</div><div class="card-footer"><button class="button secondary" data-action="random-ticket">Другой билет</button></div></article>`;
+  const answerTests = getTicketAnswerTests(ticket);
+  appView.innerHTML = `<div class="mode-header"><div><h1>${ticket.title}</h1><p>Сначала сформулируй ответ сам, затем сверяйся с готовыми формулировками и планом устного ответа.</p></div><button class="button secondary" data-view="tickets">← Все билеты</button></div><article class="case-detail"><div class="scenario">Экзаменационный билет: ${ticket.title}</div><h2>Эталон ответа</h2>${renderTicketAnswerPlan(ticket)}${renderTicketCardEvidence(answerCards)}${renderTicketTestEvidence(answerTests)}<section class="ticket-answer-section"><h3>Минимум, который должен прозвучать</h3><ul class="ticket-checklist">${ticket.topics.map(topic => `<li>${topic}</li>`).join("")}</ul></section><div class="disclaimer"><strong>Важно.</strong> Это учебный конспект для самопроверки, а не официальный кафедральный текст билета. Клинические решения сверяй с актуальными клиническими рекомендациями.</div><div class="card-footer"><button class="button secondary" data-action="random-ticket">Другой билет</button></div></article>`;
   bindActions();
 }
 
