@@ -358,7 +358,7 @@ img { max-width: 100%; height: auto; }
 
 @media (max-width: 980px) {
   body.menu-open { overflow: hidden; }
-  .sidebar { position: fixed; inset: 0 auto 0 0; z-index: 30; width: min(304px, calc(100vw - 48px)); height: 100dvh; min-height: 100dvh; padding: 22px 18px 20px; gap: 18px; transform: translateX(-105%); transition: transform .24s ease; box-shadow: 20px 0 50px rgba(4, 18, 28, .28); }
+  .sidebar { position: fixed; inset: 0 auto 0 0; z-index: 30; width: min(304px, calc(100vw - 48px)); height: 100dvh; min-height: 100dvh; padding: 22px 18px 20px; gap: 18px; overflow-y: auto; transform: translateX(-105%); transition: transform .24s ease; box-shadow: 20px 0 50px rgba(4, 18, 28, .28); }
   .sidebar.is-open { transform: translateX(0); }
   .sidebar::before { display: block; }
   .brand-lockup { justify-content: flex-start; }
@@ -381,4 +381,42 @@ img { max-width: 100%; height: auto; }
   .breadcrumb { gap: 7px; font-size: 9px; letter-spacing: .06em; }
   .breadcrumb i { flex: 0 0 auto; }
   .sidebar { width: min(292px, calc(100vw - 38px)); }
+}
+
+/* Progress, weak spots and saved study items */
+.progress-summary-large { margin: 0 0 16px; padding: 20px 22px; }
+.progress-summary-large strong { font-size: 17px; }
+.progress-summary-large .progress-bar { width: min(280px, 38%); height: 9px; }
+.progress-actions { display: flex; gap: 9px; margin-top: 18px; flex-wrap: wrap; }
+.flashcard-tools { display: flex; align-items: center; gap: 12px; }
+.favorite-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-width: 34px; min-height: 34px; padding: 6px 9px; color: var(--ink-soft); background: transparent; border: 1px solid var(--line); border-radius: 99px; font-size: 16px; line-height: 1; cursor: pointer; transition: .2s ease; }
+.favorite-toggle:hover, .favorite-toggle.is-active { color: #b07a13; background: rgba(242,194,91,.18); border-color: rgba(177,133,28,.4); }
+.dark-toggle { color: #a6c2c6; border-color: rgba(255,255,255,.2); }
+.dark-toggle:hover, .dark-toggle.is-active { color: var(--amber); background: rgba(242,194,91,.12); border-color: rgba(242,194,91,.4); }
+.detail-actions { display: flex; justify-content: flex-end; margin-top: 14px; }
+.detail-actions .favorite-toggle { padding-inline: 13px; font-size: 11px; font-weight: 800; }
+.weakness-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.weakness-panel { padding: 20px; }
+.panel-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 13px; }
+.panel-heading h2 { margin: 0; font-size: 16px; }
+.weakness-list { display: grid; gap: 9px; }
+.weakness-item { display: flex; align-items: start; justify-content: space-between; gap: 15px; padding-top: 12px; border-top: 1px solid var(--line); }
+.weakness-item:first-child { padding-top: 0; border-top: 0; }
+.weakness-item strong { display: block; font-size: 12px; line-height: 1.4; }
+.weakness-item p { margin: 5px 0 0; color: var(--ink-soft); font-size: 10px; line-height: 1.5; }
+.weakness-item .text-button { flex: 0 0 auto; white-space: nowrap; }
+.favorite-section + .favorite-section { margin-top: 32px; }
+.favorite-section .section-heading { margin-top: 0; }
+.favorite-section .section-heading h2 { display: flex; align-items: center; gap: 8px; font-size: 22px; }
+.favorite-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.favorite-item { display: flex; align-items: start; justify-content: space-between; gap: 15px; min-height: 150px; padding: 18px; border: 1px solid var(--line); border-radius: var(--radius-md); background: var(--paper-2); cursor: pointer; transition: .2s ease; }
+.favorite-item:hover { border-color: rgba(47,158,145,.4); transform: translateY(-2px); }
+.favorite-item h3 { margin: 9px 0 7px; font: 21px/1.1 var(--display); }
+.favorite-item p { margin: 0; color: var(--ink-soft); font-size: 11px; line-height: 1.5; }
+.favorite-item .favorite-toggle { flex: 0 0 auto; }
+@media (max-width: 700px) {
+  .progress-summary-large { display: block; }
+  .progress-summary-large .progress-bar { width: 100%; margin-top: 15px; }
+  .weakness-grid, .favorite-grid { grid-template-columns: 1fr; }
+  .detail-actions { justify-content: flex-start; }
 }

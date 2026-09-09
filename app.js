@@ -231,17 +231,52 @@ const testQuestions = [
   { question: "Какие признаки опасны при подозрении на разрыв аневризмы брюшной аорты?", multiple: true, options: [{ id: "a", text: "Внезапная боль в животе или пояснице", correct: true }, { id: "b", text: "Гипотония и признаки внутреннего кровотечения", correct: true }, { id: "c", text: "Необходимость срочной сосудистой тактики", correct: true }, { id: "d", text: "Плановое наблюдение без оценки гемодинамики", correct: false }], explanation: "Сочетание боли, шока и предполагаемой аневризмы требует немедленной оценки и привлечения сосудистой команды." },
 ];
 
-const defaultState = { view: "dashboard", cardIndex: 0, known: [], studied: 0, caseScores: {}, imageCaseScores: {}, dark: false, testIndex: 0, testAnswers: {}, testResults: {}, testFinished: false };
-const state = { ...defaultState, ...(JSON.parse(localStorage.getItem("pulse-state") || "{}")) };
+const defaultState = { view: "dashboard", cardIndex: 0, known: [], studied: 0, caseScores: {}, imageCaseScores: {}, favoriteCards: [], favoriteTickets: [], mistakeCounts: {}, dark: false, testIndex: 0, testAnswers: {}, testResults: {}, testFinished: false };
+let savedState = {};
+try {
+  savedState = JSON.parse(localStorage.getItem("pulse-state") || "{}") || {};
+} catch {
+  savedState = {};
+}
+const state = { ...defaultState, ...savedState };
 if (new URLSearchParams(window.location.search).get("start") === "home") state.view = "dashboard";
 if (state.view === "syllabus") state.view = "dashboard";
 state.testAnswers = state.testAnswers || {};
 state.testResults = state.testResults || {};
+state.mistakeCounts = state.mistakeCounts || {};
+state.known = Array.isArray(state.known) ? state.known : [];
+state.favoriteCards = Array.isArray(state.favoriteCards) ? state.favoriteCards : [];
+state.favoriteTickets = Array.isArray(state.favoriteTickets) ? state.favoriteTickets : [];
 const appView = document.querySelector("#app-view");
 
 function persist() { localStorage.setItem("pulse-state", JSON.stringify(state)); }
 function showToast(message) { const toast = document.querySelector("#toast"); toast.textContent = message; toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 2200); }
 function progressPercent() { return Math.min(100, Math.round((state.known.length / cards.length) * 100)); }
+function toggleFavorite(collection, id) {
+  const values = state[collection];
+  const index = values.indexOf(id);
+  if (index === -1) values.push(id);
+  else values.splice(index, 1);
+  persist();
+  return index === -1;
+}
+function getProgressStats() {
+  const testResults = Object.values(state.testResults);
+  const testPercent = testResults.length ? Math.round((testResults.filter(result => result.correct).length / testResults.length) * 100) : 0;
+  const scoredCases = Object.values(state.caseScores);
+  const scoredImageCases = Object.values(state.imageCaseScores);
+  const casePercent = scoredCases.length ? Math.round((scoredCases.reduce((sum, score) => sum + Number(score), 0) / (scoredCases.length * 3)) * 100) : 0;
+  const imagePercent = scoredImageCases.length ? Math.round((scoredImageCases.reduce((sum, score) => sum + Number(score), 0) / (scoredImageCases.length * 3)) * 100) : 0;
+  const parts = [progressPercent(), testPercent, casePercent, imagePercent].filter((value, index) => index === 0 || value > 0);
+  return { cards: progressPercent(), test: testPercent, cases: casePercent, images: imagePercent, overall: Math.round(parts.reduce((sum, value) => sum + value, 0) / parts.length), testAnswered: testResults.length, casesAnswered: scoredCases.length, imagesAnswered: scoredImageCases.length };
+}
+function getWeakSpots() {
+  const failedTests = new Set([...Object.keys(state.mistakeCounts), ...Object.entries(state.testResults).filter(([, result]) => !result.correct).map(([index]) => index)]);
+  const testItems = [...failedTests].map(index => ({ type: "test", index: Number(index), attempts: Number(state.mistakeCounts[index] || 1), item: testQuestions[Number(index)] }));
+  const caseItems = Object.entries(state.caseScores).filter(([, score]) => Number(score) < 3).map(([number, score]) => ({ type: "case", number, score, item: cases.find(entry => entry.number === number) }));
+  const imageItems = Object.entries(state.imageCaseScores).filter(([, score]) => Number(score) < 3).map(([number, score]) => ({ type: "image", number, score, item: imageCases.find(entry => entry.number === number) }));
+  return [...testItems, ...caseItems, ...imageItems].filter(entry => entry.item);
+}
 function closeMobileMenu() {
   const sidebar = document.querySelector("#sidebar");
   const toggle = document.querySelector("#menu-toggle");
@@ -252,7 +287,7 @@ function closeMobileMenu() {
   if (backdrop) backdrop.hidden = true;
 }
 function setView(view) { state.view = view; persist(); closeMobileMenu(); render(); window.scrollTo({ top: 0, behavior: "smooth" }); }
-const viewLabels = { "course-dashboard": "Обзор курса", cards: "Карточки", test: "Тест", tickets: "Билеты", cases: "Клинические задачи", "image-cases": "Задачи с изображением", sources: "Источники" };
+const viewLabels = { "course-dashboard": "Обзор курса", cards: "Карточки", test: "Тест", tickets: "Билеты", cases: "Клинические задачи", "image-cases": "Задачи с изображением", progress: "Прогресс", weaknesses: "Ошибки и слабые места", favorites: "Избранное", sources: "Источники" };
 function updateNavigation() {
   const sidebar = document.querySelector("#sidebar");
   const isCourse = state.view !== "dashboard";
@@ -309,7 +344,7 @@ function renderCards() {
   const cardPool = cards;
   const card = cardPool[state.cardIndex % cardPool.length] || cards[0];
   const learned = state.known.includes(card.id);
-  return `<div class="mode-header"><div><h1>Карточки</h1><p>Сначала ответь сам, затем открой эталон.<br /><span class="study-hint">«Знаю» отмечает карточку освоенной, «Дальше» просто переходит к следующей.</span></p></div></div><div class="study-layout"><section class="flashcard-panel"><div class="flashcard-top"><span>Карточка ${String(state.cardIndex + 1).padStart(2, "0")} / ${cardPool.length}</span><strong>${card.module}</strong></div><div class="flashcard-content"><span class="card-type">${card.level}</span><h2>${card.question}</h2><p id="flash-answer" hidden><span class="answer-label">Эталон ответа</span><br />${card.answer}</p><button class="button ghost-dark" id="reveal-answer">Показать ответ</button></div><div class="flashcard-actions"><button class="button ghost-dark" data-action="next-card">Дальше</button><button class="button primary" data-action="know">${learned ? "Освоено" : "Знаю"}</button></div></section><aside class="study-side"><div class="side-panel"><h3>Очередь</h3><div class="queue-list">${cardPool.slice(0, 5).map((item, index) => `<div class="queue-item"><span class="queue-index">${String(index + 1).padStart(2, "0")}</span><div><strong>${item.question.slice(0, 43)}${item.question.length > 43 ? "…" : ""}</strong><small>${item.module}</small></div><span>${state.known.includes(item.id) ? "✓" : ""}</span></div>`).join("")}</div></div><div class="side-panel"><h3>Прогресс</h3><p class="side-copy">${state.known.length} из ${cards.length} карточек освоены.</p><div class="progress-bar"><span style="width:${progressPercent()}%"></span></div></div></aside></div>`;
+  return `<div class="mode-header"><div><h1>Карточки</h1><p>Сначала ответь сам, затем открой эталон.<br /><span class="study-hint">«Знаю» отмечает карточку освоенной, «Дальше» просто переходит к следующей.</span></p></div></div><div class="study-layout"><section class="flashcard-panel"><div class="flashcard-top"><span>Карточка ${String(state.cardIndex + 1).padStart(2, "0")} / ${cardPool.length}</span><div class="flashcard-tools"><strong>${card.module}</strong><button class="favorite-toggle dark-toggle ${state.favoriteCards.includes(card.id) ? "is-active" : ""}" type="button" aria-label="${state.favoriteCards.includes(card.id) ? "Убрать карточку из избранного" : "Сохранить карточку в избранное"}" aria-pressed="${state.favoriteCards.includes(card.id)}" data-action="toggle-favorite-card" data-card-id="${card.id}">★</button></div></div><div class="flashcard-content"><span class="card-type">${card.level}</span><h2>${card.question}</h2><p id="flash-answer" hidden><span class="answer-label">Эталон ответа</span><br />${card.answer}</p><button class="button ghost-dark" id="reveal-answer">Показать ответ</button></div><div class="flashcard-actions"><button class="button ghost-dark" data-action="next-card">Дальше</button><button class="button primary" data-action="know">${learned ? "Освоено" : "Знаю"}</button></div></section><aside class="study-side"><div class="side-panel"><h3>Очередь</h3><div class="queue-list">${cardPool.slice(0, 5).map((item, index) => `<div class="queue-item"><span class="queue-index">${String(index + 1).padStart(2, "0")}</span><div><strong>${item.question.slice(0, 43)}${item.question.length > 43 ? "…" : ""}</strong><small>${item.module}</small></div><span>${state.known.includes(item.id) ? "✓" : ""}</span></div>`).join("")}</div></div><div class="side-panel"><h3>Прогресс</h3><p class="side-copy">${state.known.length} из ${cards.length} карточек освоены.</p><div class="progress-bar"><span style="width:${progressPercent()}%"></span></div></div></aside></div>`;
 }
 
 function renderTest() {
@@ -337,7 +372,7 @@ function renderTest() {
 }
 
 function renderTickets() {
-  return `<div class="mode-header"><div><h1>Билеты</h1><p>Нажми на билет. Внутри — темы и порядок устного ответа.</p></div></div><section class="ticket-grid">${tickets.map(ticket => `<article class="ticket-card" role="button" tabindex="0" data-action="open-ticket" data-ticket="${ticket.number}"><span class="ticket-number">БИЛЕТ ${ticket.number}</span><h3>${ticket.title}</h3><p>${ticket.topics.join(" · ")}</p><div class="card-footer"><span class="tag">${ticket.tag}</span></div></article>`).join("")}</section><div class="disclaimer"><strong>Как читать банк.</strong> Билеты 01–20 покрывают основной тематический каркас; 21–40 — расширенная самопроверка; 41–57 — темы, найденные при сверке дополнительных учебных банков. Это не опубликованный кафедральный список.</div>`;
+  return `<div class="mode-header"><div><h1>Билеты</h1><p>Нажми на билет. Внутри — темы и порядок устного ответа.</p></div></div><section class="ticket-grid">${tickets.map(ticket => `<article class="ticket-card" role="button" tabindex="0" data-action="open-ticket" data-ticket="${ticket.number}"><span class="ticket-number">БИЛЕТ ${ticket.number}</span><h3>${ticket.title}</h3><p>${ticket.topics.join(" · ")}</p><div class="card-footer"><span class="tag">${ticket.tag}</span><button class="favorite-toggle ${state.favoriteTickets.includes(ticket.number) ? "is-active" : ""}" type="button" aria-label="${state.favoriteTickets.includes(ticket.number) ? "Убрать билет из избранного" : "Сохранить билет в избранное"}" aria-pressed="${state.favoriteTickets.includes(ticket.number)}" data-action="toggle-favorite-ticket" data-ticket-number="${ticket.number}">★</button></div></article>`).join("")}</section><div class="disclaimer"><strong>Как читать банк.</strong> Билеты 01–20 покрывают основной тематический каркас; 21–40 — расширенная самопроверка; 41–57 — темы, найденные при сверке дополнительных учебных банков. Это не опубликованный кафедральный список.</div>`;
 }
 
 const ticketAnswerStopWords = new Set(["заболевания", "заболевание", "клиника", "диагностика", "лечение", "лечения", "принципы", "оценка", "ситуация", "методы", "метод", "показания", "система", "системы", "пациент", "пациента", "хирургическая", "хирургическое", "тактика", "осложнения", "состояния", "операция", "операции", "железа", "железы", "острый", "острая", "острое", "хронический", "хроническая", "хроническое"]);
@@ -391,7 +426,7 @@ function renderTicketTestEvidence(answerTests) {
 function renderTicketDetail(ticket) {
   const answerCards = getTicketAnswerCards(ticket);
   const answerTests = getTicketAnswerTests(ticket);
-  appView.innerHTML = `<div class="mode-header"><div><h1>${ticket.title}</h1><p>Сначала сформулируй ответ сам, затем сверяйся с готовыми формулировками и планом устного ответа.</p></div><button class="button secondary" data-view="tickets">← Все билеты</button></div><article class="case-detail"><div class="scenario">Экзаменационный билет: ${ticket.title}</div><h2>Эталон ответа</h2>${renderTicketAnswerPlan(ticket)}${renderTicketCardEvidence(answerCards)}${renderTicketTestEvidence(answerTests)}<section class="ticket-answer-section"><h3>Минимум, который должен прозвучать</h3><ul class="ticket-checklist">${ticket.topics.map(topic => `<li>${topic}</li>`).join("")}</ul></section><div class="disclaimer"><strong>Важно.</strong> Это учебный конспект для самопроверки, а не официальный кафедральный текст билета. Клинические решения сверяй с актуальными клиническими рекомендациями.</div><div class="card-footer"><button class="button secondary" data-action="random-ticket">Другой билет</button></div></article>`;
+  appView.innerHTML = `<div class="mode-header"><div><h1>${ticket.title}</h1><p>Сначала сформулируй ответ сам, затем сверяйся с готовыми формулировками и планом устного ответа.</p></div><button class="button secondary" data-view="tickets">← Все билеты</button></div><article class="case-detail"><div class="scenario">Экзаменационный билет: ${ticket.title}</div><div class="detail-actions"><button class="favorite-toggle ${state.favoriteTickets.includes(ticket.number) ? "is-active" : ""}" type="button" aria-label="${state.favoriteTickets.includes(ticket.number) ? "Убрать билет из избранного" : "Сохранить билет в избранное"}" aria-pressed="${state.favoriteTickets.includes(ticket.number)}" data-action="toggle-favorite-ticket" data-ticket-number="${ticket.number}">★ ${state.favoriteTickets.includes(ticket.number) ? "В избранном" : "Сохранить в избранное"}</button></div><h2>Эталон ответа</h2>${renderTicketAnswerPlan(ticket)}${renderTicketCardEvidence(answerCards)}${renderTicketTestEvidence(answerTests)}<section class="ticket-answer-section"><h3>Минимум, который должен прозвучать</h3><ul class="ticket-checklist">${ticket.topics.map(topic => `<li>${topic}</li>`).join("")}</ul></section><div class="disclaimer"><strong>Важно.</strong> Это учебный конспект для самопроверки, а не официальный кафедральный текст билета. Клинические решения сверяй с актуальными клиническими рекомендациями.</div><div class="card-footer"><button class="button secondary" data-action="random-ticket">Другой билет</button></div></article>`;
   updateBreadcrumbs(ticket.title);
   bindActions();
 }
@@ -418,6 +453,26 @@ function renderImageCaseDetail(index) {
   bindActions();
 }
 
+function renderProgress() {
+  const stats = getProgressStats();
+  return `<div class="mode-header"><div><p class="eyebrow">Контроль подготовки</p><h1>Прогресс</h1><p>Здесь сохраняется твой текущий результат по всем форматам курса.</p></div></div><section class="progress-summary progress-summary-large"><div><strong>Общая готовность · ${stats.overall}%</strong><p>Расчёт обновляется после карточек, тестов и клинических задач.</p></div><div class="progress-bar"><span style="width:${stats.overall}%"></span></div></section><section class="stat-grid progress-stat-grid"><article class="stat-card"><span class="stat-label">Карточки</span><strong>${stats.cards}%</strong><small>${state.known.length} из ${cards.length} освоено</small></article><article class="stat-card"><span class="stat-label">Тест</span><strong>${stats.test}%</strong><small>${stats.testAnswered} вопросов проверено</small></article><article class="stat-card"><span class="stat-label">Клинические задачи</span><strong>${stats.cases}%</strong><small>${stats.casesAnswered} задач оценено</small></article><article class="stat-card"><span class="stat-label">Изображения</span><strong>${stats.images}%</strong><small>${stats.imagesAnswered} задач оценено</small></article></section><section class="progress-actions"><button class="button primary" data-view="weaknesses">Открыть слабые места</button><button class="button secondary" data-view="favorites">Перейти в избранное</button></section>`;
+}
+
+function renderWeaknesses() {
+  const weakSpots = getWeakSpots();
+  const testItems = weakSpots.filter(entry => entry.type === "test");
+  const caseItems = weakSpots.filter(entry => entry.type !== "test");
+  const empty = `<div class="empty-state"><strong>Пока нет отмеченных слабых мест</strong><p>Пройди несколько вопросов теста или оцени клинические задачи — здесь появятся темы для повторения.</p><button class="button primary" data-view="test">Пройти тест</button></div>`;
+  return `<div class="mode-header"><div><p class="eyebrow">Повторить</p><h1>Ошибки и слабые места</h1><p>Здесь собираются вопросы и задачи, к которым стоит вернуться.</p></div></div>${weakSpots.length ? `<section class="weakness-grid">${testItems.length ? `<article class="side-panel weakness-panel"><div class="panel-heading"><h2>Ошибки в тесте</h2><span class="tag">${testItems.length}</span></div><div class="weakness-list">${testItems.map(entry => `<article class="weakness-item"><div><strong>${entry.item.question}</strong><p>${entry.item.explanation}</p></div><button class="text-button" data-action="review-test" data-test-index="${entry.index}">Повторить →</button></article>`).join("")}</div></article>` : ""}${caseItems.length ? `<article class="side-panel weakness-panel"><div class="panel-heading"><h2>Задачи для повторения</h2><span class="tag">${caseItems.length}</span></div><div class="weakness-list">${caseItems.map(entry => `<article class="weakness-item"><div><strong>${entry.item.title}</strong><p>${entry.type === "case" ? entry.item.summary : entry.item.scenario}</p></div><button class="text-button" data-action="review-weakness" data-weakness-type="${entry.type}" data-weakness-number="${entry.number}">Открыть →</button></article>`).join("")}</div></article>` : ""}</section>` : empty}`;
+}
+
+function renderFavorites() {
+  const favoriteCards = state.favoriteCards.map(id => cards.find(card => card.id === id)).filter(Boolean);
+  const favoriteTickets = state.favoriteTickets.map(number => tickets.find(ticket => ticket.number === number)).filter(Boolean);
+  if (!favoriteCards.length && !favoriteTickets.length) return `<div class="mode-header"><div><p class="eyebrow">Сохранённое</p><h1>Избранное</h1><p>Сохраняй карточки и билеты, к которым хочешь вернуться позже.</p></div></div><div class="empty-state"><strong>Избранное пока пустое</strong><p>Нажми на звёздочку в карточке или билете — материал появится здесь.</p><button class="button primary" data-view="cards">Открыть карточки</button></div>`;
+  return `<div class="mode-header"><div><p class="eyebrow">Сохранённое</p><h1>Избранное</h1><p>Материалы, которые ты отметил для повторения позже.</p></div></div>${favoriteCards.length ? `<section class="favorite-section"><div class="section-heading"><h2>Карточки <span class="tag">${favoriteCards.length}</span></h2></div><div class="favorite-grid">${favoriteCards.map(card => `<article class="favorite-item" role="button" tabindex="0" data-action="open-favorite-card" data-card-id="${card.id}"><div><span class="format-number">${card.module}</span><h3>${card.question}</h3><p>${card.answer}</p></div><button class="favorite-toggle is-active" type="button" aria-label="Убрать карточку из избранного" data-action="toggle-favorite-card" data-card-id="${card.id}">★</button></article>`).join("")}</div></section>` : ""}${favoriteTickets.length ? `<section class="favorite-section"><div class="section-heading"><h2>Билеты <span class="tag">${favoriteTickets.length}</span></h2></div><div class="favorite-grid">${favoriteTickets.map(ticket => `<article class="favorite-item" role="button" tabindex="0" data-action="open-ticket" data-ticket="${ticket.number}"><div><span class="format-number">БИЛЕТ ${ticket.number}</span><h3>${ticket.title}</h3><p>${ticket.topics.join(" · ")}</p></div><button class="favorite-toggle is-active" type="button" aria-label="Убрать билет из избранного" data-action="toggle-favorite-ticket" data-ticket-number="${ticket.number}">★</button></article>`).join("")}</div></section>` : ""}`;
+}
+
 function renderSources() {
   return `<div class="mode-header"><div><h1>Источники</h1><p>Клинические рекомендации и открытые источники изображений, использованные в учебных задачах.</p></div></div><section class="source-grid">${references.map(ref => `<article class="reference-item"><div class="reference-main"><div class="reference-icon">${ref.icon}</div><div><h3>${ref.title}</h3><p>${ref.text}</p></div></div><div><span class="source-tag">${ref.label}</span><br /><a href="${ref.url}" target="_blank" rel="noreferrer">Открыть</a></div></article>`).join("")}</section><div class="disclaimer"><strong>Важно.</strong> Отдельный кафедральный список экзаменационных билетов в открытом доступе не найден, поэтому расширенные билеты и задачи — учебный банк для самопроверки, а не официальный перечень.</div>`;
 }
@@ -433,6 +488,9 @@ function render() {
   if (state.view === "tickets") appView.innerHTML = renderTickets();
   if (state.view === "cases") appView.innerHTML = renderCases();
   if (state.view === "image-cases") appView.innerHTML = renderImageCases();
+  if (state.view === "progress") appView.innerHTML = renderProgress();
+  if (state.view === "weaknesses") appView.innerHTML = renderWeaknesses();
+  if (state.view === "favorites") appView.innerHTML = renderFavorites();
   if (state.view === "sources") appView.innerHTML = renderSources();
   bindActions();
 }
@@ -452,7 +510,7 @@ function bindActions() {
     event.preventDefault();
     element.click();
   }));
-  document.querySelectorAll("[data-action]").forEach(element => bindOnce(element, "action-click", "click", () => {
+  document.querySelectorAll("[data-action]").forEach(element => bindOnce(element, "action-click", "click", event => {
     const action = element.dataset.action;
     const cardPool = cards;
     if (action === "open-subject") {
@@ -463,6 +521,11 @@ function bindActions() {
     if (action === "know") { const card = cardPool[state.cardIndex % cardPool.length]; if (!state.known.includes(card.id)) state.known.push(card.id); state.studied += 1; state.cardIndex = (state.cardIndex + 1) % cardPool.length; persist(); render(); showToast("Карточка отмечена как освоенная"); }
     if (action === "random-ticket") { const ticket = tickets[Math.floor(Math.random() * tickets.length)]; showToast(`Сегодня: билет ${ticket.number} · ${ticket.title}`); }
     if (action === "open-ticket") { const ticket = tickets.find(item => item.number === element.dataset.ticket); renderTicketDetail(ticket); }
+    if (action === "toggle-favorite-card") { event.stopPropagation(); const cardId = Number(element.dataset.cardId); const added = toggleFavorite("favoriteCards", cardId); render(); showToast(added ? "Карточка добавлена в избранное" : "Карточка убрана из избранного"); }
+    if (action === "toggle-favorite-ticket") { event.stopPropagation(); const ticketNumber = element.dataset.ticketNumber; const added = toggleFavorite("favoriteTickets", ticketNumber); const ticket = tickets.find(item => item.number === ticketNumber); if (element.closest(".case-detail") && ticket) renderTicketDetail(ticket); else render(); showToast(added ? "Билет добавлен в избранное" : "Билет убран из избранного"); }
+    if (action === "open-favorite-card") { const cardIndex = cards.findIndex(item => item.id === Number(element.dataset.cardId)); if (cardIndex !== -1) { state.cardIndex = cardIndex; setView("cards"); } }
+    if (action === "review-test") { state.testIndex = Number(element.dataset.testIndex); state.testFinished = false; persist(); setView("test"); }
+    if (action === "review-weakness") { const type = element.dataset.weaknessType; const number = element.dataset.weaknessNumber; if (type === "case") { const index = cases.findIndex(item => item.number === number); if (index !== -1) { state.view = "cases"; persist(); renderCaseDetail(index); } } if (type === "image") { const index = imageCases.findIndex(item => item.number === number); if (index !== -1) { state.view = "image-cases"; persist(); renderImageCaseDetail(index); } } }
     if (action === "open-case") renderCaseDetail(Number(element.dataset.case));
     if (action === "open-image-case") renderImageCaseDetail(Number(element.dataset.imageCase));
     if (action === "check-test") {
@@ -471,8 +534,10 @@ function bindActions() {
       const selected = [...document.querySelectorAll(`input[data-test-option][data-test-index="${questionIndex}"]:checked`)].map(input => input.value).sort();
       if (!selected.length) { showToast("Выбери хотя бы один вариант"); return; }
       const correctIds = item.options.filter(option => option.correct).map(option => option.id).sort();
+      const correct = selected.length === correctIds.length && selected.every((answer, index) => answer === correctIds[index]);
       state.testAnswers[questionIndex] = selected;
-      state.testResults[questionIndex] = { correct: selected.length === correctIds.length && selected.every((answer, index) => answer === correctIds[index]), selected };
+      state.testResults[questionIndex] = { correct, selected };
+      if (!correct) state.mistakeCounts[questionIndex] = Number(state.mistakeCounts[questionIndex] || 0) + 1;
       persist(); render();
     }
     if (action === "next-test") {
