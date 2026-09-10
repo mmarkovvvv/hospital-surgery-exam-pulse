@@ -5,7 +5,7 @@ import './styles.css'
 
 export const metadata = {
   description: 'Локальная учебная платформа с управляемым доступом к материалам.',
-  title: 'Пульс — учебная платформа',
+  title: 'Beep Academy — учебная платформа',
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {

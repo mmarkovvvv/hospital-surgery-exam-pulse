@@ -2,6 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 
 import LogoutButton from '@/components/LogoutButton'
+import Brand from '@/components/Brand'
 import { countByFormat, getLearningContext } from '@/lib/learning'
 import { formatDefinitions, subjectDefinitions } from '@/lib/subjects'
 
@@ -20,10 +21,7 @@ export default async function HomePage() {
   return (
     <main className="pulse-shell">
       <header className="topbar">
-        <Link className="brand" href="/" aria-label="Пульс — на главную">
-          <span className="brand-mark">|||</span>
-          <span>Пульс</span>
-        </Link>
+        <Brand />
         <nav className="topbar-nav" aria-label="Основная навигация">
           {viewer ? <><span className="user-chip">{viewer.email}</span><LogoutButton /></> : <><Link className="button button-quiet" href="/login">Войти</Link><Link className="button button-aqua" href="/register">Регистрация</Link></>}
         </nav>
@@ -78,7 +76,7 @@ export default async function HomePage() {
           })}
         </div>
       </section>
-      <footer className="site-footer"><span>Пульс · учебная платформа</span><span>Сначала доступность и безопасность.</span></footer>
+      <footer className="site-footer"><span>Beep Academy · учебная платформа</span><span>Сначала доступность и безопасность.</span></footer>
     </main>
   )
 }

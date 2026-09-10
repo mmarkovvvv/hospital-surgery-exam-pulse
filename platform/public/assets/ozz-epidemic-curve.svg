@@ -1,0 +1,1327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="750" height="500" font-family="Helvetica,Liberation Sans,Nimbus Sans L,Arial" viewBox="-316.75 -1343 2491.4 1647" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <pattern id="a" patternTransform="scale(1 -1)" xlink:href="#f"/>
+  <pattern id="b" patternTransform="scale(1 -1)" xlink:href="#g"/>
+  <pattern id="c" patternTransform="scale(1 -1)" xlink:href="#e"/>
+  <pattern id="d" patternTransform="scale(1 -1)" xlink:href="#h"/>
+  <pattern id="e" width="11.73" height="4.4" patternUnits="userSpaceOnUse">
+   <path d="m0-1v5.4" stroke="#000" stroke-width=".52"/>
+  </pattern>
+  <pattern id="f" width="11.73" height="220" patternUnits="userSpaceOnUse">
+   <path d="m0 0v220" stroke="#000" stroke-width=".37"/>
+  </pattern>
+  <pattern id="g" width="156.42" height="10" patternUnits="userSpaceOnUse">
+   <path d="m0 0h156.42" stroke="#000" stroke-width=".37"/>
+  </pattern>
+  <pattern id="h" width="4.4" height="20" patternUnits="userSpaceOnUse">
+   <path d="m-1 0h5.4" stroke="#000" stroke-width=".52"/>
+  </pattern>
+  <marker id="i" stroke="#000" markerHeight="5.32" markerUnits="userSpaceOnUse" markerWidth="5.32" refX=".98" refY="2.66" viewBox="0,0,5.32,5.32">
+   <use transform="scale(.37 1)" stroke-linejoin="round" stroke-width=".74" xlink:href="#n"/>
+  </marker>
+  <marker id="j" fill="#f00" stroke="#f00" markerHeight="5.32" markerUnits="userSpaceOnUse" markerWidth="5.32" refX=".98" refY="2.66" viewBox="0,0,5.32,5.32">
+   <use transform="scale(.37 1)" stroke-linejoin="round" stroke-width=".74" xlink:href="#t"/>
+  </marker>
+  <marker id="k" fill="#92d050" stroke="#92d050" markerHeight="5.32" markerUnits="userSpaceOnUse" markerWidth="5.32" refX=".98" refY="2.66" viewBox="0,0,5.32,5.32">
+   <use transform="scale(.37 1)" stroke-linejoin="round" stroke-width=".74" xlink:href="#o"/>
+  </marker>
+  <marker id="l" fill="#ffc000" stroke="#ffc000" markerHeight="5.32" markerUnits="userSpaceOnUse" markerWidth="5.32" refX=".98" refY="2.66" viewBox="0,0,5.32,5.32">
+   <use transform="scale(.37 1)" stroke-linejoin="round" stroke-width=".74" xlink:href="#p"/>
+  </marker>
+  <path id="m" d="m.571.2 1-.2h1l1 .5 1-.2 1 .2 1-.2 1 .2 1 .4 1-.1 1 1.9 1-.9 1 1.1 1 .1 1-.2 1-1.1 1-.7 1 .3 1 .2 1-.7 1 2.3 1 3.7 1-.1 1 5.7 1-1.5 1-.3 1 1.7 1 3.3 1-3.4 1 11.5 1 5.1 1 10.9 1 11 1 22.9 1 3.5 1 4.4 1 2.8 1 17.3 1-2.7 1-16 1 2.9 1 .5 1-7.7 1 6.9 1 8.5 1-16.9 1 3.2 1 3.3 1-17.4 1-6.6 1 5.7 1 1.6 1-18 1-9 1-19.2 1-1.4 1-1.5 1 1.6h1l1-5.4 1-.5 1 3.3 1-1.4 1-6.2 1 .5 1-4.2h1l1-1.9 1-.1 1-.8 1-1.2 1 3.9 1-4.2 1 1.3 1 .2 1-.3" stroke-width=".44"/>
+  <path id="n" d="m1.33 1.33h2.66v2.66h-2.66z"/>
+  <path id="o" d="m1.06 1.06h3.2l-1.6 3.2z"/>
+  <path id="p" transform="matrix(.70711 .70711 -.70711 .70711 2.66 2.66)" d="m-1.33-1.33h2.66v2.66h-2.66z"/>
+  <path id="q" d="m19.571 0 1 .3 1 1.5 1 1.8 1 3.6 1-1 1-.8 1 3.9 1 1.9 1-3.4 1 2.6 1 4.5 1-.5 1-1.2 1 5 1 2.1 1 2.5 1 1.6 1 17.6 1-1.5 1 .3 1 2.4 1 11.3 1 1.9 1 6.8 1 .4 1-8.6 1-1.2 1 11.8 1-18.7 1-.2 1-3.8 1 9.6 1-12.2 1-6.5 1-16.7 1-3.3 1-2 1 .1 1 .3 1-2.2 1-1.9 1 2.8 1-4.8 1-1.5 1-.4 1-.8 1-1 1-.5 1-.6 1 .5 1-1 1 1.4 1-1.9 1 .9 1 .3 1-.1"/>
+  <path id="r" d="m10.571 0 1 .1h1l1 .2 1-.2h1l1-.1 1 .1 1 .3 1-.4 1 .1 1-.1 1 .3 1 1.5 1 1.1 1-.1 1-.2 1 1.2 1-.2 1 5.3 1 2 1 11.4 1 10.6 1 14.6 1-1.7 1 2.4 1 2.2 1 .9 1-5.9 1-13.9 1-3.4 1-7.9 1-7.8 1 .4 1 1.1 1-2 1-2.6 1-.6 1-1.6 1-3 1-2 1 1.3 1-2.6 1-.4 1 1 1-.7 1 .5 1-.8 1 .7 1-1h1l1-.1"/>
+  <path id="s" d="m.571.2 1-.2h1l1 .5 1-.2 1 .2 1-.2 1 .2 1 .4 1-.1 1 1.9 1-1 1 1.1 1-.1h1l1-1.1 1-.6 1 .2 1-.1 1-.3 1 1.9 1 2.3 1-2.2 1 .6 1-1.6 1 .6 1-2 1 .2 1 .2 1 3.5 1-1.6 1-.6 1 2.3 1 3.4 1 2.6 1 .1 1-1 1-1.2 1 4.7 1-2.5 1 3.8 1-2.8 1-2h1l1 6.7 1-6.2 1 7 1-7.7 1 2.9 1-3.4 1 11.5 1-9.4 1-3.1 1-2.1 1-3.5 1 2.6h1l1 2.3 1-1 1-2.2 1 1.4 1 .6 1 3.4 1-4.7 1 .9 1-3.4 1 1 1-1.4 1 .5 1-1.3 1-.2 1 2.4 1-2.2 1 .4 1-.1 1-.2"/>
+  <circle id="t" cx="2.66" cy="2.66" r="1.6"/>
+  <marker id="u" stroke="#000" markerHeight="5.32" markerUnits="userSpaceOnUse" markerWidth="5.32" refX="2.66" refY="2.66" viewBox="0,0,5.32,5.32">
+   <use stroke-linejoin="round" stroke-width=".74" xlink:href="#n"/>
+  </marker>
+  <marker id="v" fill="#f00" stroke="#f00" markerHeight="5.32" markerUnits="userSpaceOnUse" markerWidth="5.32" refX="2.66" refY="2.66" viewBox="0,0,5.32,5.32">
+   <use stroke-linejoin="round" stroke-width=".74" xlink:href="#t"/>
+  </marker>
+  <marker id="w" fill="#92d050" stroke="#92d050" markerHeight="5.32" markerUnits="userSpaceOnUse" markerWidth="5.32" refX="2.66" refY="2.66" viewBox="0,0,5.32,5.32">
+   <use stroke-linejoin="round" stroke-width=".74" xlink:href="#o"/>
+  </marker>
+  <marker id="x" fill="#ffc000" stroke="#ffc000" markerHeight="5.32" markerUnits="userSpaceOnUse" markerWidth="5.32" refX="2.66" refY="2.66" viewBox="0,0,5.32,5.32">
+   <use stroke-linejoin="round" stroke-width=".74" xlink:href="#p"/>
+  </marker>
+ </defs>
+ <path d="m-316.8-1343h2491.4v1647h-2491.4z" fill="#fff" stroke-width="10"/>
+ <path d="m0 0h2110m-2110 0v-1100" stroke="#000" stroke-linecap="round" stroke-width="7.4"/>
+ <path transform="scale(10)" d="m.3 0h215.4v-110h-215.4z" fill="url(#a)"/>
+ <path transform="scale(10)" d="m0-.3h211.2v-112.2h-211.2z" fill="url(#b)"/>
+ <path transform="scale(10)" d="m-1.1 3.9h215.4v-3.85h-215.4z" fill="url(#c)"/>
+ <path transform="scale(10)" d="m-3.85 1.1h3.85v-111h-3.85z" fill="url(#d)"/>
+ <path d="m63-1056h710v298h-710z" fill="#fff" stroke="#000" stroke-width="5.2"/>
+ <g transform="scale(10)" fill="none">
+  <path d="m15.8-100.92 0 0" marker-start="url(#u)" stroke="#000"/>
+  <path d="m15.8-94.23 0 0" marker-start="url(#v)" stroke="#000"/>
+  <path transform="matrix(-1 0 0 -1 31.6 -175.08)" d="m15.8-87.54 0 0" marker-start="url(#w)" stroke="#000"/>
+  <path d="m15.8-80.85 0 0" marker-start="url(#x)" stroke="#000"/>
+ </g>
+ <path d="m105.2-1009.2h105.6" fill="none" marker-mid="url(#i)" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="11.8"/>
+ <path d="m105.2-942.3h105.6" fill="none" marker-mid="url(#j)" stroke="#f00" stroke-linecap="round" stroke-linejoin="round" stroke-width="11.8"/>
+ <path d="m105.2-875.4h105.6" fill="none" marker-mid="url(#k)" stroke="#92d050" stroke-linecap="round" stroke-linejoin="round" stroke-width="11.8"/>
+ <path d="m105.2-808.5h105.6" fill="none" marker-mid="url(#l)" stroke="#ffc000" stroke-linecap="round" stroke-linejoin="round" stroke-width="11.8"/>
+ <use transform="matrix(27 0 0 -10 0 -3.6)" width="100%" height="100%" fill="none" stroke="#ffc000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".44" xlink:href="#q"/>
+ <use transform="matrix(27 0 0 -10 0 3.6)" width="100%" height="100%" fill="none" stroke="#ffc000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".44" xlink:href="#q"/>
+ <use transform="matrix(27 0 0 -10 0 .6)" width="100%" height="100%" fill="none" stroke="#ffc000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".44" xlink:href="#q"/>
+ <use transform="matrix(27 0 0 -10 0 -.6)" width="100%" height="100%" fill="none" stroke="#ffc000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".44" xlink:href="#q"/>
+ <use transform="scale(27 -10)" width="100%" height="100%" fill="none" marker-end="url(#l)" marker-mid="url(#l)" marker-start="url(#l)" stroke="#ffc000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".44" xlink:href="#q"/>
+ <use transform="matrix(27 0 0 -10 0 -3.6)" width="100%" height="100%" fill="none" stroke="#92d050" stroke-linecap="round" stroke-linejoin="round" stroke-width=".44" xlink:href="#r"/>
+ <use transform="matrix(27 0 0 -10 0 3.6)" width="100%" height="100%" fill="none" stroke="#92d050" stroke-linecap="round" stroke-linejoin="round" stroke-width=".44" xlink:href="#r"/>
+ <use transform="matrix(27 0 0 -10 0 .6)" width="100%" height="100%" fill="none" stroke="#92d050" stroke-linecap="round" stroke-linejoin="round" stroke-width=".44" xlink:href="#r"/>
+ <use transform="matrix(27 0 0 -10 0 -.6)" width="100%" height="100%" fill="none" stroke="#92d050" stroke-linecap="round" stroke-linejoin="round" stroke-width=".44" xlink:href="#r"/>
+ <use transform="scale(27 -10)" width="100%" height="100%" fill="none" marker-end="url(#k)" marker-mid="url(#k)" marker-start="url(#k)" stroke="#92d050" stroke-linecap="round" stroke-linejoin="round" stroke-width=".44" xlink:href="#r"/>
+ <use transform="matrix(27 0 0 -10 0 -3.6)" width="100%" height="100%" fill="none" stroke="#f00" stroke-linecap="round" stroke-linejoin="round" stroke-width=".44" xlink:href="#s"/>
+ <use transform="matrix(27 0 0 -10 0 3.6)" width="100%" height="100%" fill="none" stroke="#f00" stroke-linecap="round" stroke-linejoin="round" stroke-width=".44" xlink:href="#s"/>
+ <use transform="matrix(27 0 0 -10 0 .6)" width="100%" height="100%" fill="none" stroke="#f00" stroke-linecap="round" stroke-linejoin="round" stroke-width=".44" xlink:href="#s"/>
+ <use transform="matrix(27 0 0 -10 0 -.6)" width="100%" height="100%" fill="none" stroke="#f00" stroke-linecap="round" stroke-linejoin="round" stroke-width=".44" xlink:href="#s"/>
+ <use transform="scale(27 -10)" width="100%" height="100%" fill="none" marker-end="url(#j)" marker-mid="url(#j)" marker-start="url(#j)" stroke="#f00" stroke-linecap="round" stroke-linejoin="round" stroke-width=".44" xlink:href="#s"/>
+ <use transform="matrix(27 0 0 -10 0 -3.6)" width="100%" height="100%" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".44" xlink:href="#m"/>
+ <use transform="matrix(27 0 0 -10 0 3.6)" width="100%" height="100%" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".44" xlink:href="#m"/>
+ <use transform="matrix(27 0 0 -10 0 .6)" width="100%" height="100%" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".44" xlink:href="#m"/>
+ <use transform="matrix(27 0 0 -10 0 -.6)" width="100%" height="100%" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".44" xlink:href="#m"/>
+ <use transform="scale(27 -10)" width="100%" height="100%" fill="none" marker-end="url(#i)" marker-mid="url(#i)" marker-start="url(#i)" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width=".44" xlink:href="#m"/>
+ <g font-size="60.08" stroke-width="10" text-anchor="middle">
+  <switch>
+   <text x="58.7" y="112" systemLanguage="ar">يناير</text>
+   <text x="58.7" y="112" systemLanguage="az">Yan</text>
+   <text x="58.7" y="112" systemLanguage="be">Сту</text>
+   <text x="58.7" y="112" systemLanguage="bg">Яну</text>
+   <text x="58.7" y="112" systemLanguage="ca">gen</text>
+   <text x="58.7" y="112" systemLanguage="cs">led</text>
+   <text x="58.7" y="112" systemLanguage="cy">Ion</text>
+   <text x="58.7" y="112" systemLanguage="da">jan</text>
+   <text x="58.7" y="112" systemLanguage="de">Jan</text>
+   <text x="58.7" y="112" systemLanguage="el">Ιαν</text>
+   <text x="58.7" y="112" systemLanguage="eo">Jan</text>
+   <text x="58.7" y="112" systemLanguage="es">ene</text>
+   <text x="58.7" y="112" systemLanguage="et">Jan</text>
+   <text x="58.7" y="112" systemLanguage="eu">urt.</text>
+   <text x="58.7" y="112" systemLanguage="fa">ژانویه</text>
+   <text x="58.7" y="112" systemLanguage="fi">Tam</text>
+   <text x="58.7" y="112" systemLanguage="fr">janv.</text>
+   <text x="58.7" y="112" systemLanguage="gl">xan</text>
+   <text x="58.7" y="112" systemLanguage="he">ינואר</text>
+   <text x="58.7" y="112" systemLanguage="hi">जनवरी</text>
+   <text x="58.7" y="112" systemLanguage="hr">sij</text>
+   <text x="58.7" y="112" systemLanguage="hu">jan.</text>
+   <text x="58.7" y="112" systemLanguage="id">Jan</text>
+   <text x="58.7" y="112" systemLanguage="it">gen</text>
+   <text x="58.7" y="112" systemLanguage="ja">1月</text>
+   <text x="58.7" y="112" systemLanguage="ko">1월</text>
+   <text x="58.7" y="112" systemLanguage="la">Ian</text>
+   <text x="58.7" y="112" systemLanguage="lv">Jan</text>
+   <text x="58.7" y="112" systemLanguage="ms">Jan</text>
+   <text x="58.7" y="112" systemLanguage="nl">jan</text>
+   <text x="58.7" y="112" systemLanguage="no">jan</text>
+   <text x="58.7" y="112" systemLanguage="pl">sty</text>
+   <text x="58.7" y="112" systemLanguage="pt">jan</text>
+   <text x="58.7" y="112" systemLanguage="ro">ian.</text>
+   <text x="58.7" y="112" systemLanguage="ru">янв</text>
+   <text x="58.7" y="112" systemLanguage="sco">Jan</text>
+   <text x="58.7" y="112" systemLanguage="sk">I</text>
+   <text x="58.7" y="112" systemLanguage="sl">jan.</text>
+   <text x="58.7" y="112" systemLanguage="sr">јан</text>
+   <text x="58.7" y="112" systemLanguage="sv">jan</text>
+   <text x="58.7" y="112" systemLanguage="ta">சனவரி</text>
+   <text x="58.7" y="112" systemLanguage="th">มกร</text>
+   <text x="58.7" y="112" systemLanguage="tr">Ocak</text>
+   <text x="58.7" y="112" systemLanguage="uk">Січ</text>
+   <text x="58.7" y="112" systemLanguage="uz">Yan</text>
+   <text x="58.7" y="112" systemLanguage="vi">1</text>
+   <text x="58.7" y="112" systemLanguage="zh">1月</text>
+   <text x="58.7" y="112">Jan</text>
+  </switch>
+  <switch>
+   <text x="176" y="172" systemLanguage="ar">فبراير</text>
+   <text x="176" y="112" systemLanguage="ca">feb</text>
+   <text x="176" y="112" systemLanguage="az">Fev</text>
+   <text x="176" y="112" systemLanguage="be">Лют</text>
+   <text x="176" y="112" systemLanguage="bg">Фев</text>
+   <text x="176" y="112" systemLanguage="cs">úno</text>
+   <text x="176" y="112" systemLanguage="cy">Chw</text>
+   <text x="176" y="112" systemLanguage="da">feb</text>
+   <text x="176" y="112" systemLanguage="de">Feb</text>
+   <text x="176" y="112" systemLanguage="el">Φεβ</text>
+   <text x="176" y="112" systemLanguage="eo">Feb</text>
+   <text x="176" y="112" systemLanguage="es">feb</text>
+   <text x="176" y="112" systemLanguage="et">Veb</text>
+   <text x="176" y="112" systemLanguage="eu">ots.</text>
+   <text x="176" y="172" systemLanguage="fa">فوریه</text>
+   <text x="176" y="112" systemLanguage="fi">Hel</text>
+   <text x="176" y="112" systemLanguage="fr">févr.</text>
+   <text x="176" y="112" systemLanguage="gl">feb</text>
+   <text x="176" y="172" systemLanguage="he">פברואר</text>
+   <text x="176" y="172" systemLanguage="hi">फ़रवरी</text>
+   <text x="176" y="112" systemLanguage="hr">vlj</text>
+   <text x="176" y="112" systemLanguage="hu">febr.</text>
+   <text x="176" y="112" systemLanguage="id">Feb</text>
+   <text x="176" y="112" systemLanguage="it">feb</text>
+   <text x="176" y="112" systemLanguage="ja">2月</text>
+   <text x="176" y="112" systemLanguage="ko">2월</text>
+   <text x="176" y="112" systemLanguage="la">Feb</text>
+   <text x="176" y="112" systemLanguage="lv">Feb</text>
+   <text x="176" y="112" systemLanguage="ms">Feb</text>
+   <text x="176" y="112" systemLanguage="nl">feb</text>
+   <text x="176" y="112" systemLanguage="no">feb</text>
+   <text x="176" y="112" systemLanguage="pl">lut</text>
+   <text x="176" y="112" systemLanguage="pt">fev</text>
+   <text x="176" y="112" systemLanguage="ro">feb.</text>
+   <text x="176" y="112" systemLanguage="ru">фев</text>
+   <text x="176" y="112" systemLanguage="sco">Feb</text>
+   <text x="176" y="112" systemLanguage="sk">II</text>
+   <text x="176" y="112" systemLanguage="sl">feb.</text>
+   <text x="176" y="112" systemLanguage="sr">феб</text>
+   <text x="176" y="112" systemLanguage="sv">feb</text>
+   <text x="176" y="172" systemLanguage="ta">பெப்ரவரி</text>
+   <text x="176" y="112" systemLanguage="th">กุมภ</text>
+   <text x="176" y="112" systemLanguage="tr">Şub</text>
+   <text x="176" y="112" systemLanguage="uk">Лют</text>
+   <text x="176" y="112" systemLanguage="uz">Fev</text>
+   <text x="176" y="112" systemLanguage="vi">2</text>
+   <text x="176" y="112" systemLanguage="zh">2月</text>
+   <text x="176" y="112">Feb</text>
+  </switch>
+  <switch>
+   <text x="293.3" y="112" systemLanguage="ar">مارس</text>
+   <text x="293.3" y="112" systemLanguage="az">Mar</text>
+   <text x="293.3" y="112" systemLanguage="be">Сак</text>
+   <text x="293.3" y="112" systemLanguage="bg">Мар</text>
+   <text x="293.3" y="112" systemLanguage="ca">març</text>
+   <text x="293.3" y="112" systemLanguage="cs">bře</text>
+   <text x="293.3" y="112" systemLanguage="cy">Maw</text>
+   <text x="293.3" y="112" systemLanguage="da">mar</text>
+   <text x="293.3" y="112" systemLanguage="de">Mrz</text>
+   <text x="293.3" y="112" systemLanguage="el">Μαρ</text>
+   <text x="293.3" y="112" systemLanguage="es">mar</text>
+   <text x="293.3" y="112" systemLanguage="eo">Mar</text>
+   <text x="293.3" y="112" systemLanguage="et">Mär</text>
+   <text x="293.3" y="112" systemLanguage="eu">mar.</text>
+   <text x="293.3" y="112" systemLanguage="fa">مارس</text>
+   <text x="293.3" y="112" systemLanguage="fi">Maal</text>
+   <text x="293.3" y="112" systemLanguage="fr">mars</text>
+   <text x="293.3" y="112" systemLanguage="gl">mar</text>
+   <text x="293.3" y="112" systemLanguage="he">מרץ</text>
+   <text x="293.3" y="112" systemLanguage="hi">मार्च</text>
+   <text x="293.3" y="112" systemLanguage="hr">ožu</text>
+   <text x="293.3" y="112" systemLanguage="hu">márc.</text>
+   <text x="293.3" y="112" systemLanguage="id">Mar</text>
+   <text x="293.3" y="112" systemLanguage="it">mar</text>
+   <text x="293.3" y="112" systemLanguage="ja">3月</text>
+   <text x="293.3" y="112" systemLanguage="ko">3월</text>
+   <text x="293.3" y="112" systemLanguage="la">Mar</text>
+   <text x="293.3" y="112" systemLanguage="lv">Mar</text>
+   <text x="293.3" y="112" systemLanguage="ms">Mac</text>
+   <text x="293.3" y="112" systemLanguage="nl">mrt</text>
+   <text x="293.3" y="112" systemLanguage="no">mar</text>
+   <text x="293.3" y="112" systemLanguage="pl">mar</text>
+   <text x="293.3" y="112" systemLanguage="pt">mar</text>
+   <text x="293.3" y="112" systemLanguage="ro">mar.</text>
+   <text x="293.3" y="112" systemLanguage="ru">мар</text>
+   <text x="293.3" y="112" systemLanguage="sco">Mair</text>
+   <text x="293.3" y="112" systemLanguage="sk">III</text>
+   <text x="293.3" y="112" systemLanguage="sl">mar.</text>
+   <text x="293.3" y="112" systemLanguage="sr">мар</text>
+   <text x="293.3" y="112" systemLanguage="sv">mar</text>
+   <text x="293.3" y="112" systemLanguage="ta">மார்ச்</text>
+   <text x="293.3" y="112" systemLanguage="th">มีนา</text>
+   <text x="293.3" y="112" systemLanguage="tr">Mar</text>
+   <text x="293.3" y="112" systemLanguage="uk">Бер</text>
+   <text x="293.3" y="112" systemLanguage="uz">Mar</text>
+   <text x="293.3" y="112" systemLanguage="vi">3</text>
+   <text x="293.3" y="112" systemLanguage="zh">3月</text>
+   <text x="293.3" y="112">Mar</text>
+  </switch>
+  <switch>
+   <text x="410.6" y="172" systemLanguage="ar">أبريل</text>
+   <text x="410.6" y="112" systemLanguage="az">Apr</text>
+   <text x="410.6" y="112" systemLanguage="be">Кра</text>
+   <text x="410.6" y="112" systemLanguage="bg">Апр</text>
+   <text x="410.6" y="112" systemLanguage="ca">abr</text>
+   <text x="410.6" y="112" systemLanguage="cs">dub</text>
+   <text x="410.6" y="112" systemLanguage="cy">Ebr</text>
+   <text x="410.6" y="112" systemLanguage="da">apr</text>
+   <text x="410.6" y="112" systemLanguage="de">Apr</text>
+   <text x="410.6" y="112" systemLanguage="el">Απρ</text>
+   <text x="410.6" y="112" systemLanguage="eo">Apr</text>
+   <text x="410.6" y="112" systemLanguage="es">abr</text>
+   <text x="410.6" y="112" systemLanguage="et">Apr</text>
+   <text x="410.6" y="112" systemLanguage="eu">api.</text>
+   <text x="410.6" y="172" systemLanguage="fa">آوریل</text>
+   <text x="410.6" y="112" systemLanguage="fi">Huht</text>
+   <text x="410.6" y="112" systemLanguage="fr">avr.</text>
+   <text x="410.6" y="112" systemLanguage="gl">abr</text>
+   <text x="410.6" y="172" systemLanguage="he">אפריל</text>
+   <text x="410.6" y="172" systemLanguage="hi">अप्रैल</text>
+   <text x="410.6" y="112" systemLanguage="hr">tra</text>
+   <text x="410.6" y="112" systemLanguage="hu">ápr.</text>
+   <text x="410.6" y="112" systemLanguage="id">Apr</text>
+   <text x="410.6" y="112" systemLanguage="it">apr</text>
+   <text x="410.6" y="112" systemLanguage="ja">4月</text>
+   <text x="410.6" y="112" systemLanguage="ko">4월</text>
+   <text x="410.6" y="112" systemLanguage="la">Apr</text>
+   <text x="410.6" y="112" systemLanguage="lv">Apr</text>
+   <text x="410.6" y="112" systemLanguage="ms">Apr</text>
+   <text x="410.6" y="112" systemLanguage="nl">apr</text>
+   <text x="410.6" y="112" systemLanguage="no">apr</text>
+   <text x="410.6" y="112" systemLanguage="pl">kwi</text>
+   <text x="410.6" y="112" systemLanguage="pt">abr</text>
+   <text x="410.6" y="112" systemLanguage="ro">apr.</text>
+   <text x="410.6" y="112" systemLanguage="ru">апр</text>
+   <text x="410.6" y="112" systemLanguage="sco">Apr</text>
+   <text x="410.6" y="112" systemLanguage="sk">IV</text>
+   <text x="410.6" y="112" systemLanguage="sl">apr.</text>
+   <text x="410.6" y="112" systemLanguage="sr">апр</text>
+   <text x="410.6" y="112" systemLanguage="sv">apr</text>
+   <text x="410.6" y="172" systemLanguage="ta">ஏப்ரல்</text>
+   <text x="410.6" y="112" systemLanguage="th">เมษ</text>
+   <text x="410.6" y="112" systemLanguage="tr">Nis</text>
+   <text x="410.6" y="112" systemLanguage="uk">Кві</text>
+   <text x="410.6" y="112" systemLanguage="uz">Apr</text>
+   <text x="410.6" y="112" systemLanguage="vi">4</text>
+   <text x="410.6" y="112" systemLanguage="zh">4月</text>
+   <text x="410.6" y="112">Apr</text>
+  </switch>
+  <switch>
+   <text x="527.9" y="112" systemLanguage="ar">ماي</text>
+   <text x="527.9" y="112" systemLanguage="az">May</text>
+   <text x="527.9" y="112" systemLanguage="be">Май</text>
+   <text x="527.9" y="112" systemLanguage="bg">Май</text>
+   <text x="527.9" y="112" systemLanguage="ca">maig</text>
+   <text x="527.9" y="112" systemLanguage="cs">kvě</text>
+   <text x="527.9" y="112" systemLanguage="cy">Mai</text>
+   <text x="527.9" y="112" systemLanguage="da">maj</text>
+   <text x="527.9" y="112" systemLanguage="de">Mai</text>
+   <text x="527.9" y="112" systemLanguage="el">Μαϊ</text>
+   <text x="527.9" y="112" systemLanguage="eo">Maj</text>
+   <text x="527.9" y="112" systemLanguage="es">may</text>
+   <text x="527.9" y="112" systemLanguage="et">Mai</text>
+   <text x="527.9" y="112" systemLanguage="eu">mai.</text>
+   <text x="527.9" y="112" systemLanguage="fa">مه</text>
+   <text x="527.9" y="112" systemLanguage="fi">Touk</text>
+   <text x="527.9" y="112" systemLanguage="fr">mai</text>
+   <text x="527.9" y="112" systemLanguage="gl">maio</text>
+   <text x="527.9" y="112" systemLanguage="he">מאי</text>
+   <text x="527.9" y="112" systemLanguage="hi">मई</text>
+   <text x="527.9" y="112" systemLanguage="hr">svi</text>
+   <text x="527.9" y="112" systemLanguage="hu">máj.</text>
+   <text x="527.9" y="112" systemLanguage="id">Mei</text>
+   <text x="527.9" y="112" systemLanguage="it">mag</text>
+   <text x="527.9" y="112" systemLanguage="ja">5月</text>
+   <text x="527.9" y="112" systemLanguage="ko">5월</text>
+   <text x="527.9" y="112" systemLanguage="la">Mai</text>
+   <text x="527.9" y="112" systemLanguage="lv">Mai</text>
+   <text x="527.9" y="112" systemLanguage="ms">Mei</text>
+   <text x="527.9" y="112" systemLanguage="nl">mei</text>
+   <text x="527.9" y="112" systemLanguage="no">mai</text>
+   <text x="527.9" y="112" systemLanguage="pl">maj</text>
+   <text x="527.9" y="112" systemLanguage="pt">mai</text>
+   <text x="527.9" y="112" systemLanguage="ro">mai.</text>
+   <text x="527.9" y="112" systemLanguage="ru">май</text>
+   <text x="527.9" y="112" systemLanguage="sco">Mey</text>
+   <text x="527.9" y="112" systemLanguage="sk">V</text>
+   <text x="527.9" y="112" systemLanguage="sl">maj.</text>
+   <text x="527.9" y="112" systemLanguage="sv">мај</text>
+   <text x="527.9" y="112" systemLanguage="ta">மே</text>
+   <text x="527.9" y="112" systemLanguage="th">พฤษ</text>
+   <text x="527.9" y="112" systemLanguage="tr">May</text>
+   <text x="527.9" y="112" systemLanguage="uk">Тра</text>
+   <text x="527.9" y="112" systemLanguage="pt">Mai</text>
+   <text x="527.9" y="112" systemLanguage="uz">May</text>
+   <text x="527.9" y="112" systemLanguage="vi">5</text>
+   <text x="527.9" y="112" systemLanguage="zh">5月</text>
+   <text x="527.9" y="112">May</text>
+  </switch>
+  <switch>
+   <text x="645.2" y="172" systemLanguage="ar">يونيو</text>
+   <text x="645.2" y="112" systemLanguage="az">İyun</text>
+   <text x="645.2" y="112" systemLanguage="be">Чэр</text>
+   <text x="645.2" y="112" systemLanguage="bg">Юни</text>
+   <text x="645.2" y="112" systemLanguage="ca">juny</text>
+   <text x="645.2" y="112" systemLanguage="cs">čer</text>
+   <text x="645.2" y="112" systemLanguage="cy">Meh</text>
+   <text x="645.2" y="112" systemLanguage="da">jun</text>
+   <text x="645.2" y="112" systemLanguage="de">Jun</text>
+   <text x="645.2" y="112" systemLanguage="el">Ιουν</text>
+   <text x="645.2" y="112" systemLanguage="eo">Jun</text>
+   <text x="645.2" y="112" systemLanguage="es">jun</text>
+   <text x="645.2" y="112" systemLanguage="et">Jun</text>
+   <text x="645.2" y="112" systemLanguage="eu">eka.</text>
+   <text x="645.2" y="172" systemLanguage="fa">ژوئن</text>
+   <text x="645.2" y="112" systemLanguage="fi">Kes</text>
+   <text x="645.2" y="112" systemLanguage="fr">juin</text>
+   <text x="645.2" y="112" systemLanguage="gl">xuñ</text>
+   <text x="645.2" y="172" systemLanguage="he">יוני</text>
+   <text x="645.2" y="172" systemLanguage="hi">जून</text>
+   <text x="645.2" y="112" systemLanguage="hr">lip</text>
+   <text x="645.2" y="112" systemLanguage="hu">jún.</text>
+   <text x="645.2" y="112" systemLanguage="id">Jun</text>
+   <text x="645.2" y="112" systemLanguage="it">giu</text>
+   <text x="645.2" y="112" systemLanguage="ja">6月</text>
+   <text x="645.2" y="112" systemLanguage="ko">6월</text>
+   <text x="645.2" y="112" systemLanguage="la">Iun</text>
+   <text x="645.2" y="112" systemLanguage="lv">Jūn</text>
+   <text x="645.2" y="112" systemLanguage="ms">Jun</text>
+   <text x="645.2" y="112" systemLanguage="nl">jun</text>
+   <text x="645.2" y="112" systemLanguage="no">jun</text>
+   <text x="645.2" y="112" systemLanguage="pl">cze</text>
+   <text x="645.2" y="112" systemLanguage="pt">jun</text>
+   <text x="645.2" y="112" systemLanguage="ro">iun.</text>
+   <text x="645.2" y="112" systemLanguage="ru">июн</text>
+   <text x="645.2" y="112" systemLanguage="sco">Juin</text>
+   <text x="645.2" y="112" systemLanguage="sk">VI</text>
+   <text x="645.2" y="112" systemLanguage="sl">jun.</text>
+   <text x="645.2" y="112" systemLanguage="sr">јун</text>
+   <text x="645.2" y="112" systemLanguage="sv">jun</text>
+   <text x="645.2" y="172" systemLanguage="ta">சூன்</text>
+   <text x="645.2" y="112" systemLanguage="th">มิถุน</text>
+   <text x="645.2" y="112" systemLanguage="tr">Haz</text>
+   <text x="645.2" y="112" systemLanguage="uk">Чер</text>
+   <text x="645.2" y="112" systemLanguage="uz">Iyun</text>
+   <text x="645.2" y="112" systemLanguage="vi">6</text>
+   <text x="645.2" y="112" systemLanguage="zh">6月</text>
+   <text x="645.2" y="112">Jun</text>
+  </switch>
+  <switch>
+   <text x="762.5" y="112" systemLanguage="ar">يوليوز</text>
+   <text x="762.5" y="112" systemLanguage="az">İyul</text>
+   <text x="762.5" y="112" systemLanguage="be">Ліп</text>
+   <text x="762.5" y="112" systemLanguage="bg">Юли</text>
+   <text x="762.5" y="112" systemLanguage="ca">jul</text>
+   <text x="762.5" y="112" systemLanguage="cs">čvc</text>
+   <text x="762.5" y="112" systemLanguage="cy">Gor</text>
+   <text x="762.5" y="112" systemLanguage="da">jul</text>
+   <text x="762.5" y="112" systemLanguage="de">Jul</text>
+   <text x="762.5" y="112" systemLanguage="el">Ιουλ</text>
+   <text x="762.5" y="112" systemLanguage="eo">Jul</text>
+   <text x="762.5" y="112" systemLanguage="es">jul</text>
+   <text x="762.5" y="112" systemLanguage="et">Jul</text>
+   <text x="762.5" y="112" systemLanguage="eu">uzt.</text>
+   <text x="762.5" y="112" systemLanguage="fa">ژوئیه</text>
+   <text x="762.5" y="112" systemLanguage="fi">Hein</text>
+   <text x="762.5" y="112" systemLanguage="fr">juil.</text>
+   <text x="762.5" y="112" systemLanguage="gl">xull</text>
+   <text x="762.5" y="112" systemLanguage="he">יולי</text>
+   <text x="762.5" y="112" systemLanguage="hi">जुलाई</text>
+   <text x="762.5" y="112" systemLanguage="hr">srp</text>
+   <text x="762.5" y="112" systemLanguage="hu">júl.</text>
+   <text x="762.5" y="112" systemLanguage="id">Jul</text>
+   <text x="762.5" y="112" systemLanguage="it">lug</text>
+   <text x="762.5" y="112" systemLanguage="ja">7月</text>
+   <text x="762.5" y="112" systemLanguage="ko">7월</text>
+   <text x="762.5" y="112" systemLanguage="la">Iul</text>
+   <text x="762.5" y="112" systemLanguage="lv">Jūl</text>
+   <text x="762.5" y="112" systemLanguage="ms">Jul</text>
+   <text x="762.5" y="112" systemLanguage="nl">jul</text>
+   <text x="762.5" y="112" systemLanguage="no">jul</text>
+   <text x="762.5" y="112" systemLanguage="pl">lip</text>
+   <text x="762.5" y="112" systemLanguage="pt">jul</text>
+   <text x="762.5" y="112" systemLanguage="ro">iul.</text>
+   <text x="762.5" y="112" systemLanguage="ru">июл</text>
+   <text x="762.5" y="112" systemLanguage="sco">Jul</text>
+   <text x="762.5" y="112" systemLanguage="sk">VII</text>
+   <text x="762.5" y="112" systemLanguage="sl">jul.</text>
+   <text x="762.5" y="112" systemLanguage="sr">јул</text>
+   <text x="762.5" y="112" systemLanguage="sv">jul</text>
+   <text x="762.5" y="112" systemLanguage="ta">சூன்</text>
+   <text x="762.5" y="112" systemLanguage="th">กรก</text>
+   <text x="762.5" y="112" systemLanguage="tr">Tem</text>
+   <text x="762.5" y="112" systemLanguage="uk">Лип</text>
+   <text x="762.5" y="112" systemLanguage="uz">Iyul</text>
+   <text x="762.5" y="112" systemLanguage="vi">7</text>
+   <text x="762.5" y="112" systemLanguage="zh">7月</text>
+   <text x="762.5" y="112">Jul</text>
+  </switch>
+  <switch>
+   <text x="879.9" y="172" systemLanguage="ar">غشت</text>
+   <text x="879.9" y="112" systemLanguage="az">Avq</text>
+   <text x="879.9" y="112" systemLanguage="be">Жні</text>
+   <text x="879.9" y="112" systemLanguage="bg">Авг</text>
+   <text x="879.9" y="112" systemLanguage="ca">ag</text>
+   <text x="879.9" y="112" systemLanguage="cs">srp</text>
+   <text x="879.9" y="112" systemLanguage="cy">Awst</text>
+   <text x="879.9" y="112" systemLanguage="da">aug</text>
+   <text x="879.9" y="112" systemLanguage="de">Aug</text>
+   <text x="879.9" y="112" systemLanguage="el">Αυγ</text>
+   <text x="879.9" y="112" systemLanguage="eo">Aŭg</text>
+   <text x="879.9" y="112" systemLanguage="es">ago</text>
+   <text x="879.9" y="112" systemLanguage="et">Aug</text>
+   <text x="879.9" y="112" systemLanguage="eu">abu.</text>
+   <text x="879.9" y="172" systemLanguage="fa">اوت</text>
+   <text x="879.9" y="112" systemLanguage="fi">Elok</text>
+   <text x="879.9" y="112" systemLanguage="fr">août</text>
+   <text x="879.9" y="112" systemLanguage="gl">ago</text>
+   <text x="879.9" y="172" systemLanguage="he">אוגוסט</text>
+   <text x="879.9" y="172" systemLanguage="hi">अगस्त</text>
+   <text x="879.9" y="112" systemLanguage="hr">kol</text>
+   <text x="879.9" y="112" systemLanguage="hu">aug.</text>
+   <text x="879.9" y="112" systemLanguage="id">Agu</text>
+   <text x="879.9" y="112" systemLanguage="it">ago</text>
+   <text x="879.9" y="112" systemLanguage="ja">8月</text>
+   <text x="879.9" y="112" systemLanguage="ko">8월</text>
+   <text x="879.9" y="112" systemLanguage="la">Sext</text>
+   <text x="879.9" y="112" systemLanguage="lv">Aug</text>
+   <text x="879.9" y="112" systemLanguage="ms">Ogo</text>
+   <text x="879.9" y="112" systemLanguage="nl">aug</text>
+   <text x="879.9" y="112" systemLanguage="no">aug</text>
+   <text x="879.9" y="112" systemLanguage="pl">sie</text>
+   <text x="879.9" y="112" systemLanguage="pt">ago</text>
+   <text x="879.9" y="112" systemLanguage="ro">aug.</text>
+   <text x="879.9" y="112" systemLanguage="ru">авг</text>
+   <text x="879.9" y="112" systemLanguage="sco">Aug</text>
+   <text x="879.9" y="112" systemLanguage="sk">VIII</text>
+   <text x="879.9" y="112" systemLanguage="sl">avg.</text>
+   <text x="879.9" y="112" systemLanguage="sr">авг</text>
+   <text x="879.9" y="112" systemLanguage="sv">aug</text>
+   <text x="829.9" y="172" systemLanguage="ta">ஆகத்து</text>
+   <text x="879.9" y="112" systemLanguage="tr">Ağu</text>
+   <text x="879.9" y="112" systemLanguage="th">สิงห</text>
+   <text x="879.9" y="112" systemLanguage="uk">Сер</text>
+   <text x="879.9" y="112" systemLanguage="uz">Avg</text>
+   <text x="879.9" y="112" systemLanguage="vi">8</text>
+   <text x="879.9" y="112" systemLanguage="zh">8月</text>
+   <text x="879.9" y="112">Aug</text>
+  </switch>
+  <switch>
+   <text x="997.2" y="112" systemLanguage="ar">شتنبر</text>
+   <text x="997.2" y="112" systemLanguage="az">Sen</text>
+   <text x="997.2" y="112" systemLanguage="be">Вер</text>
+   <text x="997.2" y="112" systemLanguage="bg">Сеп</text>
+   <text x="997.2" y="112" systemLanguage="ca">set</text>
+   <text x="997.2" y="112" systemLanguage="cs">zář</text>
+   <text x="997.2" y="112" systemLanguage="cy">Med</text>
+   <text x="997.2" y="112" systemLanguage="da">sep</text>
+   <text x="997.2" y="112" systemLanguage="de">Sep</text>
+   <text x="997.2" y="112" systemLanguage="el">Σεπ</text>
+   <text x="997.2" y="112" systemLanguage="eo">Sep</text>
+   <text x="997.2" y="112" systemLanguage="es">sep</text>
+   <text x="997.2" y="112" systemLanguage="et">Sep</text>
+   <text x="997.2" y="112" systemLanguage="eu">ira.</text>
+   <text x="997.2" y="112" systemLanguage="fa">سپتامبر</text>
+   <text x="997.2" y="112" systemLanguage="fi">Syy</text>
+   <text x="997.2" y="112" systemLanguage="fr">sept.</text>
+   <text x="997.2" y="112" systemLanguage="gl">set</text>
+   <text x="997.2" y="112" systemLanguage="he">ספטמבר</text>
+   <text x="997.2" y="112" systemLanguage="hi">सितम्बर</text>
+   <text x="997.2" y="112" systemLanguage="hr">ruj</text>
+   <text x="997.2" y="112" systemLanguage="hu">szept.</text>
+   <text x="997.2" y="112" systemLanguage="id">Sep</text>
+   <text x="997.2" y="112" systemLanguage="it">set</text>
+   <text x="997.2" y="112" systemLanguage="ja">9月</text>
+   <text x="997.2" y="112" systemLanguage="ko">9월</text>
+   <text x="997.2" y="112" systemLanguage="la">Sep</text>
+   <text x="997.2" y="112" systemLanguage="lv">Sep</text>
+   <text x="997.2" y="112" systemLanguage="ms">Sep</text>
+   <text x="997.2" y="112" systemLanguage="nl">sep</text>
+   <text x="997.2" y="112" systemLanguage="no">sep</text>
+   <text x="997.2" y="112" systemLanguage="pl">wrz</text>
+   <text x="997.2" y="112" systemLanguage="pt">set</text>
+   <text x="997.2" y="112" systemLanguage="ro">sep.</text>
+   <text x="997.2" y="112" systemLanguage="ru">сен</text>
+   <text x="997.2" y="112" systemLanguage="sco">Sep</text>
+   <text x="997.2" y="112" systemLanguage="sk">IX</text>
+   <text x="997.2" y="112" systemLanguage="sl">sept.</text>
+   <text x="997.2" y="112" systemLanguage="sr">сеп</text>
+   <text x="997.2" y="112" systemLanguage="sv">sep</text>
+   <text x="997.2" y="112" systemLanguage="ta">செப்டம்பர்</text>
+   <text x="997.2" y="112" systemLanguage="th">กันย</text>
+   <text x="997.2" y="112" systemLanguage="tr">Eyl</text>
+   <text x="997.2" y="112" systemLanguage="uk">Вер</text>
+   <text x="997.2" y="112" systemLanguage="uz">Sen</text>
+   <text x="997.2" y="112" systemLanguage="vi">9</text>
+   <text x="997.2" y="112" systemLanguage="zh">9月</text>
+   <text x="997.2" y="112">Sept</text>
+  </switch>
+  <switch>
+   <text x="1114.5" y="172" systemLanguage="ar">أكتوبر</text>
+   <text x="1114.5" y="112" systemLanguage="az">Okt</text>
+   <text x="1114.5" y="112" systemLanguage="be">Каст</text>
+   <text x="1114.5" y="112" systemLanguage="bg">Окт</text>
+   <text x="1114.5" y="112" systemLanguage="ca">oct</text>
+   <text x="1114.5" y="112" systemLanguage="cs">říj</text>
+   <text x="1114.5" y="112" systemLanguage="cy">Hyd</text>
+   <text x="1114.5" y="112" systemLanguage="da">okt</text>
+   <text x="1114.5" y="112" systemLanguage="de">Okt</text>
+   <text x="1114.5" y="112" systemLanguage="el">Οκτ</text>
+   <text x="1114.5" y="112" systemLanguage="eo">Okt</text>
+   <text x="1114.5" y="112" systemLanguage="es">oct</text>
+   <text x="1114.5" y="112" systemLanguage="et">Okt</text>
+   <text x="1114.5" y="112" systemLanguage="eu">urr.</text>
+   <text x="1114.5" y="172" systemLanguage="fa">اکتبر</text>
+   <text x="1114.5" y="112" systemLanguage="fi">Lok</text>
+   <text x="1114.5" y="112" systemLanguage="fr">oct.</text>
+   <text x="1114.5" y="112" systemLanguage="gl">out</text>
+   <text x="1114.5" y="172" systemLanguage="he">אוקטובר</text>
+   <text x="1114.5" y="172" systemLanguage="hi">अक्टूबर</text>
+   <text x="1114.5" y="112" systemLanguage="hr">lis</text>
+   <text x="1114.5" y="112" systemLanguage="hu">okt.</text>
+   <text x="1114.5" y="112" systemLanguage="id">Okt</text>
+   <text x="1114.5" y="112" systemLanguage="it">ott</text>
+   <text x="1114.5" y="112" systemLanguage="ja">10月</text>
+   <text x="1114.5" y="112" systemLanguage="la">Oct</text>
+   <text x="1114.5" y="112" systemLanguage="lv">Okt</text>
+   <text x="1114.5" y="112" systemLanguage="ko">10월</text>
+   <text x="1114.5" y="112" systemLanguage="ms">Okt</text>
+   <text x="1114.5" y="112" systemLanguage="nl">okt</text>
+   <text x="1114.5" y="112" systemLanguage="no">okt</text>
+   <text x="1114.5" y="112" systemLanguage="pl">paź</text>
+   <text x="1114.5" y="112" systemLanguage="pt">out</text>
+   <text x="1114.5" y="112" systemLanguage="ro">oct.</text>
+   <text x="1114.5" y="112" systemLanguage="ru">окт</text>
+   <text x="1114.5" y="112" systemLanguage="sco">Oct</text>
+   <text x="1114.5" y="112" systemLanguage="sk">X</text>
+   <text x="1114.5" y="112" systemLanguage="sl">okt.</text>
+   <text x="1114.5" y="112" systemLanguage="sr">окт</text>
+   <text x="1114.5" y="112" systemLanguage="sv">okt</text>
+   <text x="1114.5" y="172" systemLanguage="ta">அக்டோபர்</text>
+   <text x="1114.5" y="112" systemLanguage="th">ตุลา</text>
+   <text x="1114.5" y="112" systemLanguage="tr">Ekim</text>
+   <text x="1114.5" y="112" systemLanguage="uk">Жов</text>
+   <text x="1114.5" y="112" systemLanguage="uz">Okt</text>
+   <text x="1114.5" y="112" systemLanguage="vi">10</text>
+   <text x="1114.5" y="112" systemLanguage="zh">10月</text>
+   <text x="1114.5" y="112">Oct</text>
+  </switch>
+  <switch>
+   <text x="1231.8" y="112" systemLanguage="ar">نونبر</text>
+   <text x="1231.8" y="112" systemLanguage="az">Noy</text>
+   <text x="1231.8" y="112" systemLanguage="be">Ліст</text>
+   <text x="1231.8" y="112" systemLanguage="bg">Ное</text>
+   <text x="1231.8" y="112" systemLanguage="ca">nov</text>
+   <text x="1231.8" y="112" systemLanguage="cs">lis</text>
+   <text x="1231.8" y="112" systemLanguage="cy">Tac</text>
+   <text x="1231.8" y="112" systemLanguage="da">nov</text>
+   <text x="1231.8" y="112" systemLanguage="de">Nov</text>
+   <text x="1231.8" y="112" systemLanguage="el">Νοε</text>
+   <text x="1231.8" y="112" systemLanguage="eo">Nov</text>
+   <text x="1231.8" y="112" systemLanguage="es">nov</text>
+   <text x="1231.8" y="112" systemLanguage="et">Nov</text>
+   <text x="1231.8" y="112" systemLanguage="eu">aza.</text>
+   <text x="1231.8" y="112" systemLanguage="fa">نوامبر</text>
+   <text x="1231.8" y="112" systemLanguage="fi">Mar</text>
+   <text x="1231.8" y="112" systemLanguage="fr">nov.</text>
+   <text x="1231.8" y="112" systemLanguage="gl">nov</text>
+   <text x="1231.8" y="112" systemLanguage="he">נובמבר</text>
+   <text x="1231.8" y="112" systemLanguage="hi">नवम्बर</text>
+   <text x="1231.8" y="112" systemLanguage="hr">stu</text>
+   <text x="1231.8" y="112" systemLanguage="hu">nov.</text>
+   <text x="1231.8" y="112" systemLanguage="id">Nov</text>
+   <text x="1231.8" y="112" systemLanguage="it">nov</text>
+   <text x="1231.8" y="112" systemLanguage="ja">11月</text>
+   <text x="1231.8" y="112" systemLanguage="ko">11월</text>
+   <text x="1231.8" y="112" systemLanguage="la">Nov</text>
+   <text x="1231.8" y="112" systemLanguage="lv">Nov</text>
+   <text x="1231.8" y="112" systemLanguage="ms">Nov</text>
+   <text x="1231.8" y="112" systemLanguage="nl">nov</text>
+   <text x="1231.8" y="112" systemLanguage="no">nov</text>
+   <text x="1231.8" y="112" systemLanguage="pl">lis</text>
+   <text x="1231.8" y="112" systemLanguage="pt">nov</text>
+   <text x="1231.8" y="112" systemLanguage="ro">nov.</text>
+   <text x="1231.8" y="112" systemLanguage="ru">ноя</text>
+   <text x="1231.8" y="112" systemLanguage="sco">Nov</text>
+   <text x="1231.8" y="112" systemLanguage="sk">XI</text>
+   <text x="1231.8" y="112" systemLanguage="sl">nov.</text>
+   <text x="1231.8" y="112" systemLanguage="sr">нов</text>
+   <text x="1231.8" y="112" systemLanguage="sv">nov</text>
+   <text x="1281.8" y="112" systemLanguage="ta">நவம்பர்</text>
+   <text x="1231.8" y="112" systemLanguage="th">พฤศ</text>
+   <text x="1231.8" y="112" systemLanguage="tr">Kas</text>
+   <text x="1231.8" y="112" systemLanguage="uk">Лис</text>
+   <text x="1231.8" y="112" systemLanguage="uz">Noy</text>
+   <text x="1231.8" y="112" systemLanguage="vi">11</text>
+   <text x="1231.8" y="112" systemLanguage="zh">11月</text>
+   <text x="1231.8" y="112">Nov</text>
+  </switch>
+  <switch>
+   <text x="1349.1" y="172" systemLanguage="ar">دجنبر</text>
+   <text x="1349.1" y="112" systemLanguage="az">Dek</text>
+   <text x="1349.1" y="112" systemLanguage="be">Сне</text>
+   <text x="1349.1" y="112" systemLanguage="bg">Дек</text>
+   <text x="1349.1" y="112" systemLanguage="ca">des</text>
+   <text x="1349.1" y="112" systemLanguage="cs">pro</text>
+   <text x="1349.1" y="112" systemLanguage="cy">Rha</text>
+   <text x="1349.1" y="112" systemLanguage="da">dec</text>
+   <text x="1349.1" y="112" systemLanguage="de">Dez</text>
+   <text x="1349.1" y="112" systemLanguage="el">Δεκ</text>
+   <text x="1349.1" y="112" systemLanguage="eo">Dec</text>
+   <text x="1349.1" y="112" systemLanguage="es">dic</text>
+   <text x="1349.1" y="112" systemLanguage="et">Det</text>
+   <text x="1349.1" y="112" systemLanguage="eu">abe.</text>
+   <text x="1349.1" y="172" systemLanguage="fa">دسامبر</text>
+   <text x="1349.1" y="112" systemLanguage="fi">Joul</text>
+   <text x="1349.1" y="112" systemLanguage="fr">déc.</text>
+   <text x="1349.1" y="112" systemLanguage="gl">dec</text>
+   <text x="1349.1" y="172" systemLanguage="he">דצמבר</text>
+   <text x="1349.1" y="172" systemLanguage="hi">दिसम्बर</text>
+   <text x="1349.1" y="112" systemLanguage="hr">pro</text>
+   <text x="1349.1" y="112" systemLanguage="hu">dec.</text>
+   <text x="1349.1" y="112" systemLanguage="id">Des</text>
+   <text x="1349.1" y="112" systemLanguage="it">dic</text>
+   <text x="1349.1" y="112" systemLanguage="ja">12月</text>
+   <text x="1349.1" y="112" systemLanguage="ko">12월</text>
+   <text x="1349.1" y="112" systemLanguage="la">Dec</text>
+   <text x="1349.1" y="112" systemLanguage="lv">Dec</text>
+   <text x="1349.1" y="112" systemLanguage="ms">Dis</text>
+   <text x="1349.1" y="112" systemLanguage="nl">dec</text>
+   <text x="1349.1" y="112" systemLanguage="no">des</text>
+   <text x="1349.1" y="112" systemLanguage="pl">gru</text>
+   <text x="1349.1" y="112" systemLanguage="pt">dez</text>
+   <text x="1349.1" y="112" systemLanguage="ro">dec.</text>
+   <text x="1349.1" y="112" systemLanguage="ru">дек</text>
+   <text x="1349.1" y="112" systemLanguage="sco">Dec</text>
+   <text x="1349.1" y="112" systemLanguage="sk">XII</text>
+   <text x="1349.1" y="112" systemLanguage="sl">dec.</text>
+   <text x="1349.1" y="112" systemLanguage="sr">дец</text>
+   <text x="1349.1" y="112" systemLanguage="sv">dec</text>
+   <text x="1399.1" y="172" systemLanguage="ta">திசம்பர்</text>
+   <text x="1349.1" y="112" systemLanguage="th">ธันว</text>
+   <text x="1349.1" y="112" systemLanguage="tr">Aral</text>
+   <text x="1349.1" y="112" systemLanguage="uk">Грг</text>
+   <text x="1349.1" y="112" systemLanguage="uz">Dek</text>
+   <text x="1349.1" y="112" systemLanguage="vi">12</text>
+   <text x="1349.1" y="112" systemLanguage="zh">12月</text>
+   <text x="1349.1" y="112">Dec</text>
+  </switch>
+  <switch>
+   <text x="1466.4" y="112" systemLanguage="ar">يناير</text>
+   <text x="1466.4" y="112" systemLanguage="az">Yan</text>
+   <text x="1466.4" y="112" systemLanguage="be">Сту</text>
+   <text x="1466.4" y="112" systemLanguage="bg">Яну</text>
+   <text x="1466.4" y="112" systemLanguage="ca">gen</text>
+   <text x="1466.4" y="112" systemLanguage="cs">led</text>
+   <text x="1466.4" y="112" systemLanguage="cy">Ion</text>
+   <text x="1466.4" y="112" systemLanguage="da">jan</text>
+   <text x="1466.4" y="112" systemLanguage="de">Jan</text>
+   <text x="1466.4" y="112" systemLanguage="el">Ιαν</text>
+   <text x="1466.4" y="112" systemLanguage="eo">Jan</text>
+   <text x="1466.4" y="112" systemLanguage="es">ene</text>
+   <text x="1466.4" y="112" systemLanguage="et">Jan</text>
+   <text x="1466.4" y="112" systemLanguage="eu">urt.</text>
+   <text x="1466.4" y="112" systemLanguage="fa">ژانویه</text>
+   <text x="1466.4" y="112" systemLanguage="fi">Tam</text>
+   <text x="1466.4" y="112" systemLanguage="fr">janv.</text>
+   <text x="1466.4" y="112" systemLanguage="gl">xan</text>
+   <text x="1466.4" y="112" systemLanguage="he">ינואר</text>
+   <text x="1466.4" y="112" systemLanguage="hi">जनवरी</text>
+   <text x="1466.4" y="112" systemLanguage="hr">sij</text>
+   <text x="1466.4" y="112" systemLanguage="hu">jan.</text>
+   <text x="1466.4" y="112" systemLanguage="id">Jan</text>
+   <text x="1466.4" y="112" systemLanguage="it">gen</text>
+   <text x="1466.4" y="112" systemLanguage="ja">1月</text>
+   <text x="1466.4" y="112" systemLanguage="ko">1월</text>
+   <text x="1466.4" y="112" systemLanguage="la">Ian</text>
+   <text x="1466.4" y="112" systemLanguage="lv">Jan</text>
+   <text x="1466.4" y="112" systemLanguage="ms">Jan</text>
+   <text x="1466.4" y="112" systemLanguage="nl">jan</text>
+   <text x="1466.4" y="112" systemLanguage="no">jan</text>
+   <text x="1466.4" y="112" systemLanguage="pl">sty</text>
+   <text x="1466.4" y="112" systemLanguage="pt">jan</text>
+   <text x="1466.4" y="112" systemLanguage="ro">ian.</text>
+   <text x="1466.4" y="112" systemLanguage="ru">янв</text>
+   <text x="1466.4" y="112" systemLanguage="sco">Jan</text>
+   <text x="1466.4" y="112" systemLanguage="sk">I</text>
+   <text x="1466.4" y="112" systemLanguage="sl">jan.</text>
+   <text x="1466.4" y="112" systemLanguage="sr">јан</text>
+   <text x="1466.4" y="112" systemLanguage="sv">jan</text>
+   <text x="1466.4" y="112" systemLanguage="ta">சனவரி</text>
+   <text x="1466.4" y="112" systemLanguage="th">มกร</text>
+   <text x="1466.4" y="112" systemLanguage="tr">Ocak</text>
+   <text x="1466.4" y="112" systemLanguage="uk">Січ</text>
+   <text x="1466.4" y="112" systemLanguage="uz">Yan</text>
+   <text x="1466.4" y="112" systemLanguage="vi">1</text>
+   <text x="1466.4" y="112" systemLanguage="zh">1月</text>
+   <text x="1466.4" y="112">Jan</text>
+  </switch>
+  <switch>
+   <text x="1583.8" y="172" systemLanguage="ar">فبراير</text>
+   <text x="1583.8" y="112" systemLanguage="ca">feb</text>
+   <text x="1583.8" y="112" systemLanguage="az">Fev</text>
+   <text x="1583.8" y="112" systemLanguage="be">Лют</text>
+   <text x="1583.8" y="112" systemLanguage="bg">Фев</text>
+   <text x="1583.8" y="112" systemLanguage="cs">úno</text>
+   <text x="1583.8" y="112" systemLanguage="cy">Chw</text>
+   <text x="1583.8" y="112" systemLanguage="da">feb</text>
+   <text x="1583.8" y="112" systemLanguage="de">Feb</text>
+   <text x="1583.8" y="112" systemLanguage="el">Φεβ</text>
+   <text x="1583.8" y="112" systemLanguage="eo">Feb</text>
+   <text x="1583.8" y="112" systemLanguage="es">feb</text>
+   <text x="1583.8" y="112" systemLanguage="et">Veb</text>
+   <text x="1583.8" y="112" systemLanguage="eu">ots.</text>
+   <text x="1583.8" y="172" systemLanguage="fa">فوریه</text>
+   <text x="1583.8" y="112" systemLanguage="fi">Hel</text>
+   <text x="1583.8" y="112" systemLanguage="fr">févr.</text>
+   <text x="1583.8" y="112" systemLanguage="gl">feb</text>
+   <text x="1583.8" y="172" systemLanguage="he">פברואר</text>
+   <text x="1583.8" y="172" systemLanguage="hi">फ़रवरी</text>
+   <text x="1583.8" y="112" systemLanguage="hr">vlj</text>
+   <text x="1583.8" y="112" systemLanguage="hu">febr.</text>
+   <text x="1583.8" y="112" systemLanguage="id">Feb</text>
+   <text x="1583.8" y="112" systemLanguage="it">feb</text>
+   <text x="1583.8" y="112" systemLanguage="ja">2月</text>
+   <text x="1583.8" y="112" systemLanguage="ko">2월</text>
+   <text x="1583.8" y="112" systemLanguage="la">Feb</text>
+   <text x="1583.8" y="112" systemLanguage="lv">Feb</text>
+   <text x="1583.8" y="112" systemLanguage="ms">Feb</text>
+   <text x="1583.8" y="112" systemLanguage="nl">feb</text>
+   <text x="1583.8" y="112" systemLanguage="no">feb</text>
+   <text x="1583.8" y="112" systemLanguage="pl">lut</text>
+   <text x="1583.8" y="112" systemLanguage="pt">fev</text>
+   <text x="1583.8" y="112" systemLanguage="ro">feb.</text>
+   <text x="1583.8" y="112" systemLanguage="ru">фев</text>
+   <text x="1583.8" y="112" systemLanguage="sco">Feb</text>
+   <text x="1583.8" y="112" systemLanguage="sk">II</text>
+   <text x="1583.8" y="112" systemLanguage="sl">feb.</text>
+   <text x="1583.8" y="112" systemLanguage="sr">феб</text>
+   <text x="1583.8" y="112" systemLanguage="sv">feb</text>
+   <text x="1583.8" y="172" systemLanguage="ta">பெப்ரவரி</text>
+   <text x="1583.8" y="112" systemLanguage="th">กุมภ</text>
+   <text x="1583.8" y="112" systemLanguage="tr">Şub</text>
+   <text x="1583.8" y="112" systemLanguage="uk">Лют</text>
+   <text x="1583.8" y="112" systemLanguage="uz">Fev</text>
+   <text x="1583.8" y="112" systemLanguage="vi">2</text>
+   <text x="1583.8" y="112" systemLanguage="zh">2月</text>
+   <text x="1583.8" y="112">Feb</text>
+  </switch>
+  <switch>
+   <text x="1701.1" y="112" systemLanguage="ar">مارس</text>
+   <text x="1701.1" y="112" systemLanguage="az">Mar</text>
+   <text x="1701.1" y="112" systemLanguage="be">Сак</text>
+   <text x="1701.1" y="112" systemLanguage="bg">Мар</text>
+   <text x="1701.1" y="112" systemLanguage="ca">març</text>
+   <text x="1701.1" y="112" systemLanguage="cs">bře</text>
+   <text x="1701.1" y="112" systemLanguage="cy">Maw</text>
+   <text x="1701.1" y="112" systemLanguage="da">mar</text>
+   <text x="1701.1" y="112" systemLanguage="de">Mrz</text>
+   <text x="1701.1" y="112" systemLanguage="el">Μαρ</text>
+   <text x="1701.1" y="112" systemLanguage="es">mar</text>
+   <text x="1701.1" y="112" systemLanguage="eo">Mar</text>
+   <text x="1701.1" y="112" systemLanguage="et">Mär</text>
+   <text x="1701.1" y="112" systemLanguage="eu">mar.</text>
+   <text x="1701.1" y="112" systemLanguage="fa">مارس</text>
+   <text x="1701.1" y="112" systemLanguage="fi">Maal</text>
+   <text x="1701.1" y="112" systemLanguage="fr">mars</text>
+   <text x="1701.1" y="112" systemLanguage="gl">mar</text>
+   <text x="1701.1" y="112" systemLanguage="he">מרץ</text>
+   <text x="1701.1" y="112" systemLanguage="hi">मार्च</text>
+   <text x="1701.1" y="112" systemLanguage="hr">ožu</text>
+   <text x="1701.1" y="112" systemLanguage="hu">márc.</text>
+   <text x="1701.1" y="112" systemLanguage="id">Mar</text>
+   <text x="1701.1" y="112" systemLanguage="it">mar</text>
+   <text x="1701.1" y="112" systemLanguage="ja">3月</text>
+   <text x="1701.1" y="112" systemLanguage="ko">3월</text>
+   <text x="1701.1" y="112" systemLanguage="la">Mar</text>
+   <text x="1701.1" y="112" systemLanguage="lv">Mar</text>
+   <text x="1701.1" y="112" systemLanguage="ms">Mac</text>
+   <text x="1701.1" y="112" systemLanguage="nl">mrt</text>
+   <text x="1701.1" y="112" systemLanguage="no">mar</text>
+   <text x="1701.1" y="112" systemLanguage="pl">mar</text>
+   <text x="1701.1" y="112" systemLanguage="pt">mar</text>
+   <text x="1701.1" y="112" systemLanguage="ro">mar.</text>
+   <text x="1701.1" y="112" systemLanguage="ru">мар</text>
+   <text x="1701.1" y="112" systemLanguage="sco">Mair</text>
+   <text x="1701.1" y="112" systemLanguage="sk">III</text>
+   <text x="1701.1" y="112" systemLanguage="sl">mar.</text>
+   <text x="1701.1" y="112" systemLanguage="sr">мар</text>
+   <text x="1701.1" y="112" systemLanguage="sv">mar</text>
+   <text x="1701.1" y="112" systemLanguage="ta">மார்ச்</text>
+   <text x="1701.1" y="112" systemLanguage="th">มีนา</text>
+   <text x="1701.1" y="112" systemLanguage="tr">Mar</text>
+   <text x="1701.1" y="112" systemLanguage="uk">Бер</text>
+   <text x="1701.1" y="112" systemLanguage="uz">Mar</text>
+   <text x="1701.1" y="112" systemLanguage="vi">3</text>
+   <text x="1701.1" y="112" systemLanguage="zh">3月</text>
+   <text x="1701.1" y="112">Mar</text>
+  </switch>
+  <switch>
+   <text x="1818.4" y="172" systemLanguage="ar">أبريل</text>
+   <text x="1818.4" y="112" systemLanguage="az">Apr</text>
+   <text x="1818.4" y="112" systemLanguage="be">Кра</text>
+   <text x="1818.4" y="112" systemLanguage="bg">Апр</text>
+   <text x="1818.4" y="112" systemLanguage="ca">abr</text>
+   <text x="1818.4" y="112" systemLanguage="cs">dub</text>
+   <text x="1818.4" y="112" systemLanguage="cy">Ebr</text>
+   <text x="1818.4" y="112" systemLanguage="da">apr</text>
+   <text x="1818.4" y="112" systemLanguage="de">Apr</text>
+   <text x="1818.4" y="112" systemLanguage="el">Απρ</text>
+   <text x="1818.4" y="112" systemLanguage="eo">Apr</text>
+   <text x="1818.4" y="112" systemLanguage="es">abr</text>
+   <text x="1818.4" y="112" systemLanguage="et">Apr</text>
+   <text x="1818.4" y="112" systemLanguage="eu">api.</text>
+   <text x="1818.4" y="172" systemLanguage="fa">آوریل</text>
+   <text x="1818.4" y="112" systemLanguage="fi">Huht</text>
+   <text x="1818.4" y="112" systemLanguage="fr">avr.</text>
+   <text x="1818.4" y="112" systemLanguage="gl">abr</text>
+   <text x="1818.4" y="172" systemLanguage="he">אפריל</text>
+   <text x="1818.4" y="172" systemLanguage="hi">अप्रैल</text>
+   <text x="1818.4" y="112" systemLanguage="hr">tra</text>
+   <text x="1818.4" y="112" systemLanguage="hu">ápr.</text>
+   <text x="1818.4" y="112" systemLanguage="id">Apr</text>
+   <text x="1818.4" y="112" systemLanguage="it">apr</text>
+   <text x="1818.4" y="112" systemLanguage="ja">4月</text>
+   <text x="1818.4" y="112" systemLanguage="ko">4월</text>
+   <text x="1818.4" y="112" systemLanguage="la">Apr</text>
+   <text x="1818.4" y="112" systemLanguage="lv">Apr</text>
+   <text x="1818.4" y="112" systemLanguage="ms">Apr</text>
+   <text x="1818.4" y="112" systemLanguage="nl">apr</text>
+   <text x="1818.4" y="112" systemLanguage="no">apr</text>
+   <text x="1818.4" y="112" systemLanguage="pl">kwi</text>
+   <text x="1818.4" y="112" systemLanguage="pt">abr</text>
+   <text x="1818.4" y="112" systemLanguage="ro">apr.</text>
+   <text x="1818.4" y="112" systemLanguage="ru">апр</text>
+   <text x="1818.4" y="112" systemLanguage="sco">Apr</text>
+   <text x="1818.4" y="112" systemLanguage="sk">IV</text>
+   <text x="1818.4" y="112" systemLanguage="sl">apr.</text>
+   <text x="1818.4" y="112" systemLanguage="sr">апр</text>
+   <text x="1818.4" y="112" systemLanguage="sv">apr</text>
+   <text x="1818.4" y="172" systemLanguage="ta">ஏப்ரல்</text>
+   <text x="1818.4" y="112" systemLanguage="th">เมษ</text>
+   <text x="1818.4" y="112" systemLanguage="tr">Nis</text>
+   <text x="1818.4" y="112" systemLanguage="uk">Кві</text>
+   <text x="1818.4" y="112" systemLanguage="uz">Apr</text>
+   <text x="1818.4" y="112" systemLanguage="vi">4</text>
+   <text x="1818.4" y="112" systemLanguage="zh">4月</text>
+   <text x="1818.4" y="112">Apr</text>
+  </switch>
+  <switch>
+   <text x="1935.7" y="112" systemLanguage="ar">ماي</text>
+   <text x="1935.7" y="112" systemLanguage="az">May</text>
+   <text x="1935.7" y="112" systemLanguage="be">Май</text>
+   <text x="1935.7" y="112" systemLanguage="bg">Май</text>
+   <text x="1935.7" y="112" systemLanguage="ca">maig</text>
+   <text x="1935.7" y="112" systemLanguage="cs">kvě</text>
+   <text x="1935.7" y="112" systemLanguage="cy">Mai</text>
+   <text x="1935.7" y="112" systemLanguage="da">maj</text>
+   <text x="1935.7" y="112" systemLanguage="de">Mai</text>
+   <text x="1935.7" y="112" systemLanguage="el">Μαϊ</text>
+   <text x="1935.7" y="112" systemLanguage="eo">Maj</text>
+   <text x="1935.7" y="112" systemLanguage="es">may</text>
+   <text x="1935.7" y="112" systemLanguage="et">Mai</text>
+   <text x="1935.7" y="112" systemLanguage="eu">mai.</text>
+   <text x="1935.7" y="112" systemLanguage="fa">مه</text>
+   <text x="1935.7" y="112" systemLanguage="fi">Touk</text>
+   <text x="1935.7" y="112" systemLanguage="fr">mai</text>
+   <text x="1935.7" y="112" systemLanguage="gl">maio</text>
+   <text x="1935.7" y="112" systemLanguage="he">מאי</text>
+   <text x="1935.7" y="112" systemLanguage="hi">मई</text>
+   <text x="1935.7" y="112" systemLanguage="hr">svi</text>
+   <text x="1935.7" y="112" systemLanguage="hu">máj.</text>
+   <text x="1935.7" y="112" systemLanguage="id">Mei</text>
+   <text x="1935.7" y="112" systemLanguage="it">mag</text>
+   <text x="1935.7" y="112" systemLanguage="ja">5月</text>
+   <text x="1935.7" y="112" systemLanguage="ko">5월</text>
+   <text x="1935.7" y="112" systemLanguage="la">Mai</text>
+   <text x="1935.7" y="112" systemLanguage="lv">Mai</text>
+   <text x="1935.7" y="112" systemLanguage="ms">Mei</text>
+   <text x="1935.7" y="112" systemLanguage="nl">mei</text>
+   <text x="1935.7" y="112" systemLanguage="no">mai</text>
+   <text x="1935.7" y="112" systemLanguage="pl">maj</text>
+   <text x="1935.7" y="112" systemLanguage="pt">mai</text>
+   <text x="1935.7" y="112" systemLanguage="ro">mai.</text>
+   <text x="1935.7" y="112" systemLanguage="ru">май</text>
+   <text x="1935.7" y="112" systemLanguage="sco">Mey</text>
+   <text x="1935.7" y="112" systemLanguage="sk">V</text>
+   <text x="1935.7" y="112" systemLanguage="sl">maj.</text>
+   <text x="1935.7" y="112" systemLanguage="sv">мај</text>
+   <text x="1935.7" y="112" systemLanguage="ta">மே</text>
+   <text x="1935.7" y="112" systemLanguage="th">พฤษ</text>
+   <text x="1935.7" y="112" systemLanguage="tr">May</text>
+   <text x="1935.7" y="112" systemLanguage="uk">Тра</text>
+   <text x="1935.7" y="112" systemLanguage="pt">Mai</text>
+   <text x="1935.7" y="112" systemLanguage="uz">May</text>
+   <text x="1935.7" y="112" systemLanguage="vi">5</text>
+   <text x="1935.7" y="112" systemLanguage="zh">5月</text>
+   <text x="1935.7" y="112">May</text>
+  </switch>
+  <switch>
+   <text x="2053" y="172" systemLanguage="ar">يونيو</text>
+   <text x="2053" y="112" systemLanguage="az">İyun</text>
+   <text x="2053" y="112" systemLanguage="be">Чэр</text>
+   <text x="2053" y="112" systemLanguage="bg">Юни</text>
+   <text x="2053" y="112" systemLanguage="ca">juny</text>
+   <text x="2053" y="112" systemLanguage="cs">čer</text>
+   <text x="2053" y="112" systemLanguage="cy">Meh</text>
+   <text x="2053" y="112" systemLanguage="da">jun</text>
+   <text x="2053" y="112" systemLanguage="de">Jun</text>
+   <text x="2053" y="112" systemLanguage="el">Ιουν</text>
+   <text x="2053" y="112" systemLanguage="eo">Jun</text>
+   <text x="2053" y="112" systemLanguage="es">jun</text>
+   <text x="2053" y="112" systemLanguage="et">Jun</text>
+   <text x="2053" y="112" systemLanguage="eu">eka.</text>
+   <text x="2053" y="172" systemLanguage="fa">ژوئن</text>
+   <text x="2053" y="112" systemLanguage="fi">Kes</text>
+   <text x="2053" y="112" systemLanguage="fr">juin</text>
+   <text x="2053" y="112" systemLanguage="gl">xuñ</text>
+   <text x="2053" y="172" systemLanguage="he">יוני</text>
+   <text x="2053" y="172" systemLanguage="hi">जून</text>
+   <text x="2053" y="112" systemLanguage="hr">lip</text>
+   <text x="2053" y="112" systemLanguage="hu">jún.</text>
+   <text x="2053" y="112" systemLanguage="id">Jun</text>
+   <text x="2053" y="112" systemLanguage="it">giu</text>
+   <text x="2053" y="112" systemLanguage="ja">6月</text>
+   <text x="2053" y="112" systemLanguage="ko">6월</text>
+   <text x="2053" y="112" systemLanguage="la">Iun</text>
+   <text x="2053" y="112" systemLanguage="lv">Jūn</text>
+   <text x="2053" y="112" systemLanguage="ms">Jun</text>
+   <text x="2053" y="112" systemLanguage="nl">jun</text>
+   <text x="2053" y="112" systemLanguage="no">jun</text>
+   <text x="2053" y="112" systemLanguage="pl">cze</text>
+   <text x="2053" y="112" systemLanguage="pt">jun</text>
+   <text x="2053" y="112" systemLanguage="ro">iun.</text>
+   <text x="2053" y="112" systemLanguage="ru">июн</text>
+   <text x="2053" y="112" systemLanguage="sco">Juin</text>
+   <text x="2053" y="112" systemLanguage="sk">VI</text>
+   <text x="2053" y="112" systemLanguage="sl">jun.</text>
+   <text x="2053" y="112" systemLanguage="sr">јун</text>
+   <text x="2053" y="112" systemLanguage="sv">jun</text>
+   <text x="2053" y="172" systemLanguage="ta">சூன்</text>
+   <text x="2053" y="112" systemLanguage="th">มิถุน</text>
+   <text x="2053" y="112" systemLanguage="tr">Haz</text>
+   <text x="2053" y="112" systemLanguage="uk">Чер</text>
+   <text x="2053" y="112" systemLanguage="uz">Iyun</text>
+   <text x="2053" y="112" systemLanguage="vi">6</text>
+   <text x="2053" y="112" systemLanguage="zh">6月</text>
+   <text x="2053" y="112">Jun</text>
+  </switch>
+ </g>
+ <g font-size="70.08" stroke-width="10">
+  <g text-anchor="middle">
+   <switch>
+    <text x="703.7" y="277" systemLanguage="ar">2014</text>
+    <text x="703.7" y="277" systemLanguage="fa">۲۰۱۴</text>
+    <text x="703.7" y="217" systemLanguage="ja">2014年</text>
+    <text x="703.7" y="277" systemLanguage="he">2014</text>
+    <text x="703.7" y="277" systemLanguage="hi">२०१४</text>
+    <text x="703.7" y="217" systemLanguage="ko">2014년</text>
+    <text x="703.7" y="277" systemLanguage="ta">2014</text>
+    <text x="703.7" y="217" systemLanguage="th">2557</text>
+    <text x="703.7" y="217" systemLanguage="zh">2014年</text>
+    <text x="703.7" y="217">2014</text>
+   </switch>
+   <switch>
+    <text x="1759.7" y="277" systemLanguage="ar">2015</text>
+    <text x="1759.7" y="277" systemLanguage="fa">۲۰۱۵</text>
+    <text x="1759.7" y="217" systemLanguage="ja">2015年</text>
+    <text x="1759.7" y="277" systemLanguage="he">2015</text>
+    <text x="1759.7" y="277" systemLanguage="hi">२०१५</text>
+    <text x="1759.7" y="217" systemLanguage="ko">2015년</text>
+    <text x="1759.7" y="277" systemLanguage="ta">2015</text>
+    <text x="1759.7" y="217" systemLanguage="th">2558</text>
+    <text x="1759.7" y="217" systemLanguage="zh">2015年</text>
+    <text x="1759.7" y="217">2015</text>
+   </switch>
+  </g>
+  <g text-anchor="end">
+   <text x="-63" y="32">0</text>
+   <text x="-63" y="-168">200</text>
+   <text x="-63" y="-368">400</text>
+   <text x="-63" y="-568">600</text>
+   <text x="-63" y="-768">800</text>
+   <text x="-63" y="-968">1000</text>
+  </g>
+  <switch text-anchor="middle">
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="ar">حالات جديدة في أسبوعا</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="az">Həftə başına yeni işlər</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="be">Новых выпадкаў у тыдзень</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="bg">Нови случая на седмица</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="ca">Nous casos per Setmana</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="cs">Nových případů za týden</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="cy">Achosion newydd bob wythnos</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="da">Nye tilfælde om ugen</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="de">Neuerkrankungen pro Woche</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="el">Νέες υποθέσεις ανά εβδομάδα</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="eo">Novaj kazoj por semajno</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="es">Nuevos Casos por Semana</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="et">New kasti nädalas</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="eu">Cases New Aste Bakoitzeko</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="fa">موارد جدید در هر هفته</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="fi">Uudet asiat per viikko</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="fr">Nouveaux cas par semaine</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="gl">Novos casos por semana</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="he">מקרים חדשים בשבוע</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="hi">सप्ताह प्रति नए मामले</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="hr">Novi slučajevi tjedno</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="hu">New esetek hetente</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="id">Kasus baru per minggu</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="it">Nuovi casi per settimana</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="ja">週の新しいケース</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="ko">주당 새로운 케이스</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="la">Week per New Cases</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="lv">Jauni gadījumi nedēļā</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="ms">Kes baru setiap minggu</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="nl">Nieuwe gevallen per week</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="no">Nye tilfeller per uke</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="pl">Nowych przypadków na tydzień</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="pt">Novos casos por semana</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="ro">Noi cazuri pe săptămână</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="ru">Новых случаев в неделю</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="sk">Nových prípadov za týždeň</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="sl">Novih primerov na teden</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="sr">Нове случајева недељно</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="sv">Nya fall per vecka</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="ta">வாரத்திற்கு புதிய வழக்குகள்</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="th">คดีใหม่ต่อสัปดาห์</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="tr">Haftalık Yeni Kılıfları</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="uk">Нових випадків на тиждень</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="vi">Các trường hợp mới mỗi tuần</text>
+   <text transform="rotate(-90)" x="518" y="-240" systemLanguage="zh">每週新病例</text>
+   <text transform="rotate(-90)" x="518" y="-240">New Cases per Week</text>
+  </switch>
+ </g>
+ <switch font-size="60.8">
+  <text x="253" y="-991.1" systemLanguage="ar">مجموع</text>
+  <text x="253" y="-991.1" systemLanguage="az">Ümumi</text>
+  <text x="253" y="-991.1" systemLanguage="be">Агульны</text>
+  <text x="253" y="-991.1" systemLanguage="bg">Общо</text>
+  <text x="253" y="-991.1" systemLanguage="ca">Total</text>
+  <text x="253" y="-991.1" systemLanguage="cs">Celkem</text>
+  <text x="253" y="-991.1" systemLanguage="cy">Cyfanswm</text>
+  <text x="253" y="-991.1" systemLanguage="da">Total</text>
+  <text x="253" y="-991.1" systemLanguage="de">Gesamt</text>
+  <text x="253" y="-991.1" systemLanguage="el">Σύνολο</text>
+  <text x="253" y="-991.1" systemLanguage="eo">Tuta</text>
+  <text x="253" y="-991.1" systemLanguage="es">Total</text>
+  <text x="253" y="-991.1" systemLanguage="et">Kogusumma</text>
+  <text x="253" y="-991.1" systemLanguage="eu">Guztira</text>
+  <text x="253" y="-991.1" systemLanguage="fa">کل</text>
+  <text x="253" y="-991.1" systemLanguage="fi">Koko</text>
+  <text x="253" y="-991.1" systemLanguage="fr">Total</text>
+  <text x="253" y="-991.1" systemLanguage="gl">Total</text>
+  <text x="253" y="-991.1" systemLanguage="he">סה"כ</text>
+  <text x="253" y="-991.1" systemLanguage="hi">टोटल</text>
+  <text x="253" y="-991.1" systemLanguage="hr">Ukupno</text>
+  <text x="253" y="-991.1" systemLanguage="hu">Teljes</text>
+  <text x="253" y="-991.1" systemLanguage="id">Total</text>
+  <text x="253" y="-991.1" systemLanguage="it">Totale</text>
+  <text x="253" y="-991.1" systemLanguage="ja">合計</text>
+  <text x="253" y="-991.1" systemLanguage="ko">합계</text>
+  <text x="253" y="-991.1" systemLanguage="la">Numerus</text>
+  <text x="253" y="-991.1" systemLanguage="lv">Kopsumma</text>
+  <text x="253" y="-991.1" systemLanguage="ms">Jumlah</text>
+  <text x="253" y="-991.1" systemLanguage="nl">Totaal</text>
+  <text x="253" y="-991.1" systemLanguage="no">Total</text>
+  <text x="253" y="-991.1" systemLanguage="pl">Całkowity</text>
+  <text x="253" y="-991.1" systemLanguage="pt">Total</text>
+  <text x="253" y="-991.1" systemLanguage="ro">Total</text>
+  <text x="253" y="-991.1" systemLanguage="ru">Общий</text>
+  <text x="253" y="-991.1" systemLanguage="sco">Total</text>
+  <text x="253" y="-991.1" systemLanguage="sk">Celkom</text>
+  <text x="253" y="-991.1" systemLanguage="sl">Skupaj</text>
+  <text x="253" y="-991.1" systemLanguage="sr">Укупан</text>
+  <text x="253" y="-991.1" systemLanguage="sv">Totalt</text>
+  <text x="253" y="-991.1" font-size="40" systemLanguage="ta">மொத்த</text>
+  <text x="253" y="-991.1" systemLanguage="th">ทั้งหมด</text>
+  <text x="253" y="-991.1" systemLanguage="tr">Toplam</text>
+  <text x="253" y="-991.1" systemLanguage="uk">Загальний</text>
+  <text x="253" y="-991.1" systemLanguage="uz">Total</text>
+  <text x="253" y="-991.1" systemLanguage="vi">Toàn thể</text>
+  <text x="253" y="-991.1" systemLanguage="zh">總</text>
+  <text x="253" y="-991.1">Total</text>
+ </switch>
+ <switch font-size="60.8">
+  <text x="253" y="-924.2" systemLanguage="ar">غينيا</text>
+  <text x="253" y="-924.2" systemLanguage="az">Qvineya</text>
+  <text x="253" y="-924.2" systemLanguage="be">Гвінея</text>
+  <text x="253" y="-924.2" systemLanguage="bg">Гвинея</text>
+  <text x="253" y="-924.2" systemLanguage="ca">Guinea</text>
+  <text x="253" y="-924.2" systemLanguage="cs">Guinea</text>
+  <text x="253" y="-924.2" systemLanguage="cy">Gini</text>
+  <text x="253" y="-924.2" systemLanguage="da">Guinea</text>
+  <text x="253" y="-924.2" systemLanguage="de">Guinea</text>
+  <text x="253" y="-924.2" systemLanguage="el">Γουινέα</text>
+  <text x="253" y="-924.2" systemLanguage="eo">Gvineo</text>
+  <text x="253" y="-924.2" systemLanguage="es">Guinea</text>
+  <text x="253" y="-924.2" systemLanguage="et">Guinea</text>
+  <text x="253" y="-924.2" systemLanguage="eu">Ginea</text>
+  <text x="253" y="-924.2" systemLanguage="fa">گینه</text>
+  <text x="253" y="-924.2" systemLanguage="fi">Guinea</text>
+  <text x="253" y="-924.2" systemLanguage="fr">Guinée</text>
+  <text x="253" y="-924.2" systemLanguage="gl">Guinea</text>
+  <text x="253" y="-924.2" systemLanguage="he">גינאה</text>
+  <text x="253" y="-924.2" systemLanguage="hi">गिनी</text>
+  <text x="253" y="-924.2" systemLanguage="hr">Gvineja</text>
+  <text x="253" y="-924.2" systemLanguage="hu">Guinea</text>
+  <text x="253" y="-924.2" systemLanguage="id">Guinea</text>
+  <text x="253" y="-924.2" systemLanguage="it">Guinea</text>
+  <text x="253" y="-924.2" systemLanguage="ja">ギニア</text>
+  <text x="253" y="-924.2" systemLanguage="ko">기니</text>
+  <text x="253" y="-924.2" systemLanguage="la">Guinea</text>
+  <text x="253" y="-924.2" systemLanguage="lv">Gvineja</text>
+  <text x="253" y="-924.2" systemLanguage="ms">Guinea</text>
+  <text x="253" y="-924.2" systemLanguage="nl">Guinee</text>
+  <text x="253" y="-924.2" systemLanguage="no">Guinea</text>
+  <text x="253" y="-924.2" systemLanguage="pl">Gwinea</text>
+  <text x="253" y="-924.2" systemLanguage="pt">Guiné</text>
+  <text x="253" y="-924.2" systemLanguage="ro">Guineea</text>
+  <text x="253" y="-924.2" systemLanguage="ru">Гвинея</text>
+  <text x="253" y="-924.2" systemLanguage="sco">Guinea</text>
+  <text x="253" y="-924.2" systemLanguage="sk">Guinea</text>
+  <text x="253" y="-924.2" systemLanguage="sl">Guinea</text>
+  <text x="253" y="-924.2" systemLanguage="sr">Гвинеја</text>
+  <text x="253" y="-924.2" systemLanguage="sv">Guinea</text>
+  <text x="253" y="-924.2" font-size="40" systemLanguage="ta">கினி</text>
+  <text x="253" y="-924.2" systemLanguage="th">ประเทศกินี</text>
+  <text x="253" y="-924.2" systemLanguage="tr">Gine</text>
+  <text x="253" y="-924.2" systemLanguage="uk">Гвінея</text>
+  <text x="253" y="-924.2" systemLanguage="uz">Gvineya</text>
+  <text x="253" y="-924.2" systemLanguage="vi">Guinée</text>
+  <text x="253" y="-924.2" systemLanguage="zh">几内亚</text>
+  <text x="253" y="-924.2">Guinea</text>
+ </switch>
+ <switch font-size="60.8">
+  <text x="253" y="-857.4" systemLanguage="ar">ليبيريا</text>
+  <text x="253" y="-857.4" systemLanguage="az">Liberiya</text>
+  <text x="253" y="-857.4" systemLanguage="be">Ліберыя</text>
+  <text x="253" y="-857.4" systemLanguage="bg">Либерия</text>
+  <text x="253" y="-857.4" systemLanguage="ca">Libèria</text>
+  <text x="253" y="-857.4" systemLanguage="cs">Libérie</text>
+  <text x="253" y="-857.4" systemLanguage="cy">Liberia</text>
+  <text x="253" y="-857.4" systemLanguage="da">Liberia</text>
+  <text x="253" y="-857.4" systemLanguage="de">Liberia</text>
+  <text x="253" y="-857.4" systemLanguage="el">Λιβερία</text>
+  <text x="253" y="-857.4" systemLanguage="eo">Liberio</text>
+  <text x="253" y="-857.4" systemLanguage="es">Liberia</text>
+  <text x="253" y="-857.4" systemLanguage="et">Libeeria</text>
+  <text x="253" y="-857.4" systemLanguage="eu">Liberia</text>
+  <text x="253" y="-857.4" systemLanguage="fa">لیبریا</text>
+  <text x="253" y="-857.4" systemLanguage="fi">Liberia</text>
+  <text x="253" y="-857.4" systemLanguage="fr">Liberia</text>
+  <text x="253" y="-857.4" systemLanguage="gl">Liberia</text>
+  <text x="253" y="-857.4" systemLanguage="he">ליבריה</text>
+  <text x="253" y="-857.4" systemLanguage="hi">लाइबेरिया</text>
+  <text x="253" y="-857.4" systemLanguage="hr">Liberija</text>
+  <text x="253" y="-857.4" systemLanguage="hu">Libéria</text>
+  <text x="253" y="-857.4" systemLanguage="id">Liberia</text>
+  <text x="253" y="-857.4" systemLanguage="it">Liberia</text>
+  <text x="253" y="-857.4" systemLanguage="ja">リベリア</text>
+  <text x="253" y="-857.4" systemLanguage="ko">라이베리아</text>
+  <text x="253" y="-857.4" systemLanguage="la">Liberia</text>
+  <text x="253" y="-857.4" systemLanguage="lv">Libērija</text>
+  <text x="253" y="-857.4" systemLanguage="ms">Liberia</text>
+  <text x="253" y="-857.4" systemLanguage="nl">Liberia</text>
+  <text x="253" y="-857.4" systemLanguage="no">Liberia</text>
+  <text x="253" y="-857.4" systemLanguage="pl">Liberia</text>
+  <text x="253" y="-857.4" systemLanguage="pt">Libéria</text>
+  <text x="253" y="-857.4" systemLanguage="ro">Liberia</text>
+  <text x="253" y="-857.4" systemLanguage="ru">Либерия</text>
+  <text x="253" y="-857.4" systemLanguage="sco">Liberie</text>
+  <text x="253" y="-857.4" systemLanguage="sk">Libéria</text>
+  <text x="253" y="-857.4" systemLanguage="sl">Liberia</text>
+  <text x="253" y="-857.4" systemLanguage="sr">Либерија</text>
+  <text x="253" y="-857.4" systemLanguage="sv">Liberia</text>
+  <text x="253" y="-857.4" font-size="40" systemLanguage="ta">லைபீரியா</text>
+  <text x="253" y="-857.4" systemLanguage="th">ประเทศไลบีเรีย</text>
+  <text x="253" y="-857.4" systemLanguage="tr">Liberya</text>
+  <text x="253" y="-857.4" systemLanguage="uk">Ліберія</text>
+  <text x="253" y="-857.4" systemLanguage="uz">Liberiya</text>
+  <text x="253" y="-857.4" systemLanguage="vi">Liberia</text>
+  <text x="253" y="-857.4" systemLanguage="zh">利比里亚</text>
+  <text x="253" y="-857.4">Liberia</text>
+ </switch>
+ <switch font-size="60.8">
+  <text x="253" y="-790.5" systemLanguage="ar">سيراليون</text>
+  <text x="253" y="-790.5" systemLanguage="az">Syerra-Leone</text>
+  <text x="253" y="-790.5" systemLanguage="be">Сьера-Леонэ</text>
+  <text x="253" y="-790.5" systemLanguage="bg">Сиера Леоне</text>
+  <text x="253" y="-790.5" systemLanguage="ca">Sierra Leone</text>
+  <text x="253" y="-790.5" systemLanguage="cs">Sierra Leone</text>
+  <text x="253" y="-790.5" systemLanguage="cy">Sierra Leone</text>
+  <text x="253" y="-790.5" systemLanguage="da">Sierra Leone</text>
+  <text x="253" y="-790.5" systemLanguage="de">Sierra Leone</text>
+  <text x="253" y="-790.5" systemLanguage="el">Σιέρα Λεόνε</text>
+  <text x="253" y="-790.5" systemLanguage="eo">Siera-Leono</text>
+  <text x="253" y="-790.5" systemLanguage="es">Sierra Leona</text>
+  <text x="253" y="-790.5" systemLanguage="et">Sierra Leone</text>
+  <text x="253" y="-790.5" systemLanguage="eu">Sierra Leona</text>
+  <text x="253" y="-790.5" systemLanguage="fa">سیرالئون</text>
+  <text x="253" y="-790.5" systemLanguage="fi">Sierra Leone</text>
+  <text x="253" y="-790.5" systemLanguage="fr">Sierra Leone</text>
+  <text x="253" y="-790.5" systemLanguage="gl">Serra Leoa</text>
+  <text x="253" y="-790.5" systemLanguage="he">סיירה לאון</text>
+  <text x="253" y="-790.5" systemLanguage="hi">सिएरा लियोन</text>
+  <text x="253" y="-790.5" systemLanguage="hr">Sijera Leone</text>
+  <text x="253" y="-790.5" systemLanguage="hu">Sierra Leone</text>
+  <text x="253" y="-790.5" systemLanguage="id">Sierra Leone</text>
+  <text x="253" y="-790.5" systemLanguage="it">Sierra Leone</text>
+  <text x="253" y="-790.5" systemLanguage="ja">シエラレオネ</text>
+  <text x="253" y="-790.5" systemLanguage="ko">시에라리온</text>
+  <text x="253" y="-790.5" systemLanguage="la">Mons Leoninus</text>
+  <text x="253" y="-790.5" systemLanguage="lv">Sjerraleone</text>
+  <text x="253" y="-790.5" systemLanguage="ms">Sierra Leone</text>
+  <text x="253" y="-790.5" systemLanguage="nl">Sierra Leone</text>
+  <text x="253" y="-790.5" systemLanguage="no">Sierra Leone</text>
+  <text x="253" y="-790.5" systemLanguage="pl">Sierra Leone</text>
+  <text x="253" y="-790.5" systemLanguage="pt">Serra Leoa</text>
+  <text x="253" y="-790.5" systemLanguage="ro">Sierra Leone</text>
+  <text x="253" y="-790.5" systemLanguage="ru">Сьерра-Леоне</text>
+  <text x="253" y="-790.5" systemLanguage="sco">Sierra Leone</text>
+  <text x="253" y="-790.5" systemLanguage="sk">Sierra Leone</text>
+  <text x="253" y="-790.5" systemLanguage="sl">Sierra Leone</text>
+  <text x="253" y="-790.5" systemLanguage="sr">Сијера Леоне</text>
+  <text x="253" y="-790.5" systemLanguage="sv">Sierra Leone</text>
+  <text x="253" y="-790.5" font-size="40" stroke-width="10" systemLanguage="ta">சியேரா லியோனி</text>
+  <text x="253" y="-790.5" systemLanguage="th">ประเทศเซียร์ราลีโอน</text>
+  <text x="253" y="-790.5" systemLanguage="tr">Sierra Leone</text>
+  <text x="253" y="-790.5" systemLanguage="uk">Сьєрра-Леоне</text>
+  <text x="253" y="-790.5" systemLanguage="uz">Siyerra Leone</text>
+  <text x="253" y="-790.5" systemLanguage="vi">Sierra Leone</text>
+  <text x="253" y="-790.5" systemLanguage="zh">塞拉利昂</text>
+  <text x="253" y="-790.5">Sierra Leone</text>
+ </switch>
+ <switch font-size="103.2" text-anchor="middle">
+  <text x="1056" y="-1177" systemLanguage="ar">وباء إيبولا في غرب أفريقيا 2014</text>
+  <text x="1056" y="-1177" systemLanguage="az">Ebola virusunun yayılması (2014)</text>
+  <text x="1056" y="-1177" systemLanguage="be">Эбола ў Заходняй Афрыцы</text>
+  <text x="1056" y="-1177" systemLanguage="bg">Епидемия от Ебола в Западна Африка</text>
+  <text x="1056" y="-1177" systemLanguage="ca">Brot d'Ebola a l'Àfrica de l'oest de 2014</text>
+  <text x="1056" y="-1177" systemLanguage="cs">Epidemie eboly v západní Africe</text>
+  <text x="1056" y="-1177" systemLanguage="cy">Epidemig Ebola Gorllewin Affrica, 2014</text>
+  <text x="1056" y="-1177" systemLanguage="da">Ebola-udbruddet i Vestafrika 2014</text>
+  <text x="1056" y="-1177" systemLanguage="de">Ebolafieber-Epidemie 2014</text>
+  <text x="1056" y="-1177" systemLanguage="el">Έξαρση του ιού Έμπολα 2014</text>
+  <text x="1056" y="-1177" systemLanguage="eo">Ebola epidemio en Okcidenta Afriko</text>
+  <text x="1056" y="-1177" systemLanguage="es">Epidemia de ébola de 2014</text>
+  <text x="1056" y="-1177" systemLanguage="et">2014. aasta Ebola viirushaiguse epideemia</text>
+  <text x="1056" y="-1177" systemLanguage="eu">Afrika mendebaleko ebola agerraldia</text>
+  <text x="1056" y="-1177" systemLanguage="fa">همه‌گیری ابولا در غرب آفریقا در ۲۰۱۴</text>
+  <text x="1056" y="-1177" systemLanguage="fi">Länsi-Afrikan ebolaepidemia 2014</text>
+  <text x="1056" y="-1177" systemLanguage="fr">Ebola en Afrique de l'Ouest en 2014</text>
+  <text x="1056" y="-1177" systemLanguage="gl">Brote de Ébola en África Occidental</text>
+  <text x="1056" y="-1177" systemLanguage="he">‎(התפרצות האבולה במערב אפריקה (2014</text>
+  <text x="1056" y="-1177" systemLanguage="hi">२०१४ इबोला वायरस रोग के प्रकोप</text>
+  <text x="1056" y="-1177" systemLanguage="hr">Epidemija ebole u Zapadnoj Africi 2014.</text>
+  <text x="1056" y="-1177" systemLanguage="hu">2014-es nyugat-afrikai Eb</text>
+  <text x="1056" y="-1177" systemLanguage="id">Wabah Ebola Afrika Barat 2014</text>
+  <text x="1056" y="-1177" systemLanguage="it">Ebola in Africa Occidentale del 2014</text>
+  <text x="1056" y="-1177" systemLanguage="ja">2014年の西アフリカエボラ出血熱流行</text>
+  <text x="1056" y="-1177" systemLanguage="ko">2014년 서아프리카 에볼라 유행</text>
+  <text x="1056" y="-1177" systemLanguage="la">Eruptio ebolae in Africa occidentali</text>
+  <text x="1056" y="-1177" systemLanguage="lv">Rietumāfrikas Ebolas uzliesmojums</text>
+  <text x="1056" y="-1177" systemLanguage="ms">Wabak Ebola Afrika Barat 2014</text>
+  <text x="1056" y="-1177" systemLanguage="nl">Ebola-uitbraak in West-Afrika in 2014</text>
+  <text x="1056" y="-1177" systemLanguage="no">Ebolautbruddet i Vestafrika 2014</text>
+  <text x="1056" y="-1177" systemLanguage="pl">Ebola w Afryce Zachodniej (2014)</text>
+  <text x="1056" y="-1177" systemLanguage="pt">Surto de ébola na África Ocidental</text>
+  <text x="1056" y="-1177" systemLanguage="ro">Epidemia de Ebola din Africa de Vest</text>
+  <text x="1056" y="-1177" systemLanguage="ru">Лихорадки Эбола в Западной Африке</text>
+  <text x="1056" y="-1177" systemLanguage="sco">2014 Wast Africae Ebola Virus Ootbreak</text>
+  <text x="1056" y="-1177" systemLanguage="sk">Epidémia eboly v západnej Afrike v roku</text>
+  <text x="1056" y="-1177" systemLanguage="sl">Zahodnoafriška epidemija ebole 2014</text>
+  <text x="1056" y="-1177" systemLanguage="sr">Епидемија еболе у Западној Африци 2014.</text>
+  <text x="1056" y="-1177" systemLanguage="sv">Ebolautbrottet i Västafrika 2014</text>
+  <text x="1056" y="-1177" systemLanguage="ta">மேற்கு ஆபிரிக்கா எபோலா திடீர்ப் பரவல்</text>
+  <text x="1056" y="-1177" systemLanguage="th">การระบาดของอีโบลาในแอฟริกาตะวันตก</text>
+  <text x="1056" y="-1177" systemLanguage="tr">2014 Batı Afrika Ebola salgını</text>
+  <text x="1006" y="-1177" systemLanguage="uk">Епідемія гарячки Ебола в Західній Африці</text>
+  <text x="1056" y="-1177" systemLanguage="uz">Gʻarbiy Afrikadagi Ebola Epidemiyasi</text>
+  <text x="1056" y="-1177" systemLanguage="vi">Dịch bệnh Ebola tại châu Phi năm 2014</text>
+  <text x="1056" y="-1177" systemLanguage="zh">2014年西非伊波拉病毒疫情</text>
+  <text x="1056" y="-1177">2014 West Africa Ebola Epidemic</text>
+ </switch>
+</svg>

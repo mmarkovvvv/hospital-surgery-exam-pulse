@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useState } from 'react'
 
 import LogoutButton from '@/components/LogoutButton'
+import Brand from '@/components/Brand'
 import {
   formatDefinitions,
   getSubjectPath,
@@ -40,10 +41,7 @@ export default function SubjectShell({ subject, activePath = '', viewerEmail, ch
             <span />
             <span />
           </button>
-          <Link className="brand" href="/" onClick={closeMenu}>
-            <span className="brand-mark">|||</span>
-            <span>Пульс</span>
-          </Link>
+          <Brand onClick={closeMenu} />
           <div className="breadcrumbs" aria-label="Хлебные крошки">
             <Link href="/">Предметы</Link>
             <span aria-hidden="true">/</span>

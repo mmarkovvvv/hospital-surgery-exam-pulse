@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 
+import Brand from '@/components/Brand'
+
 export default function LoginPage() {
   const router = useRouter()
   const [email, setEmail] = useState('')
@@ -25,7 +27,7 @@ export default function LoginPage() {
   return (
     <main className="auth-shell">
       <section className="auth-card">
-        <Link className="auth-brand" href="/">Пульс</Link>
+        <Brand />
         <p className="eyebrow">Личный кабинет</p>
         <h1>Войти</h1>
         <p className="auth-copy">Сохрани прогресс и продолжи подготовку с того места, где остановился.</p>

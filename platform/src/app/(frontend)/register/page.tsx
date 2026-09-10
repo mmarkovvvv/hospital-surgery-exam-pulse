@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import type { FormEvent } from 'react'
 
+import Brand from '@/components/Brand'
+
 export default function RegisterPage() {
   const router = useRouter()
   const [email, setEmail] = useState('')
@@ -27,7 +29,7 @@ export default function RegisterPage() {
   return (
     <main className="auth-shell">
       <section className="auth-card">
-        <Link className="auth-brand" href="/">Пульс</Link>
+        <Brand />
         <p className="eyebrow">Бесплатный доступ</p>
         <h1>Создать аккаунт</h1>
         <p className="auth-copy">Открой материалы для зарегистрированных пользователей и сохрани свой прогресс.</p>

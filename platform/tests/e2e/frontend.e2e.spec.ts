@@ -4,7 +4,7 @@ test.describe('Frontend access funnel', () => {
   test('guest sees public and locked catalog items', async ({ page }) => {
     await page.goto('http://localhost:3000')
 
-    await expect(page).toHaveTitle('Пульс — учебная платформа')
+    await expect(page).toHaveTitle('Beep Academy — учебная платформа')
     await expect(page.locator('h1')).toContainText('Готовься к экзамену')
     await expect(page.getByText('Открыто всем').first()).toBeVisible()
     await expect(page.getByText('После регистрации').first()).toBeVisible()
@@ -45,5 +45,35 @@ test.describe('Frontend access funnel', () => {
     await expect(page).toHaveURL('http://localhost:3000/')
     await expect(page.getByText('Зарегистрирован', { exact: true })).toBeVisible()
     await expect(page.getByText(/\d+ материалов доступно сейчас/)).toBeVisible()
+  })
+
+  test('registered learner can use interactive formats', async ({ page }) => {
+    const email = `interactive-${Date.now()}@example.com`
+    await page.goto('http://localhost:3000/register')
+    await page.getByLabel('Почта').fill(email)
+    await page.getByLabel('Пароль').fill('student-password-123')
+    await page.getByRole('button', { name: 'Создать аккаунт' }).click()
+    await expect(page).toHaveURL('http://localhost:3000/')
+
+    await page.goto('http://localhost:3000/subjects/hospital-surgery/cards')
+    await expect(page.getByRole('button', { name: 'Показать ответ' })).toBeVisible()
+    await page.getByRole('button', { name: 'Показать ответ' }).click()
+    await expect(page.getByText('Эталон', { exact: true })).toBeVisible()
+    await page.getByRole('button', { name: 'Знаю' }).click()
+
+    await page.goto('http://localhost:3000/subjects/hospital-surgery/test')
+    await expect(page.getByRole('button', { name: 'Проверить ответ' })).toBeVisible()
+    await page.locator('.interactive-option').first().click()
+    await page.getByRole('button', { name: 'Проверить ответ' }).click()
+    await expect(page.getByText(/Правильно|Неправильно/)).toBeVisible()
+
+    await page.goto('http://localhost:3000/subjects/hospital-surgery/clinical-cases')
+    await expect(page.getByRole('button', { name: 'Показать разбор' })).toBeVisible()
+    await page.getByRole('button', { name: 'Показать разбор' }).click()
+    await expect(page.getByText('Эталон разбора', { exact: true })).toBeVisible()
+
+    await page.goto('http://localhost:3000/subjects/hospital-surgery/image-cases')
+    await expect(page.locator('.interactive-image img').first()).toBeVisible()
+    await expect(page.getByRole('button', { name: 'Показать разбор' })).toBeVisible()
   })
 })
