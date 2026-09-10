@@ -4,9 +4,7 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import vm from 'node:vm'
 
-import { getPayload } from 'payload'
-
-import config from './payload.config'
+import type { BasePayload } from 'payload'
 
 type SourceRecord = Record<string, unknown>
 
@@ -145,10 +143,12 @@ async function readStaticSource(fileName: string): Promise<string> {
   }
 }
 
-async function main() {
+export async function importStaticContent(
+  payload: BasePayload,
+  visibility: ImportRecord['visibility'] = 'registered',
+) {
   const surgerySource = await readStaticSource('app.js')
   const ozzExpanded = await loadOzzExpanded(await readStaticSource('ozz-expanded.js'))
-  const visibility = (process.env.IMPORT_VISIBILITY || 'registered') as ImportRecord['visibility']
 
   if (!['public', 'registered', 'subscription'].includes(visibility)) {
     throw new Error('IMPORT_VISIBILITY must be public, registered, or subscription')
@@ -193,8 +193,6 @@ async function main() {
   }
 
   const records = [...surgery, ...ozz]
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
 
   for (const record of records) {
     const existing = await payload.find({
@@ -218,7 +216,19 @@ async function main() {
 
   console.log(`Imported ${records.length} learning items.`)
   console.log(`Surgery: ${surgery.length}; OZZ: ${ozz.length}; visibility: ${visibility}`)
-  process.exit(0)
 }
 
-await main()
+async function main() {
+  process.env.DISABLE_AUTO_IMPORT = 'true'
+  const { getPayload } = await import('payload')
+  const { default: config } = await import('./payload.config')
+  const payloadConfig = await config
+  const payload = await getPayload({ config: payloadConfig })
+  const visibility = (process.env.IMPORT_VISIBILITY || 'registered') as ImportRecord['visibility']
+
+  await importStaticContent(payload, visibility)
+}
+
+if (process.argv[1]?.includes('importStaticContent')) {
+  await main()
+}
