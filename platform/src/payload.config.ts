@@ -9,6 +9,7 @@ import sharp from 'sharp'
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
 import { LearningItems } from './collections/LearningItems'
+import { initialSchemaMigration } from './migrations/initialSchema'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -18,11 +19,13 @@ const database = databaseUrl.startsWith('postgres')
       pool: {
         connectionString: databaseUrl,
       },
+      prodMigrations: [initialSchemaMigration],
     })
   : sqliteAdapter({
       client: {
         url: databaseUrl,
       },
+      prodMigrations: [initialSchemaMigration],
     })
 
 export default buildConfig({
