@@ -21,6 +21,20 @@ test.describe('Frontend access funnel', () => {
     await expect(page.getByLabel('Почта')).toBeVisible()
   })
 
+  test('subject catalog opens a subject workspace', async ({ page }) => {
+    await page.goto('http://localhost:3000')
+    await page.getByRole('link', { name: 'Госпитальная хирургия' }).click()
+
+    await expect(page).toHaveURL(/\/subjects\/hospital-surgery$/)
+    await expect(page.getByRole('heading', { name: 'Госпитальная хирургия' }).first()).toBeVisible()
+    await expect(page.getByRole('link', { name: 'Тест', exact: true })).toBeVisible()
+    await expect(page.getByRole('link', { name: 'Избранное', exact: true })).toBeVisible()
+
+    await page.getByRole('link', { name: 'Тест', exact: true }).click()
+    await expect(page).toHaveURL(/\/subjects\/hospital-surgery\/test$/)
+    await expect(page.getByRole('heading', { name: 'Тест', exact: true })).toBeVisible()
+  })
+
   test('registration unlocks registered materials', async ({ page }) => {
     const email = `student-${Date.now()}@example.com`
     await page.goto('http://localhost:3000/register')
