@@ -31,7 +31,7 @@ const database = databaseUrl.startsWith('postgres')
 
 let autoImportPromise: Promise<void> | undefined
 
-async function ensureStaticContent(payload: Payload) {
+function ensureStaticContent(payload: Payload) {
   if (process.env.DISABLE_AUTO_IMPORT === 'true') return
 
   autoImportPromise ??= (async () => {
@@ -49,7 +49,10 @@ async function ensureStaticContent(payload: Payload) {
     await importStaticContent(payload, visibility)
   })()
 
-  await autoImportPromise
+  autoImportPromise.catch((error) => {
+    const message = error instanceof Error ? error.message : String(error)
+    payload.logger.error(`Automatic static content import failed: ${message}`)
+  })
 }
 
 export default buildConfig({
