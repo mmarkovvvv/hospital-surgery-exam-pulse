@@ -2,7 +2,7 @@ import { postgresAdapter } from '@payloadcms/db-postgres'
 import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
-import { buildConfig, type Payload } from 'payload'
+import { buildConfig, type BaseDatabaseAdapter, type DatabaseAdapterObj, type Payload } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
@@ -15,19 +15,56 @@ import { initialSchemaMigration } from './migrations/initialSchema'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 const databaseUrl = process.env.DATABASE_URL || ''
-const database = databaseUrl.startsWith('postgres')
+
+function makeNonInteractiveDatabase<T extends BaseDatabaseAdapter>(
+  adapter: DatabaseAdapterObj<T>,
+): DatabaseAdapterObj<T> {
+  return {
+    ...adapter,
+    init: ({ payload }) => {
+      const initialized = adapter.init({ payload })
+      const migrate = initialized.migrate.bind(initialized)
+
+      initialized.migrate = async (args) => {
+        try {
+          await initialized.deleteMany({
+            collection: 'payload-migrations',
+            where: {
+              batch: {
+                equals: -1,
+              },
+            },
+          })
+        } catch (error) {
+          const message = error instanceof Error ? error.message : String(error)
+          payload.logger.warn(`Could not clean a stale development migration marker: ${message}`)
+        }
+
+        return migrate(args)
+      }
+
+      return initialized
+    },
+  }
+}
+
+const rawDatabase = databaseUrl.startsWith('postgres')
   ? postgresAdapter({
       pool: {
         connectionString: databaseUrl,
       },
+      push: false,
       prodMigrations: [initialSchemaMigration],
     })
   : sqliteAdapter({
       client: {
         url: databaseUrl,
       },
+      push: false,
       prodMigrations: [initialSchemaMigration],
     })
+
+const database = makeNonInteractiveDatabase(rawDatabase as DatabaseAdapterObj<BaseDatabaseAdapter>)
 
 let autoImportPromise: Promise<void> | undefined
 
