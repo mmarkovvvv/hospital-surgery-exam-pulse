@@ -119,17 +119,35 @@ function makeImportRecord(
   }
 }
 
-async function loadOzzExpanded(filePath: string): Promise<Record<string, SourceRecord[]>> {
-  const source = await fs.readFile(filePath, 'utf8')
+async function loadOzzExpanded(source: string): Promise<Record<string, SourceRecord[]>> {
   const sandbox: { window: { OZZ_EXPANDED?: Record<string, SourceRecord[]> } } = { window: {} }
   vm.runInNewContext(source, sandbox, { timeout: 3000 })
   return sandbox.window.OZZ_EXPANDED || {}
 }
 
-async function main() {
+async function readStaticSource(fileName: string): Promise<string> {
   const projectRoot = path.resolve(process.cwd(), '..')
-  const surgerySource = await fs.readFile(path.join(projectRoot, 'app.js'), 'utf8')
-  const ozzExpanded = await loadOzzExpanded(path.join(projectRoot, 'ozz-expanded.js'))
+  const localPath = path.join(projectRoot, fileName)
+
+  try {
+    return await fs.readFile(localPath, 'utf8')
+  } catch {
+    const baseUrl =
+      process.env.STATIC_SOURCE_BASE_URL ||
+      'https://raw.githubusercontent.com/mmarkovvvv/hospital-surgery-exam-pulse/main'
+    const response = await fetch(`${baseUrl}/${fileName}`)
+
+    if (!response.ok) {
+      throw new Error(`Could not load ${fileName}: ${response.status} ${response.statusText}`)
+    }
+
+    return response.text()
+  }
+}
+
+async function main() {
+  const surgerySource = await readStaticSource('app.js')
+  const ozzExpanded = await loadOzzExpanded(await readStaticSource('ozz-expanded.js'))
   const visibility = (process.env.IMPORT_VISIBILITY || 'registered') as ImportRecord['visibility']
 
   if (!['public', 'registered', 'subscription'].includes(visibility)) {
