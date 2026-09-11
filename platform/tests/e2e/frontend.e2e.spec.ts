@@ -72,8 +72,23 @@ test.describe('Frontend access funnel', () => {
     await page.getByRole('button', { name: 'Показать разбор' }).click()
     await expect(page.getByText('Эталон разбора', { exact: true })).toBeVisible()
 
-    await page.goto('http://localhost:3000/subjects/hospital-surgery/image-cases')
-    await expect(page.locator('.interactive-image img').first()).toBeVisible()
-    await expect(page.getByRole('button', { name: 'Показать разбор' })).toBeVisible()
+    const verifyImageCases = async (url: string, total: number) => {
+      await page.goto(url)
+      await expect(page.locator('.interactive-image img')).toHaveCount(1)
+
+      for (let index = 0; index < total; index += 1) {
+        const image = page.locator('.interactive-image img')
+        await expect(image).toBeVisible()
+        await expect.poll(() => image.evaluate((element) => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0)
+        await page.getByRole('button', { name: 'Показать разбор' }).click()
+
+        if (index < total - 1) {
+          await page.getByRole('button', { name: 'Дальше' }).click()
+        }
+      }
+    }
+
+    await verifyImageCases('http://localhost:3000/subjects/hospital-surgery/image-cases', 10)
+    await verifyImageCases('http://localhost:3000/subjects/healthcare-basics/image-cases', 10)
   })
 })
