@@ -91,4 +91,34 @@ test.describe('Frontend access funnel', () => {
     await verifyImageCases('http://localhost:3000/subjects/hospital-surgery/image-cases', 10)
     await verifyImageCases('http://localhost:3000/subjects/healthcare-basics/image-cases', 10)
   })
+
+  test('mobile subject workspace stays usable across sections', async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 })
+
+    const paths = [
+      '/subjects/hospital-surgery',
+      '/subjects/hospital-surgery/cards',
+      '/subjects/hospital-surgery/test',
+      '/subjects/hospital-surgery/tickets',
+      '/subjects/hospital-surgery/clinical-cases',
+      '/subjects/hospital-surgery/image-cases',
+      '/subjects/hospital-surgery/section/progress',
+      '/subjects/hospital-surgery/section/errors',
+      '/subjects/hospital-surgery/section/favorites',
+      '/subjects/hospital-surgery/section/sources',
+    ]
+
+    for (const path of paths) {
+      await page.goto(`http://localhost:3000${path}`)
+      await expect(page.locator('.subject-main')).toBeVisible()
+      await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBeTruthy()
+    }
+
+    await page.goto('http://localhost:3000/subjects/hospital-surgery')
+    await page.getByRole('button', { name: 'Открыть меню предмета' }).click()
+    await expect(page.locator('.subject-sidebar')).toHaveClass(/is-open/)
+    await expect(page.getByRole('link', { name: 'Билеты', exact: true })).toBeVisible()
+    await page.getByRole('link', { name: 'Билеты', exact: true }).click()
+    await expect(page).toHaveURL(/\/subjects\/hospital-surgery\/tickets$/)
+  })
 })
