@@ -34,6 +34,7 @@ export async function POST(request: Request) {
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Unknown Telegram error'
       console.error(`Telegram webhook reply failed: ${message}`)
+      return NextResponse.json({ error: 'Telegram reply failed' }, { status: 502 })
     }
   }
 
