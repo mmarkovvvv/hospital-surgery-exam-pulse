@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest'
 
 import { validateTelegramInitData } from '@/telegram/validateInitData'
 import { extractTelegramCommand } from '@/telegram/commands'
+import { getTelegramWebhookUrl } from '@/telegram/webhook'
 
 function makeInitData(botToken: string, authDate: number) {
   const user = JSON.stringify({ id: 123456789, first_name: 'Student', username: 'student' })
@@ -42,5 +43,22 @@ describe('Telegram commands', () => {
 
   it('ignores ordinary messages', () => {
     expect(extractTelegramCommand('hello')).toBeNull()
+  })
+})
+
+describe('Telegram webhook URL', () => {
+  it('normalizes the public app URL', () => {
+    const previousPublicUrl = process.env.PUBLIC_APP_URL
+    const previousMiniAppUrl = process.env.TELEGRAM_MINI_APP_URL
+
+    process.env.PUBLIC_APP_URL = 'https://beep-platform.onrender.com/'
+    delete process.env.TELEGRAM_MINI_APP_URL
+
+    expect(getTelegramWebhookUrl()).toBe('https://beep-platform.onrender.com/api/telegram/webhook')
+
+    if (previousPublicUrl === undefined) delete process.env.PUBLIC_APP_URL
+    else process.env.PUBLIC_APP_URL = previousPublicUrl
+    if (previousMiniAppUrl === undefined) delete process.env.TELEGRAM_MINI_APP_URL
+    else process.env.TELEGRAM_MINI_APP_URL = previousMiniAppUrl
   })
 })

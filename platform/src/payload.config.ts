@@ -11,6 +11,7 @@ import { Media } from './collections/Media'
 import { LearningItems } from './collections/LearningItems'
 import { importStaticContent } from './importStaticContent'
 import { initialSchemaMigration } from './migrations/initialSchema'
+import { configureTelegramWebhook } from './telegram/webhook'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -67,6 +68,7 @@ const rawDatabase = databaseUrl.startsWith('postgres')
 const database = makeNonInteractiveDatabase(rawDatabase as DatabaseAdapterObj<BaseDatabaseAdapter>)
 
 let autoImportPromise: Promise<void> | undefined
+let telegramWebhookPromise: Promise<void> | undefined
 
 function ensureStaticContent(payload: Payload) {
   if (process.env.DISABLE_AUTO_IMPORT === 'true') return
@@ -92,6 +94,25 @@ function ensureStaticContent(payload: Payload) {
   })
 }
 
+function ensureTelegramWebhook(payload: Payload) {
+  if (!process.env.TELEGRAM_BOT_TOKEN || !process.env.TELEGRAM_WEBHOOK_SECRET) return
+  if (!process.env.PUBLIC_APP_URL && !process.env.TELEGRAM_MINI_APP_URL) return
+
+  telegramWebhookPromise ??= configureTelegramWebhook()
+    .then((webhookUrl) => {
+      payload.logger.info(`Telegram webhook configured: ${webhookUrl}`)
+    })
+    .catch((error) => {
+      const message = error instanceof Error ? error.message : String(error)
+      payload.logger.error(`Telegram webhook setup failed: ${message}`)
+    })
+}
+
+function onInit(payload: Payload) {
+  ensureStaticContent(payload)
+  ensureTelegramWebhook(payload)
+}
+
 export default buildConfig({
   admin: {
     user: Users.slug,
@@ -106,7 +127,7 @@ export default buildConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   db: database,
-  onInit: ensureStaticContent,
+  onInit,
   sharp,
   plugins: [],
 })
