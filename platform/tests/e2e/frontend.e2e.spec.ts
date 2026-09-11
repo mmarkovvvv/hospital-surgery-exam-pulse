@@ -61,6 +61,12 @@ test.describe('Frontend access funnel', () => {
     await expect(page.getByText('Эталон', { exact: true })).toBeVisible()
     await page.getByRole('button', { name: 'Знаю' }).click()
 
+    await page.goto('http://localhost:3000/subjects/hospital-surgery/tickets')
+    await expect(page.getByRole('button', { name: 'Показать эталон' })).toBeVisible()
+    await page.getByRole('button', { name: 'Показать эталон' }).click()
+    await expect(page.getByRole('heading', { name: 'Что ответить' })).toBeVisible()
+    await page.getByRole('button', { name: 'Дальше' }).click()
+
     await page.goto('http://localhost:3000/subjects/hospital-surgery/test')
     await expect(page.getByRole('button', { name: 'Проверить ответ' })).toBeVisible()
     await page.locator('.interactive-option').first().click()
@@ -90,6 +96,14 @@ test.describe('Frontend access funnel', () => {
 
     await verifyImageCases('http://localhost:3000/subjects/hospital-surgery/image-cases', 10)
     await verifyImageCases('http://localhost:3000/subjects/healthcare-basics/image-cases', 10)
+
+    await page.setViewportSize({ width: 390, height: 844 })
+    await page.goto('http://localhost:3000/subjects/healthcare-basics/image-cases')
+    await expect(page.locator('.interactive-image img')).toHaveCount(1)
+    await expect.poll(() => page.locator('.interactive-image img').evaluate((element) => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0)
+    await page.getByRole('button', { name: 'Показать разбор' }).click()
+    await expect(page.getByRole('button', { name: 'Дальше' })).toBeVisible()
+    await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBeTruthy()
   })
 
   test('mobile subject workspace stays usable across sections', async ({ page }) => {

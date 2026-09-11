@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useState } from 'react'
+import Image from 'next/image'
 
 import {
   diagnosisOf,
@@ -123,7 +124,7 @@ function ImageCaseMode({ item, isLast, onNext, onKnow }: { item: LearningItem; i
   return (
     <article className="interactive-card image-interactive-card">
       <div className="interactive-card-meta"><span>Задача с изображением</span><span>{item.title}</span></div>
-      {image && <figure className="interactive-image"><img alt={image.alt} src={image.src} /><figcaption>{image.sourceTitle || 'Изображение из учебного банка'}{image.license ? ` · ${image.license}` : ''}</figcaption></figure>}
+      {image && <figure className="interactive-image"><div className="interactive-image-frame"><Image alt={image.alt} fill sizes="(max-width: 560px) 100vw, 900px" src={image.src} /></div><figcaption>{image.sourceTitle || 'Изображение из учебного банка'}{image.license ? ` · ${image.license}` : ''}</figcaption></figure>}
       <h2>{item.title}</h2>
       <p className="case-scenario">{promptOf(item)}</p>
       <p className="interactive-kicker">Опиши находку на изображении и свяжи её с клинической тактикой.</p>
@@ -174,7 +175,6 @@ export default function InteractiveFormat({ subjectSlug, format, items }: Intera
   })
   const [index, setIndex] = useState(0)
   const [finished, setFinished] = useState(false)
-  const [lightbox, setLightbox] = useState<string | null>(null)
 
   useEffect(() => {
     window.localStorage.setItem(storageKey, JSON.stringify(progress))
@@ -208,6 +208,5 @@ export default function InteractiveFormat({ subjectSlug, format, items }: Intera
     {format === 'case' && <CaseMode isLast={isLast} item={currentItem} key={currentItem.id} onKnow={markKnown} onNext={advance} />}
     {format === 'image-case' && <ImageCaseMode isLast={isLast} item={currentItem} key={currentItem.id} onKnow={markKnown} onNext={advance} />}
     {format === 'test' && <TestMode index={index} item={currentItem} key={`${currentItem.id}-${progress.answered[currentItem.id] ?? 'pending'}`} onNext={advance} onResult={registerTestResult} progress={progress} total={items.length} />}
-    {lightbox && <button aria-label="Закрыть изображение" className="interactive-lightbox" onClick={() => setLightbox(null)} type="button"><img alt="Увеличенное изображение" src={lightbox} /></button>}
   </>
 }
