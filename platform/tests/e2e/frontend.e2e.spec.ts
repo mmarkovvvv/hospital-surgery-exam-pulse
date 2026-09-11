@@ -80,10 +80,11 @@ test.describe('Frontend access funnel', () => {
 
     const verifyImageCases = async (url: string, total: number) => {
       await page.goto(url)
-      await expect(page.locator('.interactive-image img')).toHaveCount(1)
+      await expect(page.locator('.image-case-queue-item')).toHaveCount(total)
+      await expect(page.locator('.interactive-image-frame img')).toHaveCount(1)
 
       for (let index = 0; index < total; index += 1) {
-        const image = page.locator('.interactive-image img')
+        const image = page.locator('.interactive-image-frame img')
         await expect(image).toBeVisible()
         await expect.poll(() => image.evaluate((element) => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0)
         await page.getByRole('button', { name: 'Показать разбор' }).click()
@@ -99,8 +100,9 @@ test.describe('Frontend access funnel', () => {
 
     await page.setViewportSize({ width: 390, height: 844 })
     await page.goto('http://localhost:3000/subjects/healthcare-basics/image-cases')
-    await expect(page.locator('.interactive-image img')).toHaveCount(1)
-    await expect.poll(() => page.locator('.interactive-image img').evaluate((element) => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0)
+    await expect(page.locator('.image-case-queue-item')).toHaveCount(10)
+    await expect(page.locator('.interactive-image-frame img')).toHaveCount(1)
+    await expect.poll(() => page.locator('.interactive-image-frame img').evaluate((element) => (element as HTMLImageElement).naturalWidth)).toBeGreaterThan(0)
     await page.getByRole('button', { name: 'Показать разбор' }).click()
     await expect(page.getByRole('button', { name: 'Дальше' })).toBeVisible()
     await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBeTruthy()

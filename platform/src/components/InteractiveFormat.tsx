@@ -70,6 +70,38 @@ function NavigationActions({ onNext, onKnow, isLast }: { onNext: () => void; onK
   )
 }
 
+function ImageCaseQueue({ items, index, onSelect }: { items: LearningItem[]; index: number; onSelect: (nextIndex: number) => void }) {
+  return (
+    <section aria-label="Все задачи с изображениями" className="image-case-queue">
+      <div className="image-case-queue-header">
+        <div>
+          <span className="answer-label">Очередь задач</span>
+          <strong>Выбери любую из {items.length}</strong>
+        </div>
+        <span className="image-case-queue-hint">Текущая задача отмечена</span>
+      </div>
+      <div className="image-case-queue-grid">
+        {items.map((item, itemIndex) => {
+          const image = imageOf(item)
+          return (
+            <button
+              aria-label={`Открыть задачу ${itemIndex + 1}: ${item.title}`}
+              className={`image-case-queue-item ${itemIndex === index ? 'is-current' : ''}`}
+              key={item.id}
+              onClick={() => onSelect(itemIndex)}
+              type="button"
+            >
+              <span className="image-case-queue-number">{String(itemIndex + 1).padStart(2, '0')}</span>
+              {image && <span className="image-case-queue-thumb"><Image alt="" fill sizes="96px" src={image.src} /></span>}
+              <span className="image-case-queue-title">{item.title}</span>
+            </button>
+          )
+        })}
+      </div>
+    </section>
+  )
+}
+
 function CardMode({ item, isLast, onNext, onKnow }: { item: LearningItem; isLast: boolean; onNext: () => void; onKnow: () => void }) {
   const [revealed, setRevealed] = useState(false)
 
@@ -203,6 +235,7 @@ export default function InteractiveFormat({ subjectSlug, format, items }: Intera
 
   return <>
     <div className="interactive-toolbar"><span>Материал {index + 1} / {items.length}</span><ProgressBadge progress={progress} total={items.length} /></div>
+    {format === 'image-case' && <ImageCaseQueue index={index} items={items} onSelect={(nextIndex) => { setIndex(nextIndex); setFinished(false) }} />}
     {format === 'card' && <CardMode isLast={isLast} item={currentItem} key={currentItem.id} onKnow={markKnown} onNext={advance} />}
     {format === 'ticket' && <TicketMode isLast={isLast} item={currentItem} key={currentItem.id} onKnow={markKnown} onNext={advance} />}
     {format === 'case' && <CaseMode isLast={isLast} item={currentItem} key={currentItem.id} onKnow={markKnown} onNext={advance} />}
