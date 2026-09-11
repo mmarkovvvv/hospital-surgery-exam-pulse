@@ -62,10 +62,13 @@ test.describe('Frontend access funnel', () => {
     await page.getByRole('button', { name: 'Знаю' }).click()
 
     await page.goto('http://localhost:3000/subjects/hospital-surgery/tickets')
-    await expect(page.getByRole('button', { name: 'Показать эталон' })).toBeVisible()
-    await page.getByRole('button', { name: 'Показать эталон' }).click()
-    await expect(page.getByRole('heading', { name: 'Что ответить' })).toBeVisible()
-    await page.getByRole('button', { name: 'Дальше' }).click()
+    await expect(page.locator('.ticket-category-nav a')).toHaveCount(40)
+    await expect(page.locator('.ticket-list-card')).toHaveCount(57)
+    const firstTicket = page.locator('.ticket-list-card').first()
+    await firstTicket.getByRole('button', { name: 'Показать эталон' }).click()
+    await expect(firstTicket.getByRole('heading', { name: 'Что ответить' })).toBeVisible()
+    await firstTicket.getByRole('button', { name: 'Знаю' }).click()
+    await expect(firstTicket.getByText('Освоено', { exact: true })).toBeVisible()
 
     await page.goto('http://localhost:3000/subjects/hospital-surgery/test')
     await expect(page.getByRole('button', { name: 'Проверить ответ' })).toBeVisible()
@@ -111,6 +114,13 @@ test.describe('Frontend access funnel', () => {
   test('mobile subject workspace stays usable across sections', async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 })
 
+    const email = `mobile-${Date.now()}@example.com`
+    await page.goto('http://localhost:3000/register')
+    await page.getByLabel('Почта').fill(email)
+    await page.getByLabel('Пароль').fill('student-password-123')
+    await page.getByRole('button', { name: 'Создать аккаунт' }).click()
+    await expect(page).toHaveURL('http://localhost:3000/')
+
     const paths = [
       '/subjects/hospital-surgery',
       '/subjects/hospital-surgery/cards',
@@ -136,5 +146,8 @@ test.describe('Frontend access funnel', () => {
     await expect(page.getByRole('link', { name: 'Билеты', exact: true })).toBeVisible()
     await page.getByRole('link', { name: 'Билеты', exact: true }).click()
     await expect(page).toHaveURL(/\/subjects\/hospital-surgery\/tickets$/)
+    await expect(page.locator('.ticket-list-card')).toHaveCount(57)
+    await page.locator('.ticket-list-card').first().getByRole('button', { name: 'Показать эталон' }).click()
+    await expect(page.locator('.ticket-list-card').first().getByRole('heading', { name: 'Что ответить' })).toBeVisible()
   })
 })

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 
 import {
@@ -10,6 +10,7 @@ import {
   imageOf,
   optionsOf,
   promptOf,
+  sourceOf,
   stepsOf,
   topicsOf,
   type LearningOption,
@@ -36,15 +37,38 @@ function sortIds(ids: string[]) {
 }
 
 function ticketAnswer(item: LearningItem) {
+  const source = sourceOf(item)
+  const answerPlan = Array.isArray(source.answerPlan)
+    ? source.answerPlan.flatMap((section): Array<[string, string]> => {
+      if (!Array.isArray(section) || section.length < 2) return []
+      return [[String(section[0]), String(section[1])]]
+    })
+    : []
+
+  if (answerPlan.length > 0) {
+    return { answer: '', sections: answerPlan }
+  }
+
   const topics = topicsOf(item)
   const answer = explanationOf(item)
-  const sections = [
+  const sections: Array<[string, string]> = [
     ['Предмет ответа', topics[0] || item.title],
     ['Клиника и опасность', topics[1] || item.summary || 'Назови ведущие симптомы, осложнения и признаки неотложности.'],
     ['Обследование', topics[2] || 'Опиши лабораторную и инструментальную диагностику и ожидаемые результаты.'],
     ['Тактика', topics[3] || 'Заверши ответ стабилизацией, лечением причины и показаниями к вмешательству.'],
   ]
   return { answer, sections }
+}
+
+function ticketCategory(item: LearningItem) {
+  const source = sourceOf(item)
+  const category = source.tag || source.category || source.section
+  return typeof category === 'string' && category.trim() ? category.trim() : 'Общие вопросы'
+}
+
+function ticketNumber(item: LearningItem, fallback: number) {
+  const number = sourceOf(item).number
+  return typeof number === 'string' || typeof number === 'number' ? String(number).padStart(2, '0') : String(fallback).padStart(2, '0')
 }
 
 function ProgressBadge({ progress, total }: { progress: StoredProgress; total: number }) {
@@ -116,19 +140,65 @@ function CardMode({ item, isLast, onNext, onKnow }: { item: LearningItem; isLast
   )
 }
 
-function TicketMode({ item, isLast, onNext, onKnow }: { item: LearningItem; isLast: boolean; onNext: () => void; onKnow: () => void }) {
+function TicketCatalogItem({ item, number, isKnown, onKnow }: { item: LearningItem; number: string; isKnown: boolean; onKnow: () => void }) {
   const [revealed, setRevealed] = useState(false)
-  const ticket = useMemo(() => ticketAnswer(item), [item])
+  const ticket = ticketAnswer(item)
 
   return (
-    <article className="interactive-card ticket-interactive-card">
-      <div className="interactive-card-meta"><span>Экзаменационный билет</span><span>{item.title}</span></div>
-      <h2>{item.title}</h2>
-      <p className="interactive-summary">{item.summary}</p>
-      <p className="interactive-kicker">Сформулируй полный устный ответ, затем проверь себя.</p>
-      {!revealed ? <button className="button button-dark interactive-primary" onClick={() => setRevealed(true)} type="button">Показать эталон</button> : <div className="ticket-answer"><h3>Что ответить</h3><div className="ticket-answer-grid">{ticket.sections.map(([title, text]) => <div key={title}><span className="answer-label">{title}</span><p>{text}</p></div>)}</div><div className="interactive-answer"><span className="answer-label">Дополнительная формулировка</span><p>{ticket.answer}</p></div></div>}
-      {revealed && <NavigationActions isLast={isLast} onKnow={onKnow} onNext={onNext} />}
+    <article className={`ticket-list-card ${isKnown ? 'is-known' : ''}`}>
+      <div className="ticket-list-card-top">
+        <span className="ticket-number">Билет {number}</span>
+        {isKnown && <span className="ticket-known">Освоено</span>}
+      </div>
+      <h3>{item.title}</h3>
+      <p className="ticket-list-summary">{item.summary}</p>
+      <p className="ticket-list-prompt">Сформулируй полный устный ответ, затем проверь себя.</p>
+      <button className="button button-dark ticket-reveal-button" onClick={() => setRevealed((current) => !current)} type="button">
+        {revealed ? 'Скрыть эталон' : 'Показать эталон'}
+      </button>
+      {revealed && <div className="ticket-answer">
+        <h4>Что ответить</h4>
+        <div className="ticket-answer-grid">
+          {ticket.sections.map(([title, text]) => <div key={`${item.id}-${title}`}><span className="answer-label">{title}</span><p>{text}</p></div>)}
+        </div>
+        {ticket.answer && <div className="interactive-answer"><span className="answer-label">Дополнительная формулировка</span><p>{ticket.answer}</p></div>}
+      </div>}
+      <div className="ticket-list-actions">
+        {isKnown ? <span className="ticket-known-note">Билет отмечен как освоенный</span> : <button className="button button-aqua" onClick={onKnow} type="button">Знаю</button>}
+      </div>
     </article>
+  )
+}
+
+function TicketCatalog({ items, progress, onKnow }: { items: LearningItem[]; progress: StoredProgress; onKnow: (itemId: string) => void }) {
+  const groups = items.reduce<Array<{ title: string; items: LearningItem[] }>>((result, item) => {
+    const title = ticketCategory(item)
+    const group = result.find((candidate) => candidate.title === title)
+    if (group) group.items.push(item)
+    else result.push({ title, items: [item] })
+    return result
+  }, [])
+
+  return (
+    <div className="ticket-catalog">
+      <div className="ticket-catalog-intro">
+        <div>
+          <span className="answer-label">Каталог билетов</span>
+          <h2>Все билеты перед глазами</h2>
+          <p>Выбери категорию, открой эталон ответа и отмечай освоенные билеты. Переходить к следующему билету не нужно.</p>
+        </div>
+        <span className="ticket-catalog-total">{items.length} билетов</span>
+      </div>
+      <nav aria-label="Категории билетов" className="ticket-category-nav">
+        {groups.map((group, index) => <a href={`#ticket-group-${index}`} key={group.title}><span>{group.title}</span><strong>{group.items.length}</strong></a>)}
+      </nav>
+      {groups.map((group, groupIndex) => <section className="ticket-group" id={`ticket-group-${groupIndex}`} key={group.title}>
+        <div className="ticket-group-header"><h2>{group.title}</h2><span>{group.items.length} {group.items.length === 1 ? 'билет' : 'билетов'}</span></div>
+        <div className="ticket-list">
+          {group.items.map((item, itemIndex) => <TicketCatalogItem isKnown={progress.known.includes(item.id)} item={item} key={item.id} number={ticketNumber(item, itemIndex + 1)} onKnow={() => onKnow(item.id)} />)}
+        </div>
+      </section>)}
+    </div>
   )
 }
 
@@ -224,6 +294,7 @@ export default function InteractiveFormat({ subjectSlug, format, items }: Intera
     setProgress((current) => ({ ...current, known: sortIds([...current.known, currentItem.id]) }))
     advance()
   }
+  const markKnownById = (itemId: string) => setProgress((current) => ({ ...current, known: sortIds([...current.known, itemId]) }))
   const registerTestResult = (correct: boolean) => setProgress((current) => ({ ...current, answered: { ...current.answered, [currentItem.id]: correct } }))
   const restart = () => { setIndex(0); setFinished(false); setProgress(emptyProgress) }
 
@@ -234,10 +305,10 @@ export default function InteractiveFormat({ subjectSlug, format, items }: Intera
   }
 
   return <>
-    <div className="interactive-toolbar"><span>Материал {index + 1} / {items.length}</span><ProgressBadge progress={progress} total={items.length} /></div>
+    <div className="interactive-toolbar"><span>{format === 'ticket' ? `Билеты · ${items.length}` : `Материал ${index + 1} / ${items.length}`}</span><ProgressBadge progress={progress} total={items.length} /></div>
     {format === 'image-case' && <ImageCaseQueue index={index} items={items} onSelect={(nextIndex) => { setIndex(nextIndex); setFinished(false) }} />}
     {format === 'card' && <CardMode isLast={isLast} item={currentItem} key={currentItem.id} onKnow={markKnown} onNext={advance} />}
-    {format === 'ticket' && <TicketMode isLast={isLast} item={currentItem} key={currentItem.id} onKnow={markKnown} onNext={advance} />}
+    {format === 'ticket' && <TicketCatalog items={items} onKnow={markKnownById} progress={progress} />}
     {format === 'case' && <CaseMode isLast={isLast} item={currentItem} key={currentItem.id} onKnow={markKnown} onNext={advance} />}
     {format === 'image-case' && <ImageCaseMode isLast={isLast} item={currentItem} key={currentItem.id} onKnow={markKnown} onNext={advance} />}
     {format === 'test' && <TestMode index={index} item={currentItem} key={`${currentItem.id}-${progress.answered[currentItem.id] ?? 'pending'}`} onNext={advance} onResult={registerTestResult} progress={progress} total={items.length} />}
