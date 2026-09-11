@@ -22,9 +22,12 @@ export async function callTelegram<T>(method: string, body: Record<string, unkno
   return data.result as T
 }
 
-export async function sendStartMessage(chatId: number): Promise<void> {
-  const miniAppUrl = process.env.TELEGRAM_MINI_APP_URL
-  if (!miniAppUrl) throw new Error('TELEGRAM_MINI_APP_URL is not configured')
+export async function sendStartMessage(chatId: number, fallbackMiniAppUrl?: string): Promise<void> {
+  const configuredMiniAppUrl = process.env.TELEGRAM_MINI_APP_URL || process.env.PUBLIC_APP_URL
+  const miniAppUrl = (configuredMiniAppUrl || fallbackMiniAppUrl)?.trim().replace(/\/+$/, '')
+  if (!miniAppUrl || !miniAppUrl.startsWith('https://')) {
+    throw new Error('A public HTTPS Mini App URL is not configured')
+  }
 
   await callTelegram('sendMessage', {
     chat_id: chatId,

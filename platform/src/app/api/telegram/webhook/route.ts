@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 
 import { sendStartMessage } from '@/telegram/telegramClient'
+import { extractTelegramCommand } from '@/telegram/commands'
 
 type TelegramUpdate = {
   message?: {
@@ -15,13 +16,25 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: 'Invalid webhook secret' }, { status: 401 })
   }
 
-  const update = (await request.json()) as TelegramUpdate
+  let update: TelegramUpdate
+
+  try {
+    update = (await request.json()) as TelegramUpdate
+  } catch {
+    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 })
+  }
+
   const message = update.message
   const chatId = message?.chat?.id
-  const command = message?.text?.trim().split(/\s+/)[0]
+  const command = extractTelegramCommand(message?.text)
 
   if (chatId && (command === '/start' || command === '/help')) {
-    await sendStartMessage(chatId)
+    try {
+      await sendStartMessage(chatId, new URL(request.url).origin)
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Unknown Telegram error'
+      console.error(`Telegram webhook reply failed: ${message}`)
+    }
   }
 
   return NextResponse.json({ ok: true })
