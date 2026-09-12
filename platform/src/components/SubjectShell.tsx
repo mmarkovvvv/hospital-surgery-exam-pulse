@@ -42,17 +42,24 @@ export default function SubjectShell({ subject, activePath = '', viewerEmail, ch
             <span />
           </button>
           <Brand onClick={closeMenu} />
-          <div className="breadcrumbs" aria-label="Хлебные крошки">
+          <nav className="breadcrumbs" aria-label="Хлебные крошки">
             <Link href="/">Предметы</Link>
             <span aria-hidden="true">/</span>
-            <Link href={subjectPath}>{subject.title}</Link>
-            {activePath && <><span aria-hidden="true">/</span><span>{activePath}</span></>}
-          </div>
+            {activePath ? <Link href={subjectPath}>{subject.title}</Link> : <Link aria-current="page" href={subjectPath}>{subject.title}</Link>}
+            {activePath && <><span aria-hidden="true">/</span><span aria-current="page">{activePath}</span></>}
+          </nav>
         </div>
         <nav className="topbar-nav" aria-label="Аккаунт">
           {viewerEmail ? <><span className="user-chip">{viewerEmail}</span><LogoutButton /></> : <><Link className="button button-quiet" href="/login">Войти</Link><Link className="button button-aqua" href="/register">Регистрация</Link></>}
         </nav>
       </header>
+
+      <nav className="mobile-breadcrumbs" aria-label="Путь по предмету">
+        <Link href="/">Предметы</Link>
+        <span aria-hidden="true">/</span>
+        {activePath ? <Link href={subjectPath}>{subject.title}</Link> : <Link aria-current="page" href={subjectPath}>{subject.title}</Link>}
+        {activePath && <><span aria-hidden="true">/</span><span aria-current="page">{activePath}</span></>}
+      </nav>
 
       <div className="subject-layout">
         <aside className={`subject-sidebar ${menuOpen ? 'is-open' : ''}`} id="subject-navigation">

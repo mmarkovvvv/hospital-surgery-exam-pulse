@@ -27,6 +27,7 @@ test.describe('Frontend access funnel', () => {
 
     await expect(page).toHaveURL(/\/subjects\/hospital-surgery$/)
     await expect(page.getByRole('heading', { name: 'Госпитальная хирургия' }).first()).toBeVisible()
+    await expect(page.locator('nav.breadcrumbs')).toBeVisible()
     await expect(page.getByRole('link', { name: 'Тест', exact: true })).toBeVisible()
     await expect(page.getByRole('link', { name: 'Избранное', exact: true })).toBeVisible()
 
@@ -80,6 +81,7 @@ test.describe('Frontend access funnel', () => {
     await expect(page.getByRole('button', { name: 'Показать разбор' })).toBeVisible()
     await page.getByRole('button', { name: 'Показать разбор' }).click()
     await expect(page.getByText('Эталон разбора', { exact: true })).toBeVisible()
+    await expect(page.locator('.interactive-step-list')).toHaveCSS('list-style-type', 'none')
 
     const verifyImageCases = async (url: string, total: number) => {
       await page.goto(url)
@@ -137,6 +139,7 @@ test.describe('Frontend access funnel', () => {
     for (const path of paths) {
       await page.goto(`http://localhost:3000${path}`)
       await expect(page.locator('.subject-main')).toBeVisible()
+      await expect(page.locator('.mobile-breadcrumbs')).toBeVisible()
       await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1)).toBeTruthy()
     }
 
