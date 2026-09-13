@@ -11,6 +11,12 @@ export const subjectDefinitions = [
     shortTitle: 'ОЗЗ',
     description: 'Материалы по общественному здоровью, статистике и организации помощи.',
   },
+  {
+    slug: 'usmle',
+    title: 'USMLE',
+    shortTitle: 'USMLE',
+    description: 'Подготовка к Step 1, Step 2 CK и Step 3: база, вопросы и клиническое мышление.',
+  },
 ] as const
 
 export type SubjectDefinition = (typeof subjectDefinitions)[number]

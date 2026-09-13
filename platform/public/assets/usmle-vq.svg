@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" role="img" aria-labelledby="title desc">
+  <title id="title">Вентиляционно-перфузионный градиент</title>
+  <desc id="desc">Схема лёгкого с относительным изменением вентиляции и перфузии от верхушки к основанию.</desc>
+  <rect width="900" height="420" rx="28" fill="#f4fafb"/>
+  <path d="M450 60 C360 70 285 150 300 285 C315 365 390 375 450 315 C510 375 585 365 600 285 C615 150 540 70 450 60z" fill="#d9eef0" stroke="#102431" stroke-width="10"/>
+  <path d="M450 65v260M380 110l-42 185M520 110l42 185" fill="none" stroke="#102431" stroke-width="7"/>
+  <path d="M180 125h170M180 300h170" stroke="#58d6c7" stroke-width="22" stroke-linecap="round"/>
+  <path d="M730 125H560M730 300H560" stroke="#ff8b70" stroke-width="22" stroke-linecap="round"/>
+  <g fill="#102431" font-family="Arial, sans-serif" font-size="28" font-weight="700">
+    <text x="80" y="115">вентиляция</text><text x="80" y="160">верхушка</text><text x="75" y="335">основание</text>
+    <text x="735" y="115">перфузия</text><text x="735" y="160">V/Q выше</text><text x="735" y="335">V/Q ниже</text>
+  </g>
+</svg>

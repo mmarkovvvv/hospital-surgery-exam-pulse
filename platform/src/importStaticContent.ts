@@ -4,6 +4,8 @@ import fs from 'node:fs/promises'
 import path from 'node:path'
 import vm from 'node:vm'
 
+import { usmleContent } from './usmleContent'
+
 import type { BasePayload } from 'payload'
 
 type SourceRecord = Record<string, unknown>
@@ -192,7 +194,7 @@ export async function importStaticContent(
     )
   }
 
-  const records = [...surgery, ...ozz]
+  const records = [...surgery, ...ozz, ...usmleContent]
 
   for (const record of records) {
     const existing = await payload.find({
@@ -215,7 +217,7 @@ export async function importStaticContent(
   }
 
   console.log(`Imported ${records.length} learning items.`)
-  console.log(`Surgery: ${surgery.length}; OZZ: ${ozz.length}; visibility: ${visibility}`)
+  console.log(`Surgery: ${surgery.length}; OZZ: ${ozz.length}; USMLE: ${usmleContent.length}; visibility: ${visibility}`)
 }
 
 async function main() {

@@ -3,6 +3,7 @@ import 'dotenv/config'
 import { getPayload } from 'payload'
 
 import config from './payload.config'
+import { usmleContent } from './usmleContent'
 
 const demoItems = [
   { title: 'Открытая карточка: схема устного ответа', slug: 'demo-card-public', subject: 'Госпитальная хирургия', format: 'card', visibility: 'public', published: true, summary: 'Короткий пример открытой карточки.', answer: 'Сначала сформулировать диагноз, затем оценить угрозы и выбрать тактику.' },
@@ -17,7 +18,7 @@ const payload = await getPayload({ config })
 let created = 0
 let updated = 0
 
-for (const item of demoItems) {
+for (const item of [...demoItems, ...usmleContent]) {
   const existing = await payload.find({
     collection: 'learning-items',
     limit: 1,

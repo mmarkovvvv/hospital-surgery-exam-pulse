@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" role="img" aria-labelledby="title desc">
+  <title id="title">Схема нефрона</title>
+  <desc id="desc">Клубочек, канальцы и петля Генле с выделенным толстым восходящим отделом.</desc>
+  <rect width="900" height="420" rx="28" fill="#f4fafb"/>
+  <g fill="none" stroke="#102431" stroke-width="18" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="170" cy="135" r="62" fill="#ffd8c9"/>
+    <path d="M230 135 C330 90 430 100 470 180 C510 260 450 345 350 330 C285 320 275 250 330 220 C375 195 415 225 405 265"/>
+    <path d="M470 180 C570 115 705 135 735 220 C765 305 680 345 585 310 C530 290 520 230 560 205" stroke="#58d6c7"/>
+    <path d="M585 310 C645 370 750 360 800 300"/>
+  </g>
+  <path d="M520 225h170" stroke="#ff8b70" stroke-width="26" stroke-linecap="round"/>
+  <g fill="#102431" font-family="Arial, sans-serif" font-size="24" font-weight="700">
+    <text x="105" y="245">клубочек</text>
+    <text x="305" y="75">проксимальный</text>
+    <text x="615" y="105">дистальный</text>
+    <text x="535" y="270" fill="#b34a43">толстый восходящий отдел</text>
+    <text x="610" y="395">собирательная трубочка</text>
+  </g>
+</svg>

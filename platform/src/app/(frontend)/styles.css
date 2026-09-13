@@ -280,6 +280,14 @@ h1 { font-size: clamp(42px, 7vw, 82px); letter-spacing: -.055em; line-height: .9
 .format-locked-note { max-width: 900px; }
 
 .content-source { color: var(--aqua-dark); display: inline-block; font-weight: 800; margin-top: 18px; overflow-wrap: anywhere; }
+.source-list { display: grid; gap: 10px; margin-top: 24px; }
+.source-link { align-items: center; background: var(--paper); border: 1px solid var(--line); border-radius: 14px; color: var(--ink); display: flex; gap: 18px; justify-content: space-between; padding: 16px 18px; text-decoration: none; transition: background .2s ease, border-color .2s ease, transform .2s ease; }
+.source-link:hover { background: var(--white); border-color: var(--aqua); transform: translateY(-1px); }
+.source-link > span:first-child { display: grid; gap: 5px; min-width: 0; }
+.source-link strong { font-size: 16px; }
+.source-link small { color: var(--muted); font-size: 13px; line-height: 1.45; }
+.source-link > span:last-child { color: var(--aqua-dark); flex: 0 0 auto; font-size: 22px; font-weight: 800; }
+.source-note { color: var(--muted); font-size: 13px; line-height: 1.5; margin: 20px 0 0; }
 .interactive-kicker + .interactive-primary { margin-top: 22px; }
 .interactive-kicker + .case-answer { margin-top: 22px; }
 .case-answer { display: grid; gap: 18px; }
@@ -357,6 +365,8 @@ h1 { font-size: clamp(42px, 7vw, 82px); letter-spacing: -.055em; line-height: .9
   .route-stats { margin-top: 22px; }
   .site-footer { display: block; font-size: 13px; line-height: 1.6; padding: 20px 18px; }
   .site-footer span { display: block; }
+  .source-link { align-items: flex-start; padding: 14px; }
+  .source-link strong { font-size: 15px; }
 }
 
 @media (max-width: 760px) {

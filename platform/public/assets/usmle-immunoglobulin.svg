@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" role="img" aria-labelledby="title desc">
+  <title id="title">Классы иммуноглобулинов</title>
+  <desc id="desc">Сравнение IgM в виде пентамера и IgG в виде мономера.</desc>
+  <rect width="900" height="420" rx="28" fill="#f4fafb"/>
+  <g fill="none" stroke="#102431" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M150 130l45 70-45 70M245 130l-45 70 45 70M150 200h50"/>
+    <path d="M105 110 Q200 45 290 110M105 310 Q200 375 290 310" stroke="#ff8b70"/>
+    <path d="M565 120l45 75-45 75M655 120l-45 75 45 75M565 195h45" stroke="#58d6c7"/>
+  </g>
+  <g fill="#102431" font-family="Arial, sans-serif" font-size="30" font-weight="700">
+    <text x="130" y="365">IgM · пентамер</text>
+    <text x="545" y="365">IgG · мономер</text>
+    <text x="120" y="52" fill="#b34a43">первичный ответ</text>
+    <text x="545" y="52" fill="#1b726e">вторичный ответ</text>
+  </g>
+  <circle cx="400" cy="205" r="42" fill="#ff8b70" opacity=".8"/>
+  <text x="370" y="214" fill="#102431" font-family="Arial, sans-serif" font-size="22" font-weight="700">C3</text>
+  <path d="M295 205h60M445 205h90" stroke="#102431" stroke-width="8" marker-end="url(#arrow)"/>
+  <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0l10 5-10 5z" fill="#102431"/></marker></defs>
+</svg>
