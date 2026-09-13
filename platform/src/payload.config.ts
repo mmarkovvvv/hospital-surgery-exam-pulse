@@ -79,7 +79,13 @@ function ensureStaticContent(payload: Payload) {
       overrideAccess: true,
     })
 
-    if (existing.totalDocs > 0) return
+    const usmle = await payload.count({
+      collection: 'learning-items',
+      overrideAccess: true,
+      where: { subject: { equals: 'USMLE' } },
+    })
+
+    if (existing.totalDocs > 0 && usmle.totalDocs > 0) return
 
     const visibility = (process.env.IMPORT_VISIBILITY || 'registered') as
       | 'public'
