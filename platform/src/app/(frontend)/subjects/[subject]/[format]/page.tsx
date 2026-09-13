@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation'
+import Link from 'next/link'
 
 import SubjectShell from '@/components/SubjectShell'
 import InteractiveFormat from '@/components/InteractiveFormat'
@@ -27,8 +28,14 @@ export default async function FormatPage({ params }: FormatPageProps) {
         <div className="route-stats"><span>{items.length} материалов</span><span>{accessibleItems.length} доступно</span></div>
       </div>
       <section className="content-section item-list-section">
-        <InteractiveFormat format={format.format} items={interactiveItems} subjectSlug={subject.slug} />
-        {items.length > accessibleItems.length && <div className="locked-message format-locked-note"><strong>Часть банка закрыта</strong><span>Откройте аккаунт или подписку, чтобы получить доступ к остальным материалам.</span></div>}
+        {interactiveItems.length === 0 && items.length > 0 ? (
+          <div className="empty-state">
+            <h2>Материалы закрыты</h2>
+            <p>{viewer ? 'Для этого формата нужна активная подписка.' : 'Зарегистрируйтесь, чтобы открыть материалы для зарегистрированных пользователей.'}</p>
+            {!viewer && <Link className="button button-aqua" href="/register">Зарегистрироваться</Link>}
+          </div>
+        ) : <InteractiveFormat format={format.format} items={interactiveItems} subjectSlug={subject.slug} />}
+        {items.length > accessibleItems.length && accessibleItems.length > 0 && <div className="locked-message format-locked-note"><strong>Часть банка закрыта</strong><span>Откройте аккаунт или подписку, чтобы получить доступ к остальным материалам.</span></div>}
       </section>
     </SubjectShell>
   )

@@ -212,7 +212,7 @@ function CaseMode({ item, isLast, onNext, onKnow }: { item: LearningItem; isLast
       <h2>{item.title}</h2>
       <p className="case-scenario">{promptOf(item)}</p>
       <p className="interactive-kicker">Ответь по схеме: диагноз → опасность → обследование → тактика.</p>
-      {!revealed ? <button className="button button-dark interactive-primary" onClick={() => setRevealed(true)} type="button">Показать разбор</button> : <div className="case-answer"><h3>Эталон разбора</h3><p className="answer-highlight">{diagnosisOf(item)}</p>{steps.length > 0 && <ol className="interactive-step-list">{steps.map((step, index) => <li key={`${item.id}-${index}`}><span>{index + 1}</span><p>{step}</p></li>)}</ol>}</div>}
+      {!revealed ? <button className="button button-dark interactive-primary" onClick={() => setRevealed(true)} type="button">Показать разбор</button> : <div className="case-answer"><h3>Эталон разбора</h3><p className="answer-highlight">{diagnosisOf(item)}</p>{steps.length > 0 && <div className="interactive-step-list" role="list">{steps.map((step, index) => <div className="interactive-step" key={`${item.id}-${index}`} role="listitem"><span>{index + 1}</span><p>{step}</p></div>)}</div>}</div>}
       {revealed && <><ConfidenceActions onRate={onKnow} /><NavigationActions isLast={isLast} onKnow={onKnow} onNext={onNext} /></>}
     </article>
   )
@@ -230,7 +230,7 @@ function ImageCaseMode({ item, isLast, onNext, onKnow }: { item: LearningItem; i
       <h2>{item.title}</h2>
       <p className="case-scenario">{promptOf(item)}</p>
       <p className="interactive-kicker">Опиши находку на изображении и свяжи её с клинической тактикой.</p>
-      {!revealed ? <button className="button button-dark interactive-primary" onClick={() => setRevealed(true)} type="button">Показать разбор</button> : <div className="case-answer"><h3>Эталон разбора</h3><p className="answer-highlight">{diagnosisOf(item)}</p>{steps.length > 0 && <ol className="interactive-step-list">{steps.map((step, index) => <li key={`${item.id}-${index}`}><span>{index + 1}</span><p>{step}</p></li>)}</ol>}{image?.sourceUrl && <a className="content-source" href={image.sourceUrl} rel="noreferrer" target="_blank">Открыть источник изображения →</a>}</div>}
+      {!revealed ? <button className="button button-dark interactive-primary" onClick={() => setRevealed(true)} type="button">Показать разбор</button> : <div className="case-answer"><h3>Эталон разбора</h3><p className="answer-highlight">{diagnosisOf(item)}</p>{steps.length > 0 && <div className="interactive-step-list" role="list">{steps.map((step, index) => <div className="interactive-step" key={`${item.id}-${index}`} role="listitem"><span>{index + 1}</span><p>{step}</p></div>)}</div>}{image?.sourceUrl && <a className="content-source" href={image.sourceUrl} rel="noreferrer" target="_blank">Открыть источник изображения →</a>}</div>}
       {revealed && <><ConfidenceActions onRate={onKnow} /><NavigationActions isLast={isLast} onKnow={onKnow} onNext={onNext} /></>}
     </article>
   )

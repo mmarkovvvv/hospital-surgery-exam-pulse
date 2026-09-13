@@ -1,8 +1,7 @@
 import Link from 'next/link'
 import React from 'react'
 
-import LogoutButton from '@/components/LogoutButton'
-import Brand from '@/components/Brand'
+import HomeNavigation from '@/components/HomeNavigation'
 import { countByFormat, getLearningContext } from '@/lib/learning'
 import { formatDefinitions, subjectDefinitions } from '@/lib/subjects'
 
@@ -20,12 +19,7 @@ export default async function HomePage() {
 
   return (
     <main className="pulse-shell">
-      <header className="topbar">
-        <Brand />
-        <nav className="topbar-nav" aria-label="Основная навигация">
-          {viewer ? <><span className="user-chip">{viewer.email}</span><LogoutButton /></> : <><Link className="button button-quiet" href="/login">Войти</Link><Link className="button button-aqua" href="/register">Регистрация</Link></>}
-        </nav>
-      </header>
+      <HomeNavigation viewerEmail={viewer?.email} />
 
       <section className="hero-section">
         <div>

@@ -5,6 +5,9 @@ import './styles.css'
 
 export const metadata = {
   description: 'Локальная учебная платформа с управляемым доступом к материалам.',
+  icons: {
+    icon: '/icon.svg',
+  },
   title: 'Beep Academy — учебная платформа',
 }
 
