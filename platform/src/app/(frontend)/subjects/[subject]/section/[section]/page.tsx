@@ -8,9 +8,24 @@ type SectionPageProps = { params: Promise<{ subject: string; section: string }> 
 
 const usmleSources = [
   {
+    title: 'Step 1: форматы вопросов',
+    description: 'One-best-answer, виньетки, изображения и мультимедийные задания.',
+    href: 'https://www.usmle.org/exam-resources/step-1-materials/step-1-test-question-formats',
+  },
+  {
+    title: 'Step 1: текущая структура экзамена',
+    description: 'Актуальные блоки, тайминг и число заданий.',
+    href: 'https://www.usmle.org/step-exams/step-1/step-1-exam-content',
+  },
+  {
     title: 'USMLE: обзор экзамена',
     description: 'Официальная последовательность шагов, требования и общая структура.',
     href: 'https://www.usmle.org/bulletin-information/overview',
+  },
+  {
+    title: 'Step 2 CK: содержание экзамена',
+    description: 'Клиническое содержание и текущая структура дня.',
+    href: 'https://www.usmle.org/step-exams/step-2-ck/step-2-ck-exam-content',
   },
   {
     title: 'Step 1: содержание и спецификации',
@@ -18,9 +33,24 @@ const usmleSources = [
     href: 'https://www.usmle.org/exam-resources/step-1-materials/step-1-content-outline-and-specifications',
   },
   {
+    title: 'Step 3: форматы вопросов',
+    description: 'Standalone, sequential, abstracts, charts и мультимедиа.',
+    href: 'https://www.usmle.org/exam-resources/step-3-materials/step-3-formats-questions',
+  },
+  {
     title: 'Step 2 CK: содержание и спецификации',
     description: 'Клинические дисциплины и распределение содержания Step 2 CK.',
     href: 'https://www.usmle.org/exam-resources/step-2-ck-materials/step-2-ck-content-outline-specifications',
+  },
+  {
+    title: 'Step 3: CCS',
+    description: 'Официальное описание компьютерных симуляций случаев.',
+    href: 'https://www.usmle.org/exam-resources/step-3-materials/step-3-test-question-formats/computer-based-case-simulations',
+  },
+  {
+    title: 'Официальные пробные материалы',
+    description: 'Sample questions и интерактивный пробный интерфейс.',
+    href: 'https://www.usmle.org/common-questions?category=Practice+Materials',
   },
   {
     title: 'Step 2 CK: форматы вопросов',

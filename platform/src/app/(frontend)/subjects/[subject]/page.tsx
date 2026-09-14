@@ -30,6 +30,7 @@ export default async function SubjectPage({ params }: SubjectPageProps) {
         <div><strong>{items.filter((item) => accessibleIds.has(item.id)).length}</strong><span>доступно сейчас</span></div>
         <div><strong>{viewer ? 'Да' : 'Нет'}</strong><span>личный доступ</span></div>
       </section>
+      {subject.slug === 'usmle' && <section className="usmle-overview-card"><div><p className="eyebrow">Отдельный режим</p><h2>Тренировать как USMLE</h2><p>Выбери Step 1, Step 2 CK, Step 3 FIP/ACM или CCS. Внутри — таймеры блоков и форматы, которые встречаются в официальном интерфейсе.</p></div><Link className="button button-aqua" href="/subjects/usmle/exam">Открыть экзамен →</Link></section>}
       <section className="content-section">
         <div className="section-heading"><div><p className="eyebrow">Форматы подготовки</p><h2>Выбери режим</h2></div><p>Материалы разделены по задаче</p></div>
         <div className="format-grid">

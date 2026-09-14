@@ -69,6 +69,7 @@ export default function SubjectShell({ subject, activePath = '', viewerEmail, ch
           </div>
           <nav aria-label={`Разделы предмета «${subject.title}»`} onClick={closeMenu}>
             <Link className={`sidebar-link ${activePath === 'Обзор' ? 'is-active' : ''}`} href={subjectPath}>Обзор</Link>
+            {subject.slug === 'usmle' && <Link className={`sidebar-link sidebar-link-emphasis ${activePath === 'Экзамен USMLE' ? 'is-active' : ''}`} href={`${subjectPath}/exam`}>Экзамен USMLE</Link>}
             <span className="sidebar-label">Форматы подготовки</span>
             {formatDefinitions.map((format) => (
               <Link
