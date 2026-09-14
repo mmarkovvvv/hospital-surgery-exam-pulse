@@ -272,6 +272,11 @@ export function getUsmleMode(slug: string): UsmleExamMode | undefined {
   return usmleExamModes.find((mode) => mode.slug === slug)
 }
 
+export function getUsmleQuestionsForMode(questions: UsmleQuestion[], mode?: UsmleExamMode): UsmleQuestion[] {
+  if (!mode || mode.slug === 'ccs') return []
+  return questions.filter((question) => question.step === mode.step)
+}
+
 export function isUsmleSelectionCorrect(selected: number[], correct: number[]): boolean {
   return selected.length === correct.length && selected.every((value) => correct.includes(value))
 }

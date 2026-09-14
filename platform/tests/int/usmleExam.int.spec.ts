@@ -4,6 +4,7 @@ import {
   ccsActions,
   formatExamTime,
   getBlockProgress,
+  getUsmleQuestionsForMode,
   getUsmleStudyProgress,
   isUsmleSelectionCorrect,
   usmleExamModes,
@@ -50,6 +51,20 @@ describe('USMLE exam simulator', () => {
     expect(usmleQuestions.some(({ kind }) => kind === 'audio-video')).toBe(true)
     expect(ccsActions.length).toBeGreaterThanOrEqual(5)
     expect(usmleQuestions.every(({ sourceLabel }) => sourceLabel.includes('Авторская'))).toBe(true)
+  })
+
+  it('keeps the interactive question pool inside the selected step', () => {
+    const step1Questions = getUsmleQuestionsForMode(usmleQuestions, usmleExamModes[0])
+    const step2Questions = getUsmleQuestionsForMode(usmleQuestions, usmleExamModes[1])
+    const step3Questions = getUsmleQuestionsForMode(usmleQuestions, usmleExamModes[2])
+
+    expect(step1Questions.length).toBeGreaterThan(0)
+    expect(step2Questions.length).toBeGreaterThan(0)
+    expect(step3Questions.length).toBeGreaterThan(0)
+    expect(step1Questions.every(({ step }) => step === 'step1')).toBe(true)
+    expect(step2Questions.every(({ step }) => step === 'step2ck')).toBe(true)
+    expect(step3Questions.every(({ step }) => step === 'step3')).toBe(true)
+    expect(getUsmleQuestionsForMode(usmleQuestions, usmleExamModes[4])).toEqual([])
   })
 
   it('defines a complete system-first Step 1 route', () => {

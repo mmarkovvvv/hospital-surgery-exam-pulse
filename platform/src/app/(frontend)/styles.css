@@ -325,44 +325,21 @@ h1 { font-size: clamp(42px, 7vw, 82px); letter-spacing: -.055em; line-height: .9
 .usmle-overview-card p:not(.eyebrow) { color: #c1d0d5; line-height: 1.5; margin: 0; max-width: 720px; }
 .usmle-overview-card .button { flex: 0 0 auto; }
 .usmle-exam { display: grid; gap: 24px; max-width: 1040px; }
-.usmle-roadmap { background: var(--ink); border: 1px solid #254252; border-radius: 22px; color: var(--white); overflow: hidden; padding: clamp(22px, 4vw, 38px); }
-.usmle-roadmap-header { align-items: start; display: grid; gap: 26px; grid-template-columns: minmax(0, 1fr) minmax(180px, 240px); }
-.usmle-roadmap h2 { font-size: clamp(30px, 4vw, 48px); letter-spacing: -.045em; line-height: 1.05; margin: 8px 0 12px; text-wrap: balance; }
-.usmle-roadmap-header > div:first-child > p:not(.eyebrow) { color: #c1d0d5; line-height: 1.5; margin: 0; max-width: 760px; }
-.usmle-roadmap .eyebrow { color: var(--aqua); }
-.usmle-roadmap-progress { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14); border-radius: 16px; display: grid; gap: 5px; padding: 16px; }
-.usmle-roadmap-progress strong { color: var(--aqua); font-size: 34px; letter-spacing: -.05em; }
-.usmle-roadmap-progress span { color: #c1d0d5; font-size: 13px; }
-.usmle-roadmap-progress-track { background: rgba(255,255,255,.14); border-radius: 999px; height: 8px; margin-top: 8px; overflow: hidden; }
-.usmle-roadmap-progress-track span { background: var(--aqua); border-radius: inherit; display: block; height: 100%; transition: width .2s ease; }
-.usmle-system-selector { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 16px; display: grid; gap: 9px; margin-top: 24px; padding: 16px; }
-.usmle-system-selector label { color: #c1d0d5; font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-.usmle-system-selector select { background: var(--white); border: 0; border-radius: 10px; color: var(--ink); font: inherit; min-height: 46px; padding: 8px 12px; width: 100%; }
-.usmle-system-selector p { color: #c1d0d5; line-height: 1.45; margin: 0; }
-.usmle-system-selector p strong { color: var(--aqua); }
-.usmle-roadmap-cycle { display: grid; gap: 10px; grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 24px; }
-.usmle-roadmap-cycle div { align-items: center; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 12px; display: flex; gap: 10px; min-height: 56px; padding: 10px 12px; }
-.usmle-roadmap-cycle span { align-items: center; background: var(--aqua); border-radius: 50%; color: var(--ink); display: inline-flex; flex: 0 0 25px; font-size: 12px; font-weight: 900; height: 25px; justify-content: center; }
-.usmle-roadmap-cycle strong { font-size: 13px; line-height: 1.25; }
-.usmle-roadmap-phases { display: grid; gap: 12px; margin-top: 24px; }
-.usmle-roadmap-phase { background: var(--white); border-radius: 16px; color: var(--ink); padding: 18px; }
-.usmle-roadmap-phase-heading { align-items: start; display: grid; gap: 12px; grid-template-columns: 38px minmax(0, 1fr); }
-.usmle-roadmap-phase-heading > span { align-items: center; background: #e8f5f3; border-radius: 10px; color: var(--aqua-dark); display: flex; font-size: 12px; font-weight: 900; height: 32px; justify-content: center; }
-.usmle-roadmap-phase h3 { font-size: 20px; margin: 0 0 5px; }
-.usmle-roadmap-phase-heading p { color: var(--muted); line-height: 1.4; margin: 0; }
-.usmle-roadmap-tasks { display: grid; gap: 8px; margin: 15px 0 0 50px; }
-.usmle-roadmap-task { align-items: flex-start; background: var(--paper); border: 1px solid var(--line); border-radius: 12px; cursor: pointer; display: flex; gap: 10px; padding: 12px; transition: background .16s ease, border-color .16s ease, transform .16s ease; }
-.usmle-roadmap-task:hover { border-color: var(--aqua); transform: translateY(-1px); }
-.usmle-roadmap-task input { accent-color: var(--aqua-dark); flex: 0 0 auto; height: 18px; margin: 2px 0 0; width: 18px; }
-.usmle-roadmap-task span { display: grid; gap: 3px; }
-.usmle-roadmap-task strong { font-size: 14px; }
-.usmle-roadmap-task small { color: var(--muted); line-height: 1.4; }
-.usmle-roadmap-task.is-complete { background: #eaf8f5; border-color: #9bddd4; }
-.usmle-roadmap-note { color: #c1d0d5; font-size: 13px; line-height: 1.5; margin: 20px 0 0; }
-.usmle-mode-picker { background: var(--white); border: 1px solid var(--line); border-radius: 22px; padding: clamp(20px, 4vw, 34px); }
-.usmle-mode-picker > div:first-child { max-width: 780px; }
-.usmle-mode-picker h2 { font-size: clamp(28px, 4vw, 42px); letter-spacing: -.04em; margin-bottom: 10px; }
-.usmle-mode-picker p:not(.eyebrow) { color: var(--muted); line-height: 1.5; margin: 0; }
+.usmle-format-hub { background: var(--white); border: 1px solid var(--line); border-radius: 22px; display: grid; gap: 24px; padding: clamp(20px, 4vw, 34px); }
+.usmle-format-hub > div:first-child { max-width: 780px; }
+.usmle-format-hub h2 { font-size: clamp(28px, 4vw, 42px); letter-spacing: -.04em; margin-bottom: 10px; }
+.usmle-format-hub p:not(.eyebrow) { color: var(--muted); line-height: 1.5; margin: 0; }
+.usmle-interaction-steps { display: grid; gap: 10px; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 2px; }
+.usmle-interaction-steps > div { background: #f7fafb; border: 1px solid var(--line); border-radius: 14px; display: grid; gap: 4px; padding: 14px; }
+.usmle-interaction-steps strong { color: var(--aqua-dark); font-size: 14px; }
+.usmle-interaction-steps span { color: var(--muted); font-size: 13px; line-height: 1.4; }
+.usmle-format-groups { display: grid; gap: 22px; margin-top: 2px; }
+.usmle-format-group { border-top: 1px solid var(--line); padding-top: 20px; }
+.usmle-format-group-heading { align-items: baseline; display: flex; gap: 14px; justify-content: space-between; }
+.usmle-format-group-heading h3 { font-size: 22px; letter-spacing: -.03em; margin: 0; }
+.usmle-format-group-heading p { color: var(--muted); line-height: 1.4; margin: 0; text-align: right; }
+.usmle-format-group .usmle-mode-list { margin-top: 12px; }
+.usmle-empty-state { color: var(--muted); font-size: 14px; margin: -10px 0 0; }
 .usmle-mode-list { display: grid; gap: 10px; grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 24px; }
 .usmle-mode-option { background: var(--paper); border: 1px solid var(--line); border-radius: 16px; color: var(--ink); cursor: pointer; display: grid; gap: 5px; padding: 16px; text-align: left; transition: background .18s ease, border-color .18s ease, box-shadow .18s ease, transform .18s ease; }
 .usmle-mode-option:hover { border-color: var(--aqua); transform: translateY(-1px); }
@@ -370,6 +347,7 @@ h1 { font-size: clamp(42px, 7vw, 82px); letter-spacing: -.055em; line-height: .9
 .usmle-mode-option strong { font-size: 17px; }
 .usmle-mode-option span, .usmle-mode-option small { color: var(--muted); line-height: 1.4; }
 .usmle-mode-option small { font-size: 12px; }
+.usmle-mode-option:focus-visible { outline: 3px solid var(--aqua-dark); outline-offset: 3px; }
 .usmle-start { margin-top: 20px; min-width: 180px; }
 .usmle-session { display: grid; gap: 0; }
 .usmle-session-bar { align-items: center; background: var(--ink); border-radius: 16px 16px 0 0; color: #c8d7db; display: flex; gap: 16px; justify-content: space-between; padding: 14px 18px; }
@@ -422,11 +400,6 @@ h1 { font-size: clamp(42px, 7vw, 82px); letter-spacing: -.055em; line-height: .9
   .access-strip { grid-template-columns: 1fr; margin: 0 18px; }
   .access-strip > div { border-bottom: 1px solid var(--line); border-right: 0; }
   .access-strip > div:last-child { border-bottom: 0; }
-  .usmle-roadmap-header { grid-template-columns: 1fr; }
-  .usmle-roadmap-cycle { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .usmle-roadmap-tasks { margin-left: 0; }
-  .usmle-roadmap-phase-heading { grid-template-columns: 32px minmax(0, 1fr); }
-  .usmle-roadmap-phase { padding: 14px; }
   .catalog-section { padding: 60px 18px; }
   .section-heading { align-items: flex-start; display: block; }
   .section-heading > p { margin-top: 10px; }
@@ -462,6 +435,9 @@ h1 { font-size: clamp(42px, 7vw, 82px); letter-spacing: -.055em; line-height: .9
   .source-link { align-items: flex-start; padding: 14px; }
   .source-link strong { font-size: 15px; }
   .usmle-overview-card { align-items: flex-start; display: grid; margin: -24px 0 44px; }
+  .usmle-interaction-steps { grid-template-columns: 1fr; }
+  .usmle-format-group-heading { align-items: flex-start; display: grid; gap: 6px; }
+  .usmle-format-group-heading p { text-align: left; }
   .usmle-mode-list { grid-template-columns: 1fr; }
   .usmle-session-bar { align-items: flex-start; flex-wrap: wrap; }
   .usmle-session-bar span:last-child { margin-left: auto; }
