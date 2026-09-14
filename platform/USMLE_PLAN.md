@@ -19,6 +19,20 @@ USMLE — не университетский экзамен с билетами
 - Реализованы таймер блока, индикатор прогресса, отметка вопроса, проверка ответа, последовательный набор и журнал действий CCS.
 - Добавлены авторские демонстрационные задания с типами single-best-answer, sequential, chart, abstract и audio-video.
 - Все текущие вопросы явно помечены как авторские демонстрационные; они не являются официальными заданиями USMLE.
+- Добавлен локальный system-first маршрут Step 1: BnB и First Aid по одной системе, затем UWorld, разбор ошибок, карточки и CBSSA/NBME.
+
+## Рабочий маршрут Step 1
+
+В приложении появился локальный чек-лист, который помогает проходить Step 1 системно:
+
+1. Выбери одну систему из официального content outline.
+2. Изучи её через BnB и соответствующую главу First Aid.
+3. Сразу реши вопросы UWorld по той же главе в tutor mode.
+4. Разбери объяснения, сделай короткие карточки из ошибок и повторяй их интервально.
+5. После первого охвата переходи к неправильным вопросам UWorld, смешанным timed-блокам и слабым системам.
+6. Для готовности используй CBSSA/NBME, официальные sample questions и симуляцию текущего Step 1: 14 блоков по 30 минут, до 20 вопросов в блоке.
+
+Это не официальный календарь и не обещание результата. Сроки из Reddit — личный опыт, а не универсальная норма. BnB, First Aid и UWorld — внешние коммерческие ресурсы; приложение не содержит их защищённый текст или вопросы. Отметки маршрута сейчас хранятся локально в браузере.
 
 ## Что нельзя считать готовым банком
 
@@ -44,3 +58,7 @@ USMLE — не университетский экзамен с билетами
 - [Step 3: exam content](https://www.usmle.org/step-exams/step-3/step-3-exam-content)
 - [Step 3: computer-based case simulations](https://www.usmle.org/exam-resources/step-3-materials/step-3-test-question-formats/computer-based-case-simulations)
 - [Official practice materials and sample questions](https://www.usmle.org/common-questions?category=Practice+Materials)
+
+## Опыт сообщества
+
+- [Обсуждение Reddit о старте Step 1](https://www.reddit.com/r/step1/comments/1h7yg3s/getting_started_for_the_usmle_step_1/?tl=ru)

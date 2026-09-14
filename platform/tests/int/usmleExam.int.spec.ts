@@ -4,9 +4,12 @@ import {
   ccsActions,
   formatExamTime,
   getBlockProgress,
+  getUsmleStudyProgress,
   isUsmleSelectionCorrect,
   usmleExamModes,
   usmleQuestions,
+  usmleStep1StudyPhases,
+  usmleStep1Systems,
 } from '@/lib/usmleExam'
 
 describe('USMLE exam simulator', () => {
@@ -47,5 +50,19 @@ describe('USMLE exam simulator', () => {
     expect(usmleQuestions.some(({ kind }) => kind === 'audio-video')).toBe(true)
     expect(ccsActions.length).toBeGreaterThanOrEqual(5)
     expect(usmleQuestions.every(({ sourceLabel }) => sourceLabel.includes('Авторская'))).toBe(true)
+  })
+
+  it('defines a complete system-first Step 1 route', () => {
+    expect(usmleStep1Systems).toHaveLength(10)
+    expect(new Set(usmleStep1Systems.map(({ id }) => id)).size).toBe(10)
+    expect(usmleStep1StudyPhases).toHaveLength(4)
+    expect(usmleStep1StudyPhases.flatMap(({ tasks }) => tasks.map(({ id }) => id))).toContain('uworld-learning')
+  })
+
+  it('calculates roadmap progress against known tasks', () => {
+    const allTaskIds = usmleStep1StudyPhases.flatMap(({ tasks }) => tasks.map(({ id }) => id))
+    expect(getUsmleStudyProgress([])).toMatchObject({ completed: 0, total: 12, percent: 0 })
+    expect(getUsmleStudyProgress(['uworld-learning', 'missing'])).toMatchObject({ completed: 1, total: 12, percent: 8 })
+    expect(getUsmleStudyProgress(allTaskIds)).toMatchObject({ completed: 12, total: 12, percent: 100 })
   })
 })

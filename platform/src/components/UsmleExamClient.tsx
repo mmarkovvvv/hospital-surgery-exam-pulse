@@ -1,17 +1,65 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, useSyncExternalStore } from 'react'
 
 import {
   ccsActions,
   formatExamTime,
   getBlockProgress,
+  getUsmleStudyProgress,
   isUsmleSelectionCorrect,
   type UsmleExamMode,
   type UsmleQuestion,
+  usmleStep1StudyPhases,
+  usmleStep1Systems,
 } from '@/lib/usmleExam'
 
 type UsmleExamClientProps = { modes: UsmleExamMode[]; questions: UsmleQuestion[] }
+const USMLE_PLAN_STORAGE_KEY = 'beep-academy-usmle-step1-plan-v1'
+const EMPTY_STUDY_TASKS: string[] = []
+let cachedStudyTasksRaw: string | null | undefined
+let cachedStudyTasks = EMPTY_STUDY_TASKS
+
+function readStudyTasks(): string[] {
+  if (typeof window === 'undefined') return EMPTY_STUDY_TASKS
+
+  const raw = window.localStorage.getItem(USMLE_PLAN_STORAGE_KEY)
+  if (raw === cachedStudyTasksRaw) return cachedStudyTasks
+
+  cachedStudyTasksRaw = raw
+  if (!raw) {
+    cachedStudyTasks = EMPTY_STUDY_TASKS
+    return cachedStudyTasks
+  }
+
+  try {
+    const parsed: unknown = JSON.parse(raw)
+    cachedStudyTasks = Array.isArray(parsed) && parsed.every((taskId): taskId is string => typeof taskId === 'string') ? parsed : EMPTY_STUDY_TASKS
+  } catch {
+    window.localStorage.removeItem(USMLE_PLAN_STORAGE_KEY)
+    cachedStudyTasksRaw = null
+    cachedStudyTasks = EMPTY_STUDY_TASKS
+  }
+
+  return cachedStudyTasks
+}
+
+function subscribeToStudyTasks(onChange: () => void) {
+  window.addEventListener('storage', onChange)
+  return () => window.removeEventListener('storage', onChange)
+}
+
+function getServerStudyTasks() {
+  return EMPTY_STUDY_TASKS
+}
+
+function writeStudyTasks(taskIds: string[]) {
+  const raw = JSON.stringify(taskIds)
+  window.localStorage.setItem(USMLE_PLAN_STORAGE_KEY, raw)
+  cachedStudyTasksRaw = raw
+  cachedStudyTasks = taskIds
+  window.dispatchEvent(new Event('storage'))
+}
 
 export default function UsmleExamClient({ modes, questions }: UsmleExamClientProps) {
   const [selectedMode, setSelectedMode] = useState(modes[0]?.slug ?? 'step1-block')
@@ -25,6 +73,8 @@ export default function UsmleExamClient({ modes, questions }: UsmleExamClientPro
   const [sequenceIndex, setSequenceIndex] = useState(0)
   const [ccsLog, setCcsLog] = useState<string[]>([])
   const [ccsTime, setCcsTime] = useState(0)
+  const [selectedSystemId, setSelectedSystemId] = useState(usmleStep1Systems[0]?.id ?? '')
+  const completedStudyTasks = useSyncExternalStore(subscribeToStudyTasks, readStudyTasks, getServerStudyTasks)
 
   const mode = modes.find((item) => item.slug === selectedMode) ?? modes[0]
   const currentQuestion = questions.length > 0 ? questions[questionIndex % questions.length] : undefined
@@ -36,6 +86,8 @@ export default function UsmleExamClient({ modes, questions }: UsmleExamClientPro
   const activeCorrect = sequenceQuestion?.correct ?? currentQuestion?.correct ?? []
   const activeExplanation = sequenceQuestion?.explanation ?? currentQuestion?.explanation ?? ''
   const isCcs = mode?.slug === 'ccs'
+  const selectedSystem = usmleStep1Systems.find((system) => system.id === selectedSystemId) ?? usmleStep1Systems[0]
+  const studyProgress = useMemo(() => getUsmleStudyProgress(completedStudyTasks), [completedStudyTasks])
 
   useEffect(() => {
     if (!started || submitted || finished || isCcs) return
@@ -89,10 +141,55 @@ export default function UsmleExamClient({ modes, questions }: UsmleExamClientPro
     setCcsLog((values) => [...values, `${label}: ${result}`])
   }
 
+  function toggleStudyTask(taskId: string) {
+    const nextTasks = completedStudyTasks.includes(taskId) ? completedStudyTasks.filter((id) => id !== taskId) : [...completedStudyTasks, taskId]
+    writeStudyTasks(nextTasks)
+  }
+
   if (!mode) return null
 
   return (
     <div className="usmle-exam">
+      <section className="usmle-roadmap" aria-labelledby="usmle-roadmap-title">
+        <div className="usmle-roadmap-header">
+          <div>
+            <p className="eyebrow">Маршрут подготовки</p>
+            <h2 id="usmle-roadmap-title">Step 1: одна система за раз</h2>
+            <p>Рабочий цикл: пройти материал по одной системе, сразу решить соответствующий UWorld, разобрать ошибки и перейти к смешанным блокам.</p>
+          </div>
+          <div className="usmle-roadmap-progress" aria-label={`Выполнено ${studyProgress.completed} из ${studyProgress.total} шагов`}>
+            <strong>{studyProgress.percent}%</strong>
+            <span>{studyProgress.completed} из {studyProgress.total} шагов</span>
+            <div className="usmle-roadmap-progress-track"><span style={{ width: `${studyProgress.percent}%` }} /></div>
+          </div>
+        </div>
+
+        <div className="usmle-system-selector">
+          <label htmlFor="usmle-system">Текущая система</label>
+          <select id="usmle-system" value={selectedSystem?.id ?? ''} onChange={(event) => setSelectedSystemId(event.target.value)}>
+            {usmleStep1Systems.map((system) => <option key={system.id} value={system.id}>{system.title}</option>)}
+          </select>
+          {selectedSystem && <p><strong>{selectedSystem.officialWeight}</strong> · {selectedSystem.focus}</p>}
+        </div>
+
+        <div className="usmle-roadmap-cycle" aria-label="Основной цикл подготовки">
+          {['BnB + First Aid', 'UWorld по той же главе', 'Ошибки и карточки', 'CBSSA / NBME'].map((step, index) => <div key={step}><span>{index + 1}</span><strong>{step}</strong></div>)}
+        </div>
+
+        <div className="usmle-roadmap-phases">
+          {usmleStep1StudyPhases.map((phase, phaseIndex) => <section className="usmle-roadmap-phase" key={phase.id}>
+            <div className="usmle-roadmap-phase-heading"><span>{String(phaseIndex + 1).padStart(2, '0')}</span><div><h3>{phase.title}</h3><p>{phase.detail}</p></div></div>
+            <div className="usmle-roadmap-tasks">
+              {phase.tasks.map((task) => <label className={`usmle-roadmap-task ${completedStudyTasks.includes(task.id) ? 'is-complete' : ''}`} key={task.id}>
+                <input checked={completedStudyTasks.includes(task.id)} onChange={() => toggleStudyTask(task.id)} type="checkbox" />
+                <span><strong>{task.title}</strong><small>{task.detail}</small></span>
+              </label>)}
+            </div>
+          </section>)}
+        </div>
+        <p className="usmle-roadmap-note">Маршрут собран по опыту сообщества и официальным материалам, но не является официальным календарём подготовки. BnB, First Aid и UWorld — внешние ресурсы; их защищённые материалы не копируются в приложение.</p>
+      </section>
+
       <section className="usmle-mode-picker" aria-label="Режим экзамена USMLE">
         <div>
           <p className="eyebrow">Формат экзамена</p>

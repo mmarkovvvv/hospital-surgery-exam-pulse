@@ -30,6 +30,90 @@ export type UsmleQuestion = {
 
 export type CcsAction = { id: string; label: string; result: string }
 
+export type UsmleStudySystem = {
+  id: string
+  title: string
+  officialWeight: string
+  focus: string
+}
+
+export type UsmleStudyTask = {
+  id: string
+  title: string
+  detail: string
+}
+
+export type UsmleStudyPhase = {
+  id: string
+  title: string
+  detail: string
+  tasks: UsmleStudyTask[]
+}
+
+export const usmleStep1Systems: UsmleStudySystem[] = [
+  { id: 'foundations', title: 'Основы и общие принципы', officialWeight: 'Фундаментальные науки', focus: 'Биохимия, генетика, клеточная биология, общая патология и фармакология.' },
+  { id: 'blood-immune', title: 'Кровь, лимфа и иммунитет', officialWeight: '9–13%', focus: 'Иммунные реакции, гематология, трансфузии и опухоли крови.' },
+  { id: 'nervous-behavior', title: 'Нервная система и поведение', officialWeight: '10–14%', focus: 'Нейроанатомия, неврология, психиатрия и специальные органы чувств.' },
+  { id: 'msk-skin', title: 'Опорно-двигательная система и кожа', officialWeight: '8–12%', focus: 'Анатомия, ревматология, дерматология, травмы и инфекции.' },
+  { id: 'cardiovascular', title: 'Сердечно-сосудистая система', officialWeight: '7–11%', focus: 'Физиология, патология, фармакология и клинические сердечно-сосудистые синдромы.' },
+  { id: 'respiratory-renal', title: 'Дыхательная система и почки', officialWeight: '11–15%', focus: 'Газообмен, КОС, нефрон, электролиты и дыхательная патология.' },
+  { id: 'gastrointestinal', title: 'Желудочно-кишечный тракт', officialWeight: '6–10%', focus: 'Пищеварение, гепатобилиарная система, кишечник и питание.' },
+  { id: 'reproductive-endocrine', title: 'Репродуктивная и эндокринная системы', officialWeight: '12–16%', focus: 'Эндокринная регуляция, репродукция, беременность и соответствующая патология.' },
+  { id: 'multisystem', title: 'Мультисистемные процессы', officialWeight: '8–12%', focus: 'Инфекции, системные заболевания, старение и взаимодействие органов.' },
+  { id: 'biostats-population', title: 'Биостатистика и здоровье населения', officialWeight: '4–6%', focus: 'Эпидемиология, доказательная медицина, профилактика и интерпретация данных.' },
+]
+
+export const usmleStep1StudyPhases: UsmleStudyPhase[] = [
+  {
+    id: 'system-cycle',
+    title: 'Одна система за раз',
+    detail: 'Не смешивай ресурсы хаотично: закрой один предметный цикл и только потом переходи дальше.',
+    tasks: [
+      { id: 'choose-system', title: 'Выбрать одну систему', detail: 'Зафиксируй систему и работай с ней до завершения цикла.' },
+      { id: 'bnb-first-aid', title: 'BnB и First Aid по одной системе', detail: 'Посмотри соответствующий блок BnB и одновременно проработай ту же главу First Aid.' },
+      { id: 'uworld-learning', title: 'UWorld сразу после главы', detail: 'Решай вопросы по той же системе в tutor mode как инструмент обучения, а не только как финальную проверку.' },
+    ],
+  },
+  {
+    id: 'active-review',
+    title: 'Активно закрепить',
+    detail: 'Преврати ошибки и непонятные места в материал для повторения.',
+    tasks: [
+      { id: 'review-explanations', title: 'Разобрать объяснения UWorld', detail: 'Для каждого промаха запиши, какой признак в виньетке должен был привести к ответу.' },
+      { id: 'make-cards', title: 'Сделать карточки из ошибок', detail: 'Создавай короткие карточки только по ошибкам, пробелам и часто путаемым фактам.' },
+      { id: 'spaced-repetition', title: 'Повторять интервально', detail: 'Возвращайся к карточкам по расписанию, а не перечитывай весь конспект пассивно.' },
+    ],
+  },
+  {
+    id: 'second-pass',
+    title: 'Вторая проходка',
+    detail: 'После первого охвата переходи от обучения к смешанному клиническому применению.',
+    tasks: [
+      { id: 'uworld-incorrects', title: 'Повторить неправильные UWorld', detail: 'Реши ошибки повторно без подсказки и объясни, почему другие варианты неверны.' },
+      { id: 'mixed-uworld', title: 'Добавить смешанные блоки', detail: 'Переходи от предметных наборов к смешанным timed-блокам по мере роста готовности.' },
+      { id: 'weak-systems', title: 'Закрыть слабые системы', detail: 'Сопоставь ошибки с системами и вернись к BnB, First Aid и вопросам только по пробелу.' },
+    ],
+  },
+  {
+    id: 'readiness',
+    title: 'Проверить готовность',
+    detail: 'Используй официальные материалы и самопроверки, а не только процент в банке.',
+    tasks: [
+      { id: 'cbssa', title: 'Пройти CBSSA / NBME', detail: 'Планируй официальную самопроверку и разбирай результат по доменам, а не только общий балл.' },
+      { id: 'official-sample', title: 'Решить официальные sample questions', detail: 'Проверь, что знаком с интерфейсом, формулировками и типами официальных заданий.' },
+      { id: 'step1-simulation', title: 'Симулировать текущий Step 1', detail: 'Тренируй 14 блоков по 30 минут и до 20 заданий в блоке с запланированными перерывами.' },
+    ],
+  },
+]
+
+export function getUsmleStudyProgress(completedTaskIds: string[], phases = usmleStep1StudyPhases) {
+  const taskIds = phases.flatMap((phase) => phase.tasks.map((task) => task.id))
+  const completed = taskIds.filter((taskId) => completedTaskIds.includes(taskId)).length
+  const total = taskIds.length
+
+  return { completed, total, percent: total === 0 ? 0 : Math.round((completed / total) * 100) }
+}
+
 export const usmleExamModes: UsmleExamMode[] = [
   {
     slug: 'step1-block',
